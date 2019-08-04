@@ -5,19 +5,20 @@
   
 
   
-  <title>Hello World! | 学习博客</title>
+  <title>技术分享 | 学习博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="前端技术快报第57期React React小技巧汇总 2019 React Redux 完全指南    React开发基础学习掌握 CSS Grid布局指南 Flex布局语法教程 To Grid or to Flex?   关于gird和flex布局学习及使用选择 JavaScript- JavaScript 开销及原因 工具 nodeppt   代码控制的酷炫PPT 其他 需求分析与开发时间评估">
+<meta name="keywords" content="技术分享">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World!">
-<meta property="og:url" content="http://yoursite.com/2019/07/30/hello-world/index.html">
+<meta property="og:title" content="技术分享">
+<meta property="og:url" content="http://yoursite.com/2019/08/04/技术分享/index.html">
 <meta property="og:site_name" content="学习博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="前端技术快报第57期React React小技巧汇总 2019 React Redux 完全指南    React开发基础学习掌握 CSS Grid布局指南 Flex布局语法教程 To Grid or to Flex?   关于gird和flex布局学习及使用选择 JavaScript- JavaScript 开销及原因 工具 nodeppt   代码控制的酷炫PPT 其他 需求分析与开发时间评估">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-29T17:00:42.387Z">
+<meta property="og:updated_time" content="2019-08-04T02:53:53.952Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World!">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="技术分享">
+<meta name="twitter:description" content="前端技术快报第57期React React小技巧汇总 2019 React Redux 完全指南    React开发基础学习掌握 CSS Grid布局指南 Flex布局语法教程 To Grid or to Flex?   关于gird和flex布局学习及使用选择 JavaScript- JavaScript 开销及原因 工具 nodeppt   代码控制的酷炫PPT 其他 需求分析与开发时间评估">
   
     <link rel="alternate" href="/atom.xml" title="学习博客" type="application/atom+xml">
   
@@ -64,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-技术分享" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/07/30/hello-world/" class="article-date">
-  <time datetime="2019-07-29T17:00:42.387Z" itemprop="datePublished">2019-07-30</time>
+    <a href="/2019/08/04/技术分享/" class="article-date">
+  <time datetime="2019-08-04T02:53:23.000Z" itemprop="datePublished">2019-08-04</time>
 </a>
     
   </div>
@@ -78,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World!
+      技术分享
     </h1>
   
 
@@ -86,41 +87,57 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h1 id="前端技术快报第57期"><a href="#前端技术快报第57期" class="headerlink" title="前端技术快报第57期"></a>前端技术快报第57期</h1><h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><ul>
+<li><a href="https://juejin.im/post/5d2d41a7e51d454f723025ad" target="_blank" rel="noopener">React小技巧汇总</a></li>
+<li><a href="https://mp.weixin.qq.com/s/VpPFXt_stWXHYWSAt8eOcg" target="_blank" rel="noopener">2019 React Redux 完全指南</a></li>
+</ul>
+<hr>
+<p> React开发基础学习掌握</p>
+<h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><ul>
+<li><a href="https://www.html.cn/archives/8510" target="_blank" rel="noopener">Grid布局指南</a></li>
+<li><a href="https://www.runoob.com/w3cnote/flex-grammar.html" target="_blank" rel="noopener">Flex布局语法教程</a></li>
+<li><a href="https://css-irl.info/to-grid-or-to-flex/" target="_blank" rel="noopener">To Grid or to Flex?</a></li>
+</ul>
+<hr>
+<p>关于gird和flex布局学习及使用选择</p>
+<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><p>-<a href="https://www.html.cn/archives/9517" target="_blank" rel="noopener"> JavaScript 开销及原因</a></p>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><ul>
+<li><a href="https://juejin.im/post/5c71392de51d455f1c310be3" target="_blank" rel="noopener">nodeppt</a></li>
+</ul>
+<hr>
+<p>代码控制的酷炫PPT</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/zi1Af8UXiWq_pXc-yDt50g" target="_blank" rel="noopener">需求分析与开发时间评估</a></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/30/hello-world/" data-id="cjyweg9a20000ls32ivnvqavu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/技术分享/" data-id="cjyweg9ag0005ls32a4gzwayy" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术分享/">技术分享</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2019/08/04/技术分享/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/08/04/学习周报2019-07-12/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          技术分享
+          学习周报2019/07/12
         
       </div>
     </a>
   
+  
+    <a href="/2019/07/30/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World!</div>
+    </a>
   
 </nav>
 

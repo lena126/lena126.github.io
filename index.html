@@ -62,6 +62,287 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-学习周报2019-07-05" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/04/学习周报2019-07-05/" class="article-date">
+  <time datetime="2019-08-04T03:19:37.000Z" itemprop="datePublished">2019-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/04/学习周报2019-07-05/">学习周报2019/07/05</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-render概念"><a href="#1-render概念" class="headerlink" title="1.render概念"></a>1.render概念</h3><pre><code>React中每个组件有且只有一个render方法，创建组件有class方式创建和函数声明创建两种方式，两种方式返回的有且只有一个顶点节点。render方法的作用就是将react元素渲染到真实的dom中。</code></pre><h3 id="2-触发render机制"><a href="#2-触发render机制" class="headerlink" title="2.触发render机制"></a>2.触发render机制</h3><pre><code>首先在组件首次加载的时候会执行render，在实例化过程中，当执行componentWillMout之后会执行render，开始将节点挂载在页面上。
+其次有两种情况会触发render，一是setState会导致组件的重新渲染，二是接收到新的props属性时。</code></pre><p>（1） 状态更新时<br>a. 继承自 React.Component 的 class 组件更新状态时</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import React from &quot;react&quot;;</span><br><span class="line">import ReactDOM from &quot;react-dom&quot;;</span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">render() &#123;</span><br><span class="line">return &lt;Foo /&gt;;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Foo extends React.Component &#123;</span><br><span class="line">state = &#123; count: 0 &#125;;</span><br><span class="line">increment = () =&gt; &#123;</span><br><span class="line">const &#123; count &#125; = this.state;</span><br><span class="line">const newCount = count &lt; 10 ? count + 1 : count;</span><br><span class="line">this.setState(&#123; count: newCount &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">render() &#123;</span><br><span class="line">const &#123; count &#125; = this.state;</span><br><span class="line">console.log(&quot;Foo render&quot;);</span><br><span class="line">return (</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;h1&gt; &#123;count&#125; &lt;/h1&gt;</span><br><span class="line">&lt;button onClick=&#123;this.increment&#125;&gt;Increment&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">const rootElement = document.getElementById(&quot;root&quot;);</span><br><span class="line">ReactDOM.render(&lt;App /&gt;, rootElement);</span><br></pre></td></tr></table></figure>
+
+
+<p>上面实例代码中的逻辑是点击就会更新 count，到 10 以后，就会不再触发。但是从执行结果是即使 count 到了 10 以上，render 仍然会被调用。总结来说，继承了 React.Component 的 class 组件，即使状态没变化，只要调用了setState 就会触发 render。</p>
+<p>b. 函数式组件更新状态时<br>用函数实现相同的组件，使用 useState hook：</p>
+<figure class="highlight plain"><figcaption><span>React, &#123; useState &#125; from "react";</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import ReactDOM from &quot;react-dom&quot;;</span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">render() &#123;</span><br><span class="line">return &lt;Foo /&gt;;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">function Foo() &#123;</span><br><span class="line">const [count, setCount] = useState(0);</span><br><span class="line">function increment() &#123;</span><br><span class="line">const newCount = count &lt; 10 ? count + 1 : count;</span><br><span class="line">setCount(newCount);</span><br><span class="line">&#125;</span><br><span class="line">console.log(&quot;Foo render&quot;);</span><br><span class="line">return (</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;h1&gt; &#123;count&#125; &lt;/h1&gt;</span><br><span class="line">&lt;button onClick=&#123;increment&#125;&gt;Increment&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">);</span><br><span class="line">&#125;</span><br><span class="line">const rootElement = document.getElementById(&quot;root&quot;);</span><br><span class="line">ReactDOM.render(&lt;App /&gt;, rootElement);</span><br></pre></td></tr></table></figure>
+
+<p>上面实例执行结果当状态值不再改变之后，render 的调用就停止了。对函数式组件来说，状态值改变时才会触发 render 函数的调用。</p>
+<p>（2）props属性改变</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import React from &quot;react&quot;;</span><br><span class="line">    import ReactDOM from &quot;react-dom&quot;;</span><br><span class="line">    </span><br><span class="line">    class App extends React.Component &#123;</span><br><span class="line">      state = &#123; name: &quot;App&quot; &#125;;</span><br><span class="line">      render() &#123;</span><br><span class="line">        return (</span><br><span class="line">          &lt;div className=&quot;App&quot;&gt;</span><br><span class="line">            &lt;Foo /&gt;</span><br><span class="line">            &lt;button onClick=&#123;() =&gt; this.setState(&#123; name: &quot;App&quot; &#125;)&#125;&gt;</span><br><span class="line">              Change name</span><br><span class="line">            &lt;/button&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        );</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    function Foo() &#123;</span><br><span class="line">      console.log(&quot;Foo render&quot;);</span><br><span class="line">    </span><br><span class="line">      return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;h1&gt; Foo &lt;/h1&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    const rootElement = document.getElementById(&quot;root&quot;);</span><br><span class="line">    ReactDOM.render(&lt;App /&gt;, rootElement);</span><br></pre></td></tr></table></figure>
+
+<p>只要点击了 App 组件内的 Change name 按钮，就会重新 render。而且可以注意到，不管 Foo 具体实现是什么，Foo 都会被重新渲染。无论组件是继承自 React.Component 的 class 组件还是函数式组件，一旦父容器重新 render，组件的 render 都会再次被调用。</p>
+<h3 id="3-render触发优化"><a href="#3-render触发优化" class="headerlink" title="3.render触发优化"></a>3.render触发优化</h3><p>当状态更新后，有时只想让相关的组件重新渲染，并不想让不相关的组件也被重新渲染，因此要对其进行相关优化操作。优化方式有多种，以下是常用的两种优化方式：<br>    shouldComponentUpdate(nextProps,nextState)方法中是render函数调用前执行的函数，可以通过nextProps,nextState参数来判断当前场景是否需要重新渲染，当shouldComponentUpdate方法return true则重新渲染，return false则阻止组件渲染。<br>    PureComponent中，只接受props和state参数，如果props和state没有改变，PureComponent不会重渲染，可以一定程度上减少了render带来的消耗。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/04/学习周报2019-07-05/" data-id="cjyweg9a80001ls32wd7ljhfl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-学习周报2019-07-26" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/04/学习周报2019-07-26/" class="article-date">
+  <time datetime="2019-08-04T03:14:47.000Z" itemprop="datePublished">2019-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/04/学习周报2019-07-26/">学习周报2019/07/26</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>项目中遇到在this.setState执行成功之后，再去做别的操作，示例如下，setState执行之后，下面的输出并不能得到value最新的值：</p>
+<p> 在setState中，这是一个异步处理的函数，并不是同步的，console在setState后立刻执行了，所以这时候状态还没有真正变更完，所以这里取到的状态仍旧是更新前的。</p>
+<h3 id="2-setState机制"><a href="#2-setState机制" class="headerlink" title="2.setState机制"></a>2.setState机制</h3><p>setState的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形式了所谓的“异步”。setState 方法还提供一个可选的参数 callback ，即一个回调函数，会在当前调用 setState 方法更新状态后进行调用。<br>setState(partialState,callback);<br>如下所示就能实现最终效果：</p>
+<h3 id="3-进一步学习"><a href="#3-进一步学习" class="headerlink" title="3.进一步学习"></a>3.进一步学习</h3><p>上述中的partialState不仅是一个对象，还可以是一个函数，这个函数会接收到两个参数，第一个是当前的state值，第二个是当前的props。因为如果直接在第一个对象中使用， this.props 和 this.state 可能是异步更新的，用它们当前的值去计算下一个 state 的值可能无法更新，下面写法能够获取到最新的state及props值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">this.setState((preState, props) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        age: prevState.age + props.age,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>【批量更新】setState 的批量更新优化也是建立在“异步”（合成事件、钩子函数）之上的，在原生事件和setTimeout 中不会批量更新，在“异步”中如果对同一个值进行多次 setState ， setState 的批量更新策略会对其进行覆盖，取最后一次的执行，如果是同时 setState 多个不同的值，在更新时会对其进行合并批量更新，下面示例中对value的状态更新，最后一次的值3将之前的2覆盖掉。</p>
+<p>setState 只在合成事件（react 在组件中的onClick等都是属于它自定义的合成事件）和钩子函数中是“异步”的，在原生事件（如通过addeventListener添加的，dom中的原生事件）和 setTimeout 中都是同步的。<br>​</p>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h3><p>（1）不要直接修改 State，而是使用setState方法<br>this.state.comment = ‘Hello’;  //错误示例<br>this.setState({comment: ‘Hello’}); //正确示例<br>（2）State 的更新可能是异步的<br>因此如果一些想要在setState执行完成之后执行的操作，放在第二个参数function回调函数中执行，同时注意异步执行结果对状态及后续操作的影响。<br>（3）State 的更新会被合并<br>平常对state中的值进行管理时也要统一管理，避免多个state进行更新操作，产生不必要的混乱。</p>
+<p>[学习参考：-<a href="https://juejin.im/post/599b8f066fb9a0247637d61b#heading-3" target="_blank" rel="noopener">setState的秘密</a>   -<a href="https://react.docschina.org/docs/state-and-lifecycle.html" target="_blank" rel="noopener">State &amp; 生命周期</a>]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/04/学习周报2019-07-26/" data-id="cjyweg9ah0006ls32vzwr775m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-学习周报2019-07-19" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/04/学习周报2019-07-19/" class="article-date">
+  <time datetime="2019-08-04T03:12:08.000Z" itemprop="datePublished">2019-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/04/学习周报2019-07-19/">学习周报2019/07/19</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>在项目中遇到将单个的函数抽出在多个js文件中使用，对于其import几种方式及区别进行了学习。</p>
+<p>如下为在项目中常见的几种导入方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import &apos;echarts/lib/chart/line&apos;;</span><br><span class="line">import &#123; Select, Menu, Breadcrumb, Icon, Popover &#125; from &apos;antd&apos;;</span><br><span class="line">import * as action from &apos;../../actions/OptionAction&apos;;</span><br><span class="line">import &#123; injectIntl &#125; from &apos;react-intl&apos;;</span><br><span class="line">import ClassNames from &apos;classnames&apos;;</span><br><span class="line">import &apos;./fitterInformationAll.less&apos;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-import概念"><a href="#2-import概念" class="headerlink" title="2.import概念"></a>2.import概念</h3><p>ES6模块主要有两个功能：export和import<br>export用于对外输出本模块（一个文件可以理解为一个模块）变量的接口<br>import用于在一个模块中加载另一个含有export接口的模块。<br>也就是说使用export命令定义了模块的对外接口以后，其他JS文件就可以通过import命令加载这个模块（文件）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// main.js</span><br><span class="line">var name=&quot;Tom&quot;;</span><br><span class="line">var fun=function(value)&#123;</span><br><span class="line">　　console.log(value)</span><br><span class="line">&#125;</span><br><span class="line">export &#123;name,fun&#125;</span><br><span class="line">//通过向大括号中添加name，fun变量并且export输出，就可以将对应变量值以name、fun变量标识符形式暴露给其他文件而被读取到</span><br><span class="line"></span><br><span class="line">// child.js</span><br><span class="line">// 通过import获取main.js文件的内部变量，&#123;&#125;括号内的变量来自于main.js文件export出的变量标识符。</span><br><span class="line">import &#123;name,fun&#125; from &quot;./main.js&quot;</span><br><span class="line">console.log(name) // Tom</span><br></pre></td></tr></table></figure>
+
+<p>前面的例子可以看出，main.js使用import命令的时候，用户需要知道main.js所暴露出的变量标识符，否则无法加载。可以使用export default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名。</p>
+<h3 id="3-import常见几种方式及区别"><a href="#3-import常见几种方式及区别" class="headerlink" title="3.import常见几种方式及区别"></a>3.import常见几种方式及区别</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import defaultExport from &quot;module-name&quot;;</span><br><span class="line">import * as name from &quot;module-name&quot;;</span><br><span class="line">import &#123; export &#125; from &quot;module-name&quot;;</span><br><span class="line">import &#123; export as alias &#125; from &quot;module-name&quot;;</span><br><span class="line">import &#123; export1 , export2 &#125; from &quot;module-name&quot;;</span><br><span class="line">import &#123; foo , bar &#125; from &quot;module-name/path/to/specific/un-exported/file&quot;;</span><br><span class="line">import &#123; export1 , export2 as alias2 , [...] &#125; from &quot;module-name&quot;;</span><br><span class="line">import defaultExport, &#123; export [ , [...] ] &#125; from &quot;module-name&quot;;</span><br><span class="line">import defaultExport, * as name from &quot;module-name&quot;;</span><br><span class="line">import &quot;module-name&quot;;</span><br><span class="line">var promise = import(&quot;module-name&quot;);//这是一个处于第三阶段的提案。</span><br></pre></td></tr></table></figure>
+
+<p>name参数是“导入模块对象”的名称，它将用一种名称空间来引用导入模块的接口。export参数指定单个的命名导出，而import * as name语法导入所有导出接口，即导入模块整体。以下示例阐明该语法。</p>
+<p>（1）导入整个模块的内容</p>
+<p>这将myModule插入当前作用域，其中包含来自位于/modules/my-module.js文件中导出的所有接口。</p>
+<p><code>import * as myModule from &#39;/modules/my-module.js&#39;;</code></p>
+<p>（2）导入单个接口</p>
+<p>给定一个名为myExport的对象或值，它已经从模块my-module导出（因为整个模块被导出）或显式地导出（使用export语句），将myExport插入当前作用域。</p>
+<p><code>import {myExport} from &#39;/modules/my-module.js&#39;;</code></p>
+<p>（3）导入多个接口</p>
+<p>这将foo和bar插入当前作用域。</p>
+<p><code>import {foo, bar} from &#39;/modules/my-module.js&#39;;</code></p>
+<p>（4）导入带有别名的接口</p>
+<p>可以在导入时重命名接口。例如，将shortName插入当前作用域。</p>
+<p><code>import {reallyLongModuleExportName as shortName} from &#39;/my-module.js&#39;;</code></p>
+<p> （5）导入时重命名多个接口<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import &#123;</span><br><span class="line">  reallyReallyLongModuleMemberName as shortName,</span><br><span class="line">  anotherLongModuleName as short</span><br><span class="line">&#125; from &apos;/modules/my-module.js&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>（6）仅为副作用而导入一个模块</p>
+<p>整个模块仅为副作用（中性词，无贬义含义）而导入，而不导入模块中的任何内容（接口）。 这将运行模块中的全局代码, 但实际上不导入任何值。</p>
+<p><code>import &#39;/modules/my-module.js&#39;;</code></p>
+<p>（7）导入默认值</p>
+<p>引入模块可能有一个defaultexport（无论它是对象，函数，类等）可用。然后可以使用import语句来导入这样的默认接口。</p>
+<p>最简单的用法是直接导入默认值：</p>
+<p><code>import myDefault from &#39;/modules/my-module.js&#39;;</code></p>
+<p>也可以同时将default语法与上述用法（命名空间导入或命名导入）一起使用。在这种情况下，default导入必须首先声明。 例如：</p>
+<p><code>import myDefault, * as myModule from &#39;/modules/my-module.js&#39;;</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/04/学习周报2019-07-19/" data-id="cjyweg9af0004ls32dyb3i7a3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-学习周报2019-07-12" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/04/学习周报2019-07-12/" class="article-date">
+  <time datetime="2019-08-04T03:02:05.000Z" itemprop="datePublished">2019-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/04/学习周报2019-07-12/">学习周报2019/07/12</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-遇到问题"><a href="#1-遇到问题" class="headerlink" title="1.遇到问题"></a>1.遇到问题</h3><pre><code>在React中通过调用fun方法，进行this.steState赋值时报错：Uncaught TypeError: Cannot read property &apos;state&apos; of undefined。</code></pre><h3 id="2-错误原因"><a href="#2-错误原因" class="headerlink" title="2.错误原因"></a>2.错误原因</h3><pre><code>this指向问题：this是JavaScript的一个关键字，是指函数执行过程中，自动生成的一个内部对象，是指当前的对象，只在当前函数内部使用。由于JavaScript自身特性，如果传递一个函数名给一个变量，之后通过函数名()的方式进行调用，在方法内部如果使用this，则this的指向会丢失。 </code></pre><p>如下面例子，可以正常获取到id值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;</span><br><span class="line">id:&apos;1&apos;,</span><br><span class="line">getId:function()&#123;</span><br><span class="line">console.log(this.id);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.getId();</span><br></pre></td></tr></table></figure>
+
+<p>但是没有直接调用对象的方法，而是将方法声明给一个中间变量，之后利用中间变量()调用方法，此时this则失去指向，输出undefined:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const obj2 = &#123;</span><br><span class="line">  id:&apos;2&apos;,</span><br><span class="line">  getId:function()&#123;</span><br><span class="line">      console.log(this.id)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">const fun = obj2.getId;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-解决办法"><a href="#3-解决办法" class="headerlink" title="3.解决办法"></a>3.解决办法</h3><pre><code>React在JSX中传递的事件不是一个字符串，而是一个函数如:onClick={this.handleClick}，此时onClick是中间变量，所以处理函数中的this指向会丢失。</code></pre><p>有如下解决办法：<br>（1）使用bind<br>    给调用函数时bind(this)，从而使得无论事件处理函数如何传递，this指向都是当前实例化对象。<br>—写法1：在constructor中进行bind绑定：<br><code>this.handleCancel = this.handleCancel.bind(this);</code><br>    在函数调用时直接使用：<br><code>&lt;button onCancel={this.handleCancel}&gt;cancel&lt;/button&gt;</code></p>
+<p>—写法2：直接在调用时直接进行bind绑定：<br><code>&lt;button onOk={this.handleOk.bind(this)} &gt;sure&lt;/button&gt;</code></p>
+<p>（2）箭头函数<br>    箭头函数的this是在定义函数时绑定的，即函数在定义时，this就继承了定义函数的对象。因此在声明函数时使用箭头函数将函数内容返回给一个变量，在调用时直接使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">handOk = ()=&gt; &#123;</span><br><span class="line">this.setState(&#123;</span><br><span class="line">visible: true,</span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br><span class="line">&lt;button onOk=&#123;this.handleOk&#125; &gt;sure&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-思考总结"><a href="#4-思考总结" class="headerlink" title="4.思考总结"></a>4.思考总结</h3><pre><code>部分函数调用时无this.setState操作，所以没有意识到this指向问题，在今后需要注意这种情况；且有些开发环境不支持箭头函数，只能采取bind方式进行解决。关于this指向，仍需继续深入学习理解。</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/04/学习周报2019-07-12/" data-id="cjyweg9ac0002ls32fdkuvwgy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-技术分享" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/04/技术分享/" class="article-date">
+  <time datetime="2019-08-04T02:53:23.000Z" itemprop="datePublished">2019-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/04/技术分享/">技术分享</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前端技术快报第57期"><a href="#前端技术快报第57期" class="headerlink" title="前端技术快报第57期"></a>前端技术快报第57期</h1><h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><ul>
+<li><a href="https://juejin.im/post/5d2d41a7e51d454f723025ad" target="_blank" rel="noopener">React小技巧汇总</a></li>
+<li><a href="https://mp.weixin.qq.com/s/VpPFXt_stWXHYWSAt8eOcg" target="_blank" rel="noopener">2019 React Redux 完全指南</a></li>
+</ul>
+<hr>
+<p> React开发基础学习掌握</p>
+<h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><ul>
+<li><a href="https://www.html.cn/archives/8510" target="_blank" rel="noopener">Grid布局指南</a></li>
+<li><a href="https://www.runoob.com/w3cnote/flex-grammar.html" target="_blank" rel="noopener">Flex布局语法教程</a></li>
+<li><a href="https://css-irl.info/to-grid-or-to-flex/" target="_blank" rel="noopener">To Grid or to Flex?</a></li>
+</ul>
+<hr>
+<p>关于gird和flex布局学习及使用选择</p>
+<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><p>-<a href="https://www.html.cn/archives/9517" target="_blank" rel="noopener"> JavaScript 开销及原因</a></p>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><ul>
+<li><a href="https://juejin.im/post/5c71392de51d455f1c310be3" target="_blank" rel="noopener">nodeppt</a></li>
+</ul>
+<hr>
+<p>代码控制的酷炫PPT</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/zi1Af8UXiWq_pXc-yDt50g" target="_blank" rel="noopener">需求分析与开发时间评估</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/04/技术分享/" data-id="cjyweg9ag0005ls32a4gzwayy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术分享/">技术分享</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/30/hello-world/" class="article-date">
@@ -101,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/30/hello-world/" data-id="cjywcmzxd0000wp323lpeo10t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/30/hello-world/" data-id="cjyweg9a20000ls32ivnvqavu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -121,15 +402,29 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习周报/">学习周报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术分享/">技术分享</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/学习周报/" style="font-size: 20px;">学习周报</a> <a href="/tags/技术分享/" style="font-size: 10px;">技术分享</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
     </div>
   </div>
 
@@ -142,7 +437,23 @@
       <ul>
         
           <li>
-            <a href="/2019/07/30/hello-world/">Hello World!</a>
+            <a href="/2019/08/04/学习周报2019-07-05/">学习周报2019/07/05</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/04/学习周报2019-07-26/">学习周报2019/07/26</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/04/学习周报2019-07-19/">学习周报2019/07/19</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/04/学习周报2019-07-12/">学习周报2019/07/12</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/04/技术分享/">技术分享</a>
           </li>
         
       </ul>
