@@ -62,6 +62,88 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-studyData/其他/常见x，y属性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/18/studyData/其他/常见x，y属性/" class="article-date">
+  <time datetime="2019-08-18T14:21:59.000Z" itemprop="datePublished">2019-08-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/18/studyData/其他/常见x，y属性/">常见x，y属性</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h3><p>对常见CSS x,y属性有大概了解，实际运用过程中发现很多概念模糊不清，对其进行学习。</p>
+<h3 id="2-常见x-y属性概念"><a href="#2-常见x-y属性概念" class="headerlink" title="2.常见x,y属性概念"></a>2.常见x,y属性概念</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. e.clientX 是目标点距离浏览器可视范围的X轴坐标</span><br><span class="line">2. e.pageX 是目标点距离document最左上角的X轴坐标，即触发事件点相对于当前浏览器可视窗口左上角的横向距离，加上滚动条的滚动距离</span><br><span class="line">[没有滚动条时pageX=clientX,有滚动条时pageX=clientX+横向滚动条距离scrollLeft/Right]</span><br><span class="line">3. offsetX/Y：当鼠标事件发生时，鼠标相对于事件源x轴的位置</span><br><span class="line">4. screenX：触发事件点相对于当前电脑屏幕左上角的横向距离</span><br><span class="line">5. layerX：相对于position为absolute或relative的父元素胡外边缘的距离。ie8及ie8之前的版本没有layerX或layerY值</span><br><span class="line">6. X：等于clientX</span><br></pre></td></tr></table></figure>
+
+<p style="font-size:12px ;width:70px;color:white;background:#909090;text-align:center">图解如下：</p>
+<img src="http://ww1.sinaimg.cn/large/006tNc79ly1g5znwvq8o7j31dm0u0tbx.jpg" width="400px">
+在不同浏览器下，各种属性的定义不同，表现也有细微差异，因此
+<span style="font-size:15px ;color:#909090">推荐使用:</span> 
+screenX/Y、pageX/Y、clientX/Y、offsetX/Y 
+<span style="font-size:15px ;color:#909090">此外:</span>
+X/Y与clientX/Y相同，firefox不支持 
+layerX/Y除IE外与pageX/Y相同，IE11下与clientX/Y相同，非官方属性。 
+
+<h3 id="3-相关scroll、offset属性概念"><a href="#3-相关scroll、offset属性概念" class="headerlink" title="3.相关scroll、offset属性概念"></a>3.相关scroll、offset属性概念</h3><p>scrollTop是指某个可滚动区块向下滚动的距离。<br>offsetTop则是元素的上边框与父元素的上边框的绝对距离。</p>
+<ol>
+<li>offsetTop:<br>当前对象到其上级层顶部的距离.不能对其进行赋值.设置对象到页面顶部的距离用style.top属性.<br>（style.top属性必须自己设置，系统默认为空,设置方式：<br>document.getElementById(“box”).style.top=”100px”;）</li>
+<li>offsetLeft:<br>当前对象到其上级层左边的距离.不能对其进行赋值.设置对象到页面左部的距离用style.left属性.</li>
+<li>offsetWidth:<br>当前对象的宽度.与style.width属性的区别在于:如对象的宽度设定值为百分比宽度,则无论页面变大还是变小,style.width都返回此百分比,而offsetWidth则返回在不同页面中对象的宽度值而不是百分比值</li>
+<li>offsetHeight:<br>与style.height属性的区别在于:如对象的宽度设定值为百分比高度,则无论页面变大还是变小,style.height都返回此百分比,而offsetHeight则返回在不同页面中对象的高度值而不是百分比值</li>
+<li>offsetParent:<br>HTMLElement.offsetParent 是一个只读属性，返回一个指向最近的（closest，指包含层级上的最近）包含该元素的定位元素。如果没有定位的元素，则 offsetParent 为最近的 table, table cell 或根元素。当元素的 style.display 设置为 “none” 时，offsetParent 返回 null。offsetParent 很有用，因为 offsetTop 和 offsetLeft 都是相对于其内边距边界的。 <details>
+<summary><span>offsetParent属性</span></summary>
+(1) 当某个元素及其DOM结构层次中元素都未进行CSS定位时(absolute或者relative)[或者某个元素进行CSS定位时而DOM结构层次中元素都未进行CSS定位时]，则这个元素的offsetParent属性的取值为根元素。更确切地说，这个元素的各种偏移量计算（offsetTop、offsetLeft等）的参照物为Body元素。(其实无论时标准兼容模式还是怪异模式，根元素都为Body元素) 
+(2) 当某个元素的父元素进行了CSS定位时（absolute或者relative），则这个元素的offsetParent属性的取值为其父元素。更确切地说，这个元素的各种偏移量计算（offsetTop、offsetLeft等）的参照物为其父元素 
+(3) 当某个元素及其父元素都未进行CSS定位时（absolute或者relative），则这个元素的offsetParent属性的取值为在DOM结构层次中距离其最近，并且已进行了CSS定位的元素。
+</details></li>
+<li>scrollLeft:<br>对象的最左边到对象在当前窗口显示的范围内的左边的距离．<br>即是在出现了横向滚动条的情况下，滚动条拉动的距离．</li>
+<li>scrollTop<br>对象的最顶部到对象在当前窗口显示的范围内的顶边的距离．<br>即是在出现了纵向滚动条的情况下，滚动条拉动的距离</li>
+</ol>
+<p style="font-size:12px ;width:70px;color:white;background:#909090;text-align:center">图解如下：</p>
+<img src="http://ww1.sinaimg.cn/large/006y8mN6ly1g6bsaj08hyj30hs0bnt9g.jpg" width="350px">
+
+
+<details>
+    <summary><span id="list3">相关属性</span></summary>
+
+<p>DOM innerheight、innerwidth属性:<br>只读属性，声明了窗口的文档显示区的高度和宽度，以像素计。<br>这里的宽度和高度不包括菜单栏、工具栏以及滚动条等的高度。</p>
+<p style="font-size:12px ;color:#909090">IE 不支持这些属性。它用 document.documentElement 或 document.body的 clientWidth 和 clientHeight 属性作为替代。</p>
+
+<p>pageXOffset 和 pageYOffset 属性返回文档在窗口左上角水平和垂直方向滚动的像素。pageXOffset 和 pageYOffset 属性相等于 scrollX 和 scrollY 属性。这些属性是只读的。<br>pageYOffset 属性是 scrollY 属性的别名：window.pageYOffset == window.scrollY;<br>window.pageYOffset == window.scrollY<br>所有主流浏览器都支持 pageXOffset 和 pageYOffset 属性。<br>但是 IE 8 及 更早 IE 版本不支持该属性,但可以使用 document.documentElement.scrollLeft 和 document.documentElement.scrollTop 属性 。<br>offsetTop：<br>获取任意元素，距离页面顶部（不是文档显示区）的距离<br>innerHeight:文档显示区的高度</p>
+<p>scrollTop：页面顶部超出文档显示区的距离<br>scrollLeft = pageXOffset = scrollX 都代表向左滚动偏移X轴的距离，Y同理为向上滚动偏移距离，兼容不同浏览器而做的处理。</p>
+</details>
+
+<h3 id="4-使用场景"><a href="#4-使用场景" class="headerlink" title="4.使用场景"></a>4.使用场景</h3><img src="http://ww4.sinaimg.cn/large/006y8mN6ly1g6bqydr88lj31ay0t8grj.jpg" width="350px">
+
+<p>例如本周项目中遇到：当scrollTop+innerHeight &lt; offsetTop时,DOM1未在可视窗口显示，<br>scrollTop+innerHeight &gt; offsetTop时,DOM1已经滚动至可视窗口内，<br>根据此可以监听元素在可视窗口区内滚动显示范围，从而可以进行“回到顶部”按钮添加判断，以及对当前加载DOM元素进行动态加载效果添加等处理。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/18/studyData/其他/常见x，y属性/" data-id="cjzrqbxoj000vrg32sc2fxxv9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/12/知识点总结/" class="article-date">
@@ -94,12 +176,12 @@
 </ol>
 <p>这个类的用法很简单，如果你有些组件是纯组件，那么把继承类从 Component 换成 PureComponent 即可。当组件更新时，如果组件的 props 和 state 都没发生改变，render 方法就不会触发，省去 Virtual DOM 的生成和比对过程，达到提升性能的目的。<br>xt</p>
 <p>7.<a href="https://juejin.im/post/5d53a8895188257fad671cbc" target="_blank" rel="noopener">typeScript写法</a><br>8.<a href="https://juejin.im/entry/57a42bd07db2a2005a9419aa" target="_blank" rel="noopener">react中函数式及类声明组件</a><br>9.<a href="https://blog.csdn.net/weixin_37620905/article/details/82961944" target="_blank" rel="noopener">ES6中的解构、扩展运算符(…)、rest参数(…)的使用</a><br>10.<a href>resolve是shong么:require.resolve,promise.resolve</a><br>11.[分享至twitter]</p>
-<p>12.dangerouslySetInnerHTML使用时，内部不能嵌套子元素</p>
+<p>12.dangerouslySetInnerHTML使用时，内部不能嵌套子元素<br>13.Charles安装配置教程：<br>（1）遇到mac的网络请求不能抓包，首先确认charles的proxy选项设置，Proxy -&gt; macOS Proxy，勾选上macOS Proxy，再试一试能否抓取mac的网络请求包。<br>此时如果不能上网，是因为证书没被信任，打开Charles，help，SSL proxying，install Charles root certificate，接着出现下面界面，搜索到Charles相关证书，永久信任。<br><br><br><img src="http://ww2.sinaimg.cn/large/006y8mN6ly1g69ljgrd9vj31i40iwwkj.jpg" width="300px"><br><br><br>（2）手机端修改连接高级，8888端口号及电脑IP配置。<br><br>(3)<a href="https://blog.csdn.net/juse__we/article/details/81330170" target="_blank" rel="noopener">使用Charles进行HTTPS抓包</a><br><br>(4)<a href="https://blog.csdn.net/weixin_41725711/article/details/81302208" target="_blank" rel="noopener">手机安装证书</a><br><br>(5)<a href="https://download.csdn.net/download/u012709932/10488852" target="_blank" rel="noopener">4.1.2Mac证书</a><br></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/12/知识点总结/" data-id="cjzghjfff0001u032xhalg5l2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/12/知识点总结/" data-id="cjzrqbxnd0001rg32vdu73qq1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -215,10 +297,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/12/studyData/其他/分享至社交圈/" data-id="cjzghjfgz000xu03290kpd72p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/12/studyData/其他/分享至社交圈/" data-id="cjzrqbxol0010rg326bqtv54h" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录-2019-08-16学习周报/">学习记录,2019/08/16学习周报</a></li></ul>
 
     </footer>
   </div>
@@ -265,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/11/studyData/其他/HTML5调起APP应用程序/" data-id="cjzghjfgw000uu032uda4o0b3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/11/studyData/其他/HTML5调起APP应用程序/" data-id="cjzrqbxoi000urg325t5pk8ra" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -303,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/11/studyData/其他/阻止按钮多次点击/" data-id="cjzghjfgx000vu032z7dogoqz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/11/studyData/其他/阻止按钮多次点击/" data-id="cjzrqbxol000zrg3242i84ru0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -361,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/08/weekly/学习周报2019-08-09/" data-id="cjzghjfgt000qu032kuld0dgb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/08/weekly/学习周报2019-08-09/" data-id="cjzrqbxo8000frg32ip8x6gpg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -402,7 +484,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/05/studyData/html5/WEEX/" data-id="cjzghjfgw000tu0326cslmhvx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/05/studyData/html5/WEEX/" data-id="cjzrqbxok000xrg320jay8olf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -439,7 +521,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/05/studyData/html5/jsBridge/" data-id="cjzghjfgv000su032hwe9ee6r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/05/studyData/html5/jsBridge/" data-id="cjzrqbxoi000trg32vijcptah" class="article-share-link">Share</a>
       
       
     </footer>
@@ -503,7 +585,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/05/studyData/HTML相关知识学习/" data-id="cjzghjfgb0005u032zcq7c38n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/05/studyData/HTML相关知识学习/" data-id="cjzrqbxny0003rg326xigpjkv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -560,66 +642,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-08-02/" data-id="cjzghjfgj000du03250kicy3l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-08-02/" data-id="cjzrqbxo7000drg3251ewx27q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sourceShare/学习资料" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/04/sourceShare/学习资料/" class="article-date">
-  <time datetime="2019-08-04T03:36:36.000Z" itemprop="datePublished">2019-08-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/04/sourceShare/学习资料/">学习资料</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="博客资料"><a href="#博客资料" class="headerlink" title="博客资料"></a>博客资料</h3><ul>
-<li><a href="https://platform.html5.org/" target="_blank" rel="noopener">eg资料汇总</a></li>
-<li><a href="https://docschina.org/#weekly" target="_blank" rel="noopener">印记中文</a></li>
-<li><a href="http://f2er.club/" target="_blank" rel="noopener">前端资料汇总</a></li>
-<li><a href="https://github.com/nieweidong/fetool" target="_blank" rel="noopener">大前端工具集</a></li>
-<li><a href="https://helloqingfeng.github.io/front-end-index/index.html" target="_blank" rel="noopener">前端资源汇总</a></li>
-<li><a href="https://www.jeffjade.com/2016/03/30/104-front-end-tutorial/" target="_blank" rel="noopener">最强前端资源大全</a></li>
-<li><a href="https://www.html.cn/down/" target="_blank" rel="noopener">中文网</a><h3 id="CSS学习"><a href="#CSS学习" class="headerlink" title="CSS学习"></a>CSS学习</h3></li>
-<li><a href="https://css-tricks.com/" target="_blank" rel="noopener">CSS-TRICKS</a></li>
-<li><a href="https://www.zhangxinxu.com/wordpress/" target="_blank" rel="noopener">鑫空间，鑫生活</a></li>
-</ul>
-<h3 id="React学习"><a href="#React学习" class="headerlink" title="React学习"></a>React学习</h3><h3 id="JavaScript学习"><a href="#JavaScript学习" class="headerlink" title="JavaScript学习"></a>JavaScript学习</h3><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
-<li><a href="https://apps.apple.com/cn/app/id1101244278?mt=12" target="_blank" rel="noopener">markdown图床</a></li>
-<li><a href="https://coding.net/help/doc/project" target="_blank" rel="noopener">coding帮助文档</a></li>
-</ul>
-<h3 id="实用软件"><a href="#实用软件" class="headerlink" title="实用软件"></a>实用软件</h3><ul>
-<li><a href="http://blog.devtang.com/2015/11/14/charles-introduction/" target="_blank" rel="noopener">charles代理</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/sourceShare/学习资料/" data-id="cjzghjfg80003u032c4bn3hs8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习资源/">学习资源</a></li></ul>
 
     </footer>
   </div>
@@ -646,7 +672,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习周报/">学习周报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习记录/">学习记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习资源/">学习资源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术快报/">技术快报</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习周报/">学习周报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习记录/">学习记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习记录-2019-08-16学习周报/">学习记录,2019/08/16学习周报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习资源/">学习资源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术快报/">技术快报</a></li></ul>
     </div>
   </div>
 
@@ -656,7 +682,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/学习周报/" style="font-size: 20px;">学习周报</a> <a href="/tags/学习记录/" style="font-size: 15px;">学习记录</a> <a href="/tags/学习资源/" style="font-size: 10px;">学习资源</a> <a href="/tags/技术快报/" style="font-size: 10px;">技术快报</a>
+      <a href="/tags/学习周报/" style="font-size: 20px;">学习周报</a> <a href="/tags/学习记录/" style="font-size: 15px;">学习记录</a> <a href="/tags/学习记录-2019-08-16学习周报/" style="font-size: 10px;">学习记录,2019/08/16学习周报</a> <a href="/tags/学习资源/" style="font-size: 10px;">学习资源</a> <a href="/tags/技术快报/" style="font-size: 10px;">技术快报</a>
     </div>
   </div>
 
@@ -678,6 +704,10 @@
       <ul>
         
           <li>
+            <a href="/2019/08/18/studyData/其他/常见x，y属性/">常见x，y属性</a>
+          </li>
+        
+          <li>
             <a href="/2019/08/12/知识点总结/">知识点总结</a>
           </li>
         
@@ -691,10 +721,6 @@
         
           <li>
             <a href="/2019/08/11/studyData/其他/阻止按钮多次点击/">阻止按钮多次点击</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/08/weekly/学习周报2019-08-09/">学习周报2019-08-09</a>
           </li>
         
       </ul>
