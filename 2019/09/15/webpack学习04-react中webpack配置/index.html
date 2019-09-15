@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>webpack学习04-react中webpack配置 | 学习博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="脚手架工具creact-react-app 中webpack配置脚手架工具，其实是node的一个程序，会帮我们初始化一个项目，包含项目的工程目录以及这个项目打包的webpack配置。 通过脚手架生成的工程会默认的webpack的配置都已经配置好了，但是把webpack相关的配置文件隐藏起来了，执行npm run build/start等命令时会调用这些隐藏的配置文件，来进行项目的打包，生成可以运行">
+<meta name="keywords" content="学习记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack学习04-react中webpack配置">
+<meta property="og:url" content="http://yoursite.com/2019/09/15/webpack学习04-react中webpack配置/index.html">
+<meta property="og:site_name" content="学习博客">
+<meta property="og:description" content="脚手架工具creact-react-app 中webpack配置脚手架工具，其实是node的一个程序，会帮我们初始化一个项目，包含项目的工程目录以及这个项目打包的webpack配置。 通过脚手架生成的工程会默认的webpack的配置都已经配置好了，但是把webpack相关的配置文件隐藏起来了，执行npm run build/start等命令时会调用这些隐藏的配置文件，来进行项目的打包，生成可以运行">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6gy1g6zekelnxtj30j008kwew.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6gy1g6zelj3f50j30g604kaa3.jpg">
+<meta property="og:updated_time" content="2019-09-15T02:48:57.619Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack学习04-react中webpack配置">
+<meta name="twitter:description" content="脚手架工具creact-react-app 中webpack配置脚手架工具，其实是node的一个程序，会帮我们初始化一个项目，包含项目的工程目录以及这个项目打包的webpack配置。 通过脚手架生成的工程会默认的webpack的配置都已经配置好了，但是把webpack相关的配置文件隐藏起来了，执行npm run build/start等命令时会调用这些隐藏的配置文件，来进行项目的打包，生成可以运行">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6gy1g6zekelnxtj30j008kwew.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="学习博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">学习博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-webpack学习04-react中webpack配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/15/webpack学习04-react中webpack配置/" class="article-date">
+  <time datetime="2019-09-15T02:48:44.000Z" itemprop="datePublished">2019-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      webpack学习04-react中webpack配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="脚手架工具creact-react-app-中webpack配置"><a href="#脚手架工具creact-react-app-中webpack配置" class="headerlink" title="脚手架工具creact-react-app 中webpack配置"></a>脚手架工具creact-react-app 中webpack配置</h3><p>脚手架工具，其实是node的一个程序，会帮我们初始化一个项目，包含项目的工程目录以及这个项目打包的webpack配置。</p>
+<p>通过脚手架生成的工程会默认的webpack的配置都已经配置好了，但是把webpack相关的配置文件隐藏起来了，执行<code>npm run build/start</code>等命令时会调用这些隐藏的配置文件，来进行项目的打包，生成可以运行的代码。</p>
+<p>脚手架提供了eject命令，可以将隐藏的webpack配置项展现出来，执行<code>npm run eject</code> 之后，项目目录会多出config及scripts文件夹：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6zekelnxtj30j008kwew.jpg"></p>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6zelj3f50j30g604kaa3.jpg">
+
+<p style="font-size:10px;">jest文件夹可以先删掉，涉及自动化测试相关知识。scripts中test.js涉及自动化测试命令，也可以先删掉。package.json中test、eject命令可以先删掉。</p>
+
+<h5 id="npm-run-start"><a href="#npm-run-start" class="headerlink" title="npm run start"></a>npm run start</h5><p style="font-size:10px;">项目安装依赖失败的话，删除yarn.lock、node_modules文件，再执行npm install</p>
+
+
+<p><code>npm run start</code>命令会启动一个服务器，webpack-dev-server，让在开发过程中可以实时调试，做热模块更新。</p>
+<p><code>npm run build</code>命令帮我们生成线上要运行的生产环境代码。</p>
+<p>执行命令时<br><code>&quot;start&quot;: &quot;node scripts/start.js&quot;,
+    &quot;build&quot;: &quot;node scripts/build.js&quot;,</code><br>通过node执行scripts下面的start.js/build.js文件。</p>
+<h6 id="build-js文件"><a href="#build-js文件" class="headerlink" title="build.js文件"></a>build.js文件</h6><h6 id="env-js文件内容"><a href="#env-js文件内容" class="headerlink" title="env.js文件内容"></a>env.js文件内容</h6><ol>
+<li>L8 /config/env 文件：<code>delete require.cache[require.resolve(&#39;./paths&#39;)];</code>清paths中的缓存，使他能拿到paths中的最新内容</li>
+<li>L10判断当前打包环境</li>
+<li>L11打包中遇到异常，要抛出这个异常，而不是忽略他继续执行。</li>
+<li>L17webpack打包的时候，可以配置很多的环境变量，在脚手架工具里，可以把环境变量配置在根目录下创建.env的文件，在该文件中去定义一些全局变量。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const NODE_ENV = process.env.NODE_ENV;</span><br><span class="line">if (!NODE_ENV) &#123;</span><br><span class="line">  throw new Error(</span><br><span class="line">    &apos;The NODE_ENV environment variable is required but was not specified.&apos;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>会去.env文件中读取这些全局变量，然后定义到打包的过程之中。</p>
+<ol start="5">
+<li>L52 获取当前文件的路径，把他定义到NODE_PATH下面，即定义一个全局变量NODE_PATH里面，存放当前项目所在的路径</li>
+<li>L63提供一个方法，结合外部传进来的一个路径，对全局变量做一些整理，最终把他返回出去。</li>
+</ol>
+<h6 id="webpack-config-js文件内容"><a href="#webpack-config-js文件内容" class="headerlink" title="webpack.config.js文件内容"></a>webpack.config.js文件内容</h6><ol>
+<li>核心的webpack的配置内容</li>
+<li>L136 return<ol>
+<li>mode根据isEnvProduction判断当前环境，webpackEnv</li>
+<li>bail一旦在打包过程中遇到错误就及时停止，不再往下打包了，直接报错，（开发环境继续打包，线上环境停止打包）</li>
+<li>devtool  shouldUseSourceMap根据在全局变量中是否配置了GENERATE_SOURCEMAP</li>
+<li>entry入口 path</li>
+<li>output输出，线上环境方法哦appBuild文件夹下 pathinfo 把入口引入的其他模块的信息，通过注释的形式有所输出</li>
+<li>filename chunkFilename如果是线上环境，就用chunkhash 开发环境直接使用static/bundle.js</li>
+<li>devtoolModuleFilenameTemplate 通过sourcemap找到里面的依赖文件所在的disk（硬盘上）真正的路径位置，来定位到sourcemap中相应代码文件的行数，来帮助我们进行调错，解决sourcemap定位不准的问题（一些大型项目，应该配置此项）</li>
+<li>optimization做优化或一些代码的压缩都放在该配置项里，取决于当前的环境；minimizer里配置了TerserPlugin插件，即压缩js的一个插件，里面做了一些配置，线上环境才会执行，开发环境无效</li>
+<li>splitChunks默认webpack中的 把node_modules中的东西单独打包，runtimeChunk把webpack runtime的代码单独打包生成文件</li>
+<li>resolve<br>1.modules 如果配置了modules是个数组，当你引入一个模块的时候，会到node_moduls中去找，还会到其他的modules去找。根据你的配置生成modules配置的数组，当引入一个模块的时候，会到数组里对应的文件夹里去找<ol start="2">
+<li>extension 根据文件后缀alias别名</li>
+<li>plugins 当引入一个其他模块的时候，resolve生效，定义的plugins生效</li>
+</ol>
+</li>
+<li>resolveLoader只用引入一些loader时才会执行</li>
+<li>module  strictExportPresence引入的模块必须明确地导出自己的内容</li>
+<li>{ parser: { requireEnsure: false } },不支持require.ensure，必须使用import进行异步代码的加载</li>
+<li>enforce: ‘pre’,在loader前用eslint对代码做检测</li>
+<li>oneOf 当我们打包文件的时候，会到下面逐个的去找loader，直到找到一个为止（图片，如果是个图片文件，通过url-loader对图片打包，如果小于10kb时放到base64里，如果大于10kb直接把文件拷贝过去）</li>
+</ol>
+</li>
+</ol>
+<h6 id="build-js文件内容"><a href="#build-js文件内容" class="headerlink" title="build.js文件内容"></a>build.js文件内容</h6><ol>
+<li>L15引入dev文件，执行该文件，对一些打包过程中要用到的全局变量进行赋值</li>
+<li>L18 <ol>
+<li>path 核心模块</li>
+<li>chalk让命令行的提示更加美观的工具</li>
+<li>L22 webpack.config文件 return的就是build拿到的文件</li>
+</ol>
+</li>
+<li>L47 configFactory 得到打包所需要的webpack配置内容，</li>
+</ol>
+<p>path.js打包的一些路径信息<br>env.js帮助初始化运行环境的文件<br>webpackDevServer.config</p>
+<p>start.js文件：开发环境，遇到问题及时报错</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/15/webpack学习04-react中webpack配置/" data-id="ck0kdsa4300091i32h4hgsh4r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/13/webpack学习03-核心概念-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">webpack学习03-核心概念(下)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习周报/">学习周报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习记录/">学习记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习记录-2019-08-16学习周报/">学习记录,2019/08/16学习周报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习资源/">学习资源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术快报/">技术快报</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/学习周报/" style="font-size: 15px;">学习周报</a> <a href="/tags/学习记录/" style="font-size: 20px;">学习记录</a> <a href="/tags/学习记录-2019-08-16学习周报/" style="font-size: 10px;">学习记录,2019/08/16学习周报</a> <a href="/tags/学习资源/" style="font-size: 10px;">学习资源</a> <a href="/tags/技术快报/" style="font-size: 10px;">技术快报</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/15/webpack学习04-react中webpack配置/">webpack学习04-react中webpack配置</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/13/webpack学习03-核心概念-1/">webpack学习03-核心概念(下)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/10/webpack学习03-核心概念/">webpack学习03-核心概念</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/10/webpack学习02-文件结构解析/">webpack学习02-babel</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/10/webpack学习01-项目搭建/">webpack学习01-项目搭建</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 linayang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

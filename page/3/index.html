@@ -62,6 +62,76 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-weekly/学习周报2019-07-19" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/04/weekly/学习周报2019-07-19/" class="article-date">
+  <time datetime="2019-08-04T03:12:08.000Z" itemprop="datePublished">2019-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/04/weekly/学习周报2019-07-19/">学习周报2019/07/19</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>在项目中遇到将单个的函数抽出在多个js文件中使用，对于其import几种方式及区别进行了学习。<br>如下为在项目中常见的几种导入方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import &apos;echarts/lib/chart/line&apos;;</span><br><span class="line">import &#123; Select, Menu, Breadcrumb, Icon, Popover &#125; from &apos;antd&apos;;</span><br><span class="line">import * as action from &apos;../../actions/OptionAction&apos;;</span><br><span class="line">import &#123; injectIntl &#125; from &apos;react-intl&apos;;</span><br><span class="line">import ClassNames from &apos;classnames&apos;;</span><br><span class="line">import &apos;./fitterInformationAll.less&apos;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-import概念"><a href="#2-import概念" class="headerlink" title="2.import概念"></a>2.import概念</h3><p>ES6模块主要有两个功能：export和import<br>export用于对外输出本模块（一个文件可以理解为一个模块）变量的接口<br>import用于在一个模块中加载另一个含有export接口的模块。<br>也就是说使用export命令定义了模块的对外接口以后，其他JS文件就可以通过import命令加载这个模块（文件）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// main.js</span><br><span class="line">var name=&quot;Tom&quot;;</span><br><span class="line">var fun=function(value)&#123;</span><br><span class="line">　　console.log(value)</span><br><span class="line">&#125;</span><br><span class="line">export &#123;name,fun&#125;</span><br><span class="line">//通过向大括号中添加name，fun变量并且export输出，就可以将对应变量值以name、fun变量标识符形式暴露给其他文件而被读取到</span><br><span class="line"></span><br><span class="line">// child.js</span><br><span class="line">// 通过import获取main.js文件的内部变量，&#123;&#125;括号内的变量来自于main.js文件export出的变量标识符。</span><br><span class="line">import &#123;name,fun&#125; from &quot;./main.js&quot;</span><br><span class="line">console.log(name) // Tom</span><br></pre></td></tr></table></figure>
+
+<p>前面的例子可以看出，main.js使用import命令的时候，用户需要知道main.js所暴露出的变量标识符，否则无法加载。可以使用export default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名。</p>
+<h3 id="3-import常见几种方式及区别"><a href="#3-import常见几种方式及区别" class="headerlink" title="3.import常见几种方式及区别"></a>3.import常见几种方式及区别</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import defaultExport from &quot;module-name&quot;;</span><br><span class="line">import * as name from &quot;module-name&quot;;</span><br><span class="line">import &#123; export &#125; from &quot;module-name&quot;;</span><br><span class="line">import &#123; export as alias &#125; from &quot;module-name&quot;;</span><br><span class="line">import &#123; export1 , export2 &#125; from &quot;module-name&quot;;</span><br><span class="line">import &#123; foo , bar &#125; from &quot;module-name/path/to/specific/un-exported/file&quot;;</span><br><span class="line">import &#123; export1 , export2 as alias2 , [...] &#125; from &quot;module-name&quot;;</span><br><span class="line">import defaultExport, &#123; export [ , [...] ] &#125; from &quot;module-name&quot;;</span><br><span class="line">import defaultExport, * as name from &quot;module-name&quot;;</span><br><span class="line">import &quot;module-name&quot;;</span><br><span class="line">var promise = import(&quot;module-name&quot;);//这是一个处于第三阶段的提案。</span><br></pre></td></tr></table></figure>
+
+<p>name参数是“导入模块对象”的名称，它将用一种名称空间来引用导入模块的接口。export参数指定单个的命名导出，而import * as name语法导入所有导出接口，即导入模块整体。以下示例阐明该语法。</p>
+<p>（1）导入整个模块的内容</p>
+<p>这将myModule插入当前作用域，其中包含来自位于/modules/my-module.js文件中导出的所有接口。</p>
+<p><code>import * as myModule from &#39;/modules/my-module.js&#39;;</code></p>
+<p>（2）导入单个接口</p>
+<p>给定一个名为myExport的对象或值，它已经从模块my-module导出（因为整个模块被导出）或显式地导出（使用export语句），将myExport插入当前作用域。</p>
+<p><code>import {myExport} from &#39;/modules/my-module.js&#39;;</code></p>
+<p>（3）导入多个接口</p>
+<p>这将foo和bar插入当前作用域。</p>
+<p><code>import {foo, bar} from &#39;/modules/my-module.js&#39;;</code></p>
+<p>（4）导入带有别名的接口</p>
+<p>可以在导入时重命名接口。例如，将shortName插入当前作用域。</p>
+<p><code>import {reallyLongModuleExportName as shortName} from &#39;/my-module.js&#39;;</code></p>
+<p> （5）导入时重命名多个接口<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import &#123;</span><br><span class="line">  reallyReallyLongModuleMemberName as shortName,</span><br><span class="line">  anotherLongModuleName as short</span><br><span class="line">&#125; from &apos;/modules/my-module.js&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>（6）仅为副作用而导入一个模块</p>
+<p>整个模块仅为副作用（中性词，无贬义含义）而导入，而不导入模块中的任何内容（接口）。 这将运行模块中的全局代码, 但实际上不导入任何值。</p>
+<p><code>import &#39;/modules/my-module.js&#39;;</code></p>
+<p>（7）导入默认值</p>
+<p>引入模块可能有一个defaultexport（无论它是对象，函数，类等）可用。然后可以使用import语句来导入这样的默认接口。</p>
+<p>最简单的用法是直接导入默认值：</p>
+<p><code>import myDefault from &#39;/modules/my-module.js&#39;;</code></p>
+<p>也可以同时将default语法与上述用法（命名空间导入或命名导入）一起使用。在这种情况下，default导入必须首先声明。 例如：</p>
+<p><code>import myDefault, * as myModule from &#39;/modules/my-module.js&#39;;</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-19/" data-id="ck0kdsa4p000p1i325g809nc8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-weekly/学习周报2019-07-12" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/04/weekly/学习周报2019-07-12/" class="article-date">
@@ -103,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-12/" data-id="ck0hphurz000jkx32sme03jyy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-12/" data-id="ck0kdsa4u000y1i3213nniocs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -163,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/sourceShare/技术快报/" data-id="ck0hphus4000tkx32we8fzx5q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/sourceShare/技术快报/" data-id="ck0kdsa4j000g1i325pm2q7hg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术快报/">技术快报</a></li></ul>
@@ -214,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/30/hello-world/" data-id="ck0hphuqw0000kx32mfhyzhh9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/30/hello-world/" data-id="ck0kdsa3o00001i32lty63i50" class="article-share-link">Share</a>
       
       
     </footer>
@@ -252,7 +322,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/学习周报/" style="font-size: 20px;">学习周报</a> <a href="/tags/学习记录/" style="font-size: 20px;">学习记录</a> <a href="/tags/学习记录-2019-08-16学习周报/" style="font-size: 10px;">学习记录,2019/08/16学习周报</a> <a href="/tags/学习资源/" style="font-size: 10px;">学习资源</a> <a href="/tags/技术快报/" style="font-size: 10px;">技术快报</a>
+      <a href="/tags/学习周报/" style="font-size: 15px;">学习周报</a> <a href="/tags/学习记录/" style="font-size: 20px;">学习记录</a> <a href="/tags/学习记录-2019-08-16学习周报/" style="font-size: 10px;">学习记录,2019/08/16学习周报</a> <a href="/tags/学习资源/" style="font-size: 10px;">学习资源</a> <a href="/tags/技术快报/" style="font-size: 10px;">技术快报</a>
     </div>
   </div>
 
@@ -274,6 +344,10 @@
       <ul>
         
           <li>
+            <a href="/2019/09/15/webpack学习04-react中webpack配置/">webpack学习04-react中webpack配置</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/13/webpack学习03-核心概念-1/">webpack学习03-核心概念(下)</a>
           </li>
         
@@ -287,10 +361,6 @@
         
           <li>
             <a href="/2019/09/10/webpack学习01-项目搭建/">webpack学习01-项目搭建</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/02/weekly/webpack学习/">webpack学习</a>
           </li>
         
       </ul>
