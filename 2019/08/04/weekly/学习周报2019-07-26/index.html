@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g5nhjq9z43j31e90u079n.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g5nhi7uu0cj31dw08aq4r.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g5nhkbmjggj31e409k41e.jpg">
-<meta property="og:updated_time" content="2019-08-04T03:31:47.000Z">
+<meta property="og:updated_time" content="2019-09-20T18:41:17.966Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习周报2019&#x2F;07&#x2F;26">
 <meta name="twitter:description" content="1.前言项目中遇到在this.setState执行成功之后，再去做别的操作，示例如下，setState执行之后，下面的输出并不能得到value最新的值： 在setState中，这是一个异步处理的函数，并不是同步的，console在setState后立刻执行了，所以这时候状态还没有真正变更完，所以这里取到的状态仍旧是更新前的。 2.setState机制setState的“异步”并不是说内部由异步代码">
@@ -91,15 +91,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>项目中遇到在this.setState执行成功之后，再去做别的操作，示例如下，setState执行之后，下面的输出并不能得到value最新的值：<br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5nhjq9z43j31e90u079n.jpg" alt><br> 在setState中，这是一个异步处理的函数，并不是同步的，console在setState后立刻执行了，所以这时候状态还没有真正变更完，所以这里取到的状态仍旧是更新前的。</p>
+        <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>项目中遇到在this.setState执行成功之后，再去做别的操作，示例如下，setState执行之后，下面的输出并不能得到value最新的值：<br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5nhjq9z43j31e90u079n.jpg" style="width:500px;"><br> 在setState中，这是一个异步处理的函数，并不是同步的，console在setState后立刻执行了，所以这时候状态还没有真正变更完，所以这里取到的状态仍旧是更新前的。</p>
 <h3 id="2-setState机制"><a href="#2-setState机制" class="headerlink" title="2.setState机制"></a>2.setState机制</h3><p>setState的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形式了所谓的“异步”。setState 方法还提供一个可选的参数 callback ，即一个回调函数，会在当前调用 setState 方法更新状态后进行调用。</p>
 <p> <code>setState(partialState,callback);</code></p>
 <p>如下所示就能实现最终效果：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5nhi7uu0cj31dw08aq4r.jpg" alt></p>
+<img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5nhi7uu0cj31dw08aq4r.jpg" style="width:600px;">
+
 <h3 id="3-进一步学习"><a href="#3-进一步学习" class="headerlink" title="3.进一步学习"></a>3.进一步学习</h3><p>上述中的partialState不仅是一个对象，还可以是一个函数，这个函数会接收到两个参数，第一个是当前的state值，第二个是当前的props。因为如果直接在第一个对象中使用， this.props 和 this.state 可能是异步更新的，用它们当前的值去计算下一个 state 的值可能无法更新，下面写法能够获取到最新的state及props值：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">this.setState((preState, props) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        age: prevState.age + props.age,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>【批量更新】setState 的批量更新优化也是建立在“异步”（合成事件、钩子函数）之上的，在原生事件和setTimeout 中不会批量更新，在“异步”中如果对同一个值进行多次 setState ， setState 的批量更新策略会对其进行覆盖，取最后一次的执行，如果是同时 setState 多个不同的值，在更新时会对其进行合并批量更新，下面示例中对value的状态更新，最后一次的值3将之前的2覆盖掉。<br><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5nhkbmjggj31e409k41e.jpg" alt><br>setState 只在合成事件（react 在组件中的onClick等都是属于它自定义的合成事件）和钩子函数中是“异步”的，在原生事件（如通过addeventListener添加的，dom中的原生事件）和 setTimeout 中都是同步的。<br>​</p>
+<p>【批量更新】setState 的批量更新优化也是建立在“异步”（合成事件、钩子函数）之上的，在原生事件和setTimeout 中不会批量更新，在“异步”中如果对同一个值进行多次 setState ， setState 的批量更新策略会对其进行覆盖，取最后一次的执行，如果是同时 setState 多个不同的值，在更新时会对其进行合并批量更新，下面示例中对value的状态更新，最后一次的值3将之前的2覆盖掉。<br>setState 只在合成事件（react 在组件中的onClick等都是属于它自定义的合成事件）和钩子函数中是“异步”的，在原生事件（如通过addeventListener添加的，dom中的原生事件）和 setTimeout 中都是同步的。</p>
+<p>​<img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5nhkbmjggj31e409k41e.jpg" style="width:600px;"></p>
 <h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h3><p>（1）不要直接修改 State，而是使用setState方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">this.state.comment = &apos;Hello&apos;;  //错误示例</span><br><span class="line">this.setState(&#123;comment: &apos;Hello&apos;&#125;); //正确示例</span><br></pre></td></tr></table></figure>
 
@@ -109,7 +111,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-26/" data-id="ck0sffxl7000tnj3257pqais2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-26/" data-id="ck0sh2br5000s6932j4ms1mro" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
