@@ -62,6 +62,327 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-studyData/html5/jsBridge" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/05/studyData/html5/jsBridge/" class="article-date">
+  <time datetime="2019-08-05T14:04:58.000Z" itemprop="datePublished">2019-08-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/05/studyData/html5/jsBridge/">jsBridge</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-JSBridge概念"><a href="#1-JSBridge概念" class="headerlink" title="1.JSBridge概念"></a>1.JSBridge概念</h3><p>JSBridge顾名思义就是是一座用JavaScript搭建起来的桥，一端是web，一端是native。可以实现web 与Native之间相互调用。</p>
+<h3 id="2-开发过程中常用JSBridge来做什么？"><a href="#2-开发过程中常用JSBridge来做什么？" class="headerlink" title="2.开发过程中常用JSBridge来做什么？"></a>2.开发过程中常用JSBridge来做什么？</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/05/studyData/html5/jsBridge/" data-id="ck0sffxlq001tnj32nxj24w4n" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-studyData/HTML相关知识学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/05/studyData/HTML相关知识学习/" class="article-date">
+  <time datetime="2019-08-05T14:00:09.000Z" itemprop="datePublished">2019-08-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/05/studyData/HTML相关知识学习/">HTML相关知识学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p><a href="../html5/jsBridge">JSBridge 到底是个shong么</a></p>
+</li>
+<li><p><a href="../html5/WEEX">Weex 到底是个shong么</a></p>
+</li>
+<li><p>移动端常见的3种开发方式</p>
+<ol>
+<li>WebAPP<blockquote>
+<p>使用前端技术来编写，可以在移动端设备的浏览器中运行的app，提供类似原生app体验。</p>
+</blockquote>
+</li>
+</ol>
+<p>跨平台性非常好，性能不如原生应用程序</p>
+<ol start="2">
+<li>NativeAPP（android/ios/wp/bb/..）<blockquote>
+<p>采用的SDK(software development kit软件开发包)和Java、oc，编写可以安装并运行在移动端设备的app，称之为原生的应用程序，</p>
+</blockquote>
+</li>
+</ol>
+<p>性能好，跨平台没有优势</p>
+<ol start="3">
+<li>HyBridAPP<blockquote>
+<p>混合编程：使用前端技术结合着原生技术，来生成的可以安装在手机操作系统的app</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/05/studyData/HTML相关知识学习/" data-id="ck0sffxkv000inj3268vgje1n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-weekly/学习周报2019-08-02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/04/weekly/学习周报2019-08-02/" class="article-date">
+  <time datetime="2019-08-04T07:01:16.000Z" itemprop="datePublished">2019-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/04/weekly/学习周报2019-08-02/">学习周报2019-08-02</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>在项目中遇到表格内容在相同属性下换行不一致问题，发现是Ant design表格加了<code>word-break:normal !important</code>属性，导致下面这种情况出现：​</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g5o0k3w0c4j30pi0a4wg9.jpg" alt></p>
+<h3 id="2-word-break属性"><a href="#2-word-break属性" class="headerlink" title="2.word-break属性"></a>2.word-break属性</h3><p><code>word-break</code>指定了在单词内如何换行。<code>word-break</code>有以下四种常见属性值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">word-break: normal;</span><br><span class="line">word-break: break-all;</span><br><span class="line">word-break: keep-all;</span><br><span class="line">word-break: break-word;</span><br></pre></td></tr></table></figure>
+
+<p>运用到元素中，从下图看出，同样的文案，在不同的属性下，折行效果不同：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g5o0kde3o0j31su0f0qb0.jpg" alt></p>
+<p>（1）<code>work-break:break-all</code>；经常用到，对于non-CJK (CJK 指中文/日文/韩文) 文本，可在任意字符间断行，第一个div中文案到达右边框后都被强制折行显示；</p>
+<p>（2）<code>work-break:break-word</code>；从第二个div中可以看出，上面url部分，折行部分与break-all的区别在于二行折行部分，即该属性会对英文单词先起新行，放不下再强制断行；<br>像URL这种长字符串，“？-”这些符号会被识别作为一个单词的结束，进行断行；</p>
+<p>（3）<code>work-break:normal</code>；只在允许的断字点换行（浏览器保持默认处理），允许的断字点图中看出”-“，”?”属于。如果是中文则到边界处的汉字换行，如果是英文整个词换行，如果出现某个英文字符串长度超过边界，则后面的部分将撑开边框，如果边框为固定属性，则后面部分将溢出；</p>
+<p>（4）<code>work-break:keep-all</code>；只能在半角空格或连字符处换行。不允许字断开，如果是中文将把前后标点符号内的一个汉字短语整个换行,英文单词也整个换行，如果出现某个英文。字符串长度超过边界，则后面的部分将撑开边框，如果边框为固定属性，则后面部分将溢出；</p>
+<h3 id="3-类似属性​"><a href="#3-类似属性​" class="headerlink" title="3.类似属性​"></a>3.类似属性​</h3><p><code>word-wrap:</code>用来标明是否允许浏览器在单词内进行断句，这是为了防止当一个字符串太长而找不到它的自然断句点时产生溢出现象；</p>
+<p><code>word-break:</code>用来标明怎么样进行单词内的断句；</p>
+<p><code>white-sapce:</code>用于处理元素内的空白，只在一行内显示；</p>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h3><p>一般中文超出文本区域都会自动换行，但是对于英文折行显示，无论如何单词内的断句都会都单词的可读性产生一定的影响，如果不进行单词断句，每行后长短不一的空白，又会对整个文本区域的美观造成影响。<br>因此一般处理方式：<br>（1）强制换行，保证每行的布局完整，同时在强制断开的单词处添加连词符号，确保直观上的单词完整性；</p>
+<p>（2）文本在固定区域显示，会增加属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.multiple-line &#123;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">  text-overflow: ellipsis;</span><br><span class="line">  display: -webkit-box;</span><br><span class="line">  -webkit-line-clamp: 2;</span><br><span class="line">  -webkit-box-orient: vertical;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>控制文本显示指定行数，超出…显示，防止文本数据长短不可控，过分长超出显示区域；<br>对于URL等外文特殊长字符串，尽量采用word-break:break-all;保持界面布局整洁性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-08-02/" data-id="ck0sffxl9000xnj32grdh96dk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sourceShare/学习资料" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/04/sourceShare/学习资料/" class="article-date">
+  <time datetime="2019-08-04T03:36:36.000Z" itemprop="datePublished">2019-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/04/sourceShare/学习资料/">学习资料</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="博客资料"><a href="#博客资料" class="headerlink" title="博客资料"></a>博客资料</h3><ul>
+<li><a href="https://platform.html5.org/" target="_blank" rel="noopener">eg资料汇总</a></li>
+<li><a href="https://docschina.org/#weekly" target="_blank" rel="noopener">印记中文</a></li>
+<li><a href="http://f2er.club/" target="_blank" rel="noopener">前端资料汇总</a></li>
+<li><a href="https://github.com/nieweidong/fetool" target="_blank" rel="noopener">大前端工具集</a></li>
+<li><a href="https://helloqingfeng.github.io/front-end-index/index.html" target="_blank" rel="noopener">前端资源汇总</a></li>
+<li><a href="https://www.jeffjade.com/2016/03/30/104-front-end-tutorial/" target="_blank" rel="noopener">最强前端资源大全</a></li>
+<li><a href="https://www.html.cn/down/" target="_blank" rel="noopener">中文网</a><h3 id="CSS学习"><a href="#CSS学习" class="headerlink" title="CSS学习"></a>CSS学习</h3></li>
+<li><a href="https://css-tricks.com/" target="_blank" rel="noopener">CSS-TRICKS</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/" target="_blank" rel="noopener">鑫空间，鑫生活</a></li>
+</ul>
+<h3 id="React学习"><a href="#React学习" class="headerlink" title="React学习"></a>React学习</h3><h3 id="JavaScript学习"><a href="#JavaScript学习" class="headerlink" title="JavaScript学习"></a>JavaScript学习</h3><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><a href="https://apps.apple.com/cn/app/id1101244278?mt=12" target="_blank" rel="noopener">markdown图床</a></li>
+<li><a href="https://coding.net/help/doc/project" target="_blank" rel="noopener">coding帮助文档</a></li>
+</ul>
+<h3 id="实用软件"><a href="#实用软件" class="headerlink" title="实用软件"></a>实用软件</h3><ul>
+<li><a href="http://blog.devtang.com/2015/11/14/charles-introduction/" target="_blank" rel="noopener">charles代理</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/04/sourceShare/学习资料/" data-id="ck0sffxkx000jnj32q7jsijvz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习资源/">学习资源</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-weekly/学习周报2019-07-05" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/04/weekly/学习周报2019-07-05/" class="article-date">
+  <time datetime="2019-08-04T03:19:37.000Z" itemprop="datePublished">2019-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/04/weekly/学习周报2019-07-05/">学习周报2019/07/05</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-render概念"><a href="#1-render概念" class="headerlink" title="1.render概念"></a>1.render概念</h3><pre><code>React中每个组件有且只有一个render方法，创建组件有class方式创建和函数声明创建两种方式，两种方式返回的有且只有一个顶点节点。render方法的作用就是将react元素渲染到真实的dom中。</code></pre><h3 id="2-触发render机制"><a href="#2-触发render机制" class="headerlink" title="2.触发render机制"></a>2.触发render机制</h3><pre><code>首先在组件首次加载的时候会执行render，在实例化过程中，当执行componentWillMout之后会执行render，开始将节点挂载在页面上。
+其次有两种情况会触发render，一是setState会导致组件的重新渲染，二是接收到新的props属性时。</code></pre><p>（1） 状态更新时<br>a. 继承自 React.Component 的 class 组件更新状态时</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import React from &quot;react&quot;;</span><br><span class="line">import ReactDOM from &quot;react-dom&quot;;</span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">render() &#123;</span><br><span class="line">return &lt;Foo /&gt;;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Foo extends React.Component &#123;</span><br><span class="line">state = &#123; count: 0 &#125;;</span><br><span class="line">increment = () =&gt; &#123;</span><br><span class="line">const &#123; count &#125; = this.state;</span><br><span class="line">const newCount = count &lt; 10 ? count + 1 : count;</span><br><span class="line">this.setState(&#123; count: newCount &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">render() &#123;</span><br><span class="line">const &#123; count &#125; = this.state;</span><br><span class="line">console.log(&quot;Foo render&quot;);</span><br><span class="line">return (</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;h1&gt; &#123;count&#125; &lt;/h1&gt;</span><br><span class="line">&lt;button onClick=&#123;this.increment&#125;&gt;Increment&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">const rootElement = document.getElementById(&quot;root&quot;);</span><br><span class="line">ReactDOM.render(&lt;App /&gt;, rootElement);</span><br></pre></td></tr></table></figure>
+
+
+<p>上面实例代码中的逻辑是点击就会更新 count，到 10 以后，就会不再触发。但是从执行结果是即使 count 到了 10 以上，render 仍然会被调用。总结来说，继承了 React.Component 的 class 组件，即使状态没变化，只要调用了setState 就会触发 render。</p>
+<p>b. 函数式组件更新状态时<br>用函数实现相同的组件，使用 useState hook：</p>
+<figure class="highlight plain"><figcaption><span>React, &#123; useState &#125; from "react";</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import ReactDOM from &quot;react-dom&quot;;</span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">render() &#123;</span><br><span class="line">return &lt;Foo /&gt;;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">function Foo() &#123;</span><br><span class="line">const [count, setCount] = useState(0);</span><br><span class="line">function increment() &#123;</span><br><span class="line">const newCount = count &lt; 10 ? count + 1 : count;</span><br><span class="line">setCount(newCount);</span><br><span class="line">&#125;</span><br><span class="line">console.log(&quot;Foo render&quot;);</span><br><span class="line">return (</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;h1&gt; &#123;count&#125; &lt;/h1&gt;</span><br><span class="line">&lt;button onClick=&#123;increment&#125;&gt;Increment&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">);</span><br><span class="line">&#125;</span><br><span class="line">const rootElement = document.getElementById(&quot;root&quot;);</span><br><span class="line">ReactDOM.render(&lt;App /&gt;, rootElement);</span><br></pre></td></tr></table></figure>
+
+<p>上面实例执行结果当状态值不再改变之后，render 的调用就停止了。对函数式组件来说，状态值改变时才会触发 render 函数的调用。</p>
+<p>（2）props属性改变</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import React from &quot;react&quot;;</span><br><span class="line">    import ReactDOM from &quot;react-dom&quot;;</span><br><span class="line">    </span><br><span class="line">    class App extends React.Component &#123;</span><br><span class="line">      state = &#123; name: &quot;App&quot; &#125;;</span><br><span class="line">      render() &#123;</span><br><span class="line">        return (</span><br><span class="line">          &lt;div className=&quot;App&quot;&gt;</span><br><span class="line">            &lt;Foo /&gt;</span><br><span class="line">            &lt;button onClick=&#123;() =&gt; this.setState(&#123; name: &quot;App&quot; &#125;)&#125;&gt;</span><br><span class="line">              Change name</span><br><span class="line">            &lt;/button&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        );</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    function Foo() &#123;</span><br><span class="line">      console.log(&quot;Foo render&quot;);</span><br><span class="line">    </span><br><span class="line">      return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;h1&gt; Foo &lt;/h1&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    const rootElement = document.getElementById(&quot;root&quot;);</span><br><span class="line">    ReactDOM.render(&lt;App /&gt;, rootElement);</span><br></pre></td></tr></table></figure>
+
+<p>只要点击了 App 组件内的 Change name 按钮，就会重新 render。而且可以注意到，不管 Foo 具体实现是什么，Foo 都会被重新渲染。无论组件是继承自 React.Component 的 class 组件还是函数式组件，一旦父容器重新 render，组件的 render 都会再次被调用。</p>
+<h3 id="3-render触发优化"><a href="#3-render触发优化" class="headerlink" title="3.render触发优化"></a>3.render触发优化</h3><p>当状态更新后，有时只想让相关的组件重新渲染，并不想让不相关的组件也被重新渲染，因此要对其进行相关优化操作。优化方式有多种，以下是常用的两种优化方式：<br>    shouldComponentUpdate(nextProps,nextState)方法中是render函数调用前执行的函数，可以通过nextProps,nextState参数来判断当前场景是否需要重新渲染，当shouldComponentUpdate方法return true则重新渲染，return false则阻止组件渲染。<br>    PureComponent中，只接受props和state参数，如果props和state没有改变，PureComponent不会重渲染，可以一定程度上减少了render带来的消耗。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-05/" data-id="ck0sffxl8000vnj32nqe394rk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-weekly/学习周报2019-07-26" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/04/weekly/学习周报2019-07-26/" class="article-date">
+  <time datetime="2019-08-04T03:14:47.000Z" itemprop="datePublished">2019-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/04/weekly/学习周报2019-07-26/">学习周报2019/07/26</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>项目中遇到在this.setState执行成功之后，再去做别的操作，示例如下，setState执行之后，下面的输出并不能得到value最新的值：<br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5nhjq9z43j31e90u079n.jpg" alt><br> 在setState中，这是一个异步处理的函数，并不是同步的，console在setState后立刻执行了，所以这时候状态还没有真正变更完，所以这里取到的状态仍旧是更新前的。</p>
+<h3 id="2-setState机制"><a href="#2-setState机制" class="headerlink" title="2.setState机制"></a>2.setState机制</h3><p>setState的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形式了所谓的“异步”。setState 方法还提供一个可选的参数 callback ，即一个回调函数，会在当前调用 setState 方法更新状态后进行调用。</p>
+<p> <code>setState(partialState,callback);</code></p>
+<p>如下所示就能实现最终效果：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5nhi7uu0cj31dw08aq4r.jpg" alt></p>
+<h3 id="3-进一步学习"><a href="#3-进一步学习" class="headerlink" title="3.进一步学习"></a>3.进一步学习</h3><p>上述中的partialState不仅是一个对象，还可以是一个函数，这个函数会接收到两个参数，第一个是当前的state值，第二个是当前的props。因为如果直接在第一个对象中使用， this.props 和 this.state 可能是异步更新的，用它们当前的值去计算下一个 state 的值可能无法更新，下面写法能够获取到最新的state及props值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">this.setState((preState, props) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        age: prevState.age + props.age,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>【批量更新】setState 的批量更新优化也是建立在“异步”（合成事件、钩子函数）之上的，在原生事件和setTimeout 中不会批量更新，在“异步”中如果对同一个值进行多次 setState ， setState 的批量更新策略会对其进行覆盖，取最后一次的执行，如果是同时 setState 多个不同的值，在更新时会对其进行合并批量更新，下面示例中对value的状态更新，最后一次的值3将之前的2覆盖掉。<br><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5nhkbmjggj31e409k41e.jpg" alt><br>setState 只在合成事件（react 在组件中的onClick等都是属于它自定义的合成事件）和钩子函数中是“异步”的，在原生事件（如通过addeventListener添加的，dom中的原生事件）和 setTimeout 中都是同步的。<br>​</p>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h3><p>（1）不要直接修改 State，而是使用setState方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">this.state.comment = &apos;Hello&apos;;  //错误示例</span><br><span class="line">this.setState(&#123;comment: &apos;Hello&apos;&#125;); //正确示例</span><br></pre></td></tr></table></figure>
+
+<p>（2）State 的更新可能是异步的<br>因此如果一些想要在setState执行完成之后执行的操作，放在第二个参数function回调函数中执行，同时注意异步执行结果对状态及后续操作的影响。<br>（3）State 的更新会被合并<br>平常对state中的值进行管理时也要统一管理，避免多个state进行更新操作，产生不必要的混乱。</p>
+<p>[学习参考：-<a href="https://juejin.im/post/599b8f066fb9a0247637d61b#heading-3" target="_blank" rel="noopener">setState的秘密</a>   -<a href="https://react.docschina.org/docs/state-and-lifecycle.html" target="_blank" rel="noopener">State &amp; 生命周期</a>]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-26/" data-id="ck0sffxl7000tnj3257pqais2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-weekly/学习周报2019-07-19" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/04/weekly/学习周报2019-07-19/" class="article-date">
@@ -120,7 +441,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-19/" data-id="ck0kdsa4p000p1i325g809nc8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-19/" data-id="ck0sffxl7000rnj3247ooem7k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -173,7 +494,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-12/" data-id="ck0kdsa4u000y1i3213nniocs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-12/" data-id="ck0sffxl3000nnj3244imy224" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -233,7 +554,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/sourceShare/技术快报/" data-id="ck0kdsa4j000g1i325pm2q7hg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/sourceShare/技术快报/" data-id="ck0sffxle0018nj32wf5gdi7e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术快报/">技术快报</a></li></ul>
@@ -284,7 +605,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/30/hello-world/" data-id="ck0kdsa3o00001i32lty63i50" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/30/hello-world/" data-id="ck0sffxk30005nj32xv7fp1lj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -312,7 +633,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习周报/">学习周报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习记录/">学习记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习记录-2019-08-16学习周报/">学习记录,2019/08/16学习周报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习资源/">学习资源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术快报/">技术快报</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习周报/">学习周报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习记录/">学习记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习记录-2019-08-16学习周报/">学习记录,2019/08/16学习周报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习资源/">学习资源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具使用/">工具使用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术快报/">技术快报</a></li></ul>
     </div>
   </div>
 
@@ -322,7 +643,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/学习周报/" style="font-size: 15px;">学习周报</a> <a href="/tags/学习记录/" style="font-size: 20px;">学习记录</a> <a href="/tags/学习记录-2019-08-16学习周报/" style="font-size: 10px;">学习记录,2019/08/16学习周报</a> <a href="/tags/学习资源/" style="font-size: 10px;">学习资源</a> <a href="/tags/技术快报/" style="font-size: 10px;">技术快报</a>
+      <a href="/tags/学习周报/" style="font-size: 20px;">学习周报</a> <a href="/tags/学习记录/" style="font-size: 20px;">学习记录</a> <a href="/tags/学习记录-2019-08-16学习周报/" style="font-size: 10px;">学习记录,2019/08/16学习周报</a> <a href="/tags/学习资源/" style="font-size: 10px;">学习资源</a> <a href="/tags/工具使用/" style="font-size: 15px;">工具使用</a> <a href="/tags/技术快报/" style="font-size: 10px;">技术快报</a>
     </div>
   </div>
 
@@ -344,23 +665,23 @@
       <ul>
         
           <li>
-            <a href="/2019/09/15/webpack学习04-react中webpack配置/">webpack学习04-react中webpack配置</a>
+            <a href="/2019/09/21/工具软件/chrome常用操作/">chrome常用操作</a>
           </li>
         
           <li>
-            <a href="/2019/09/13/webpack学习03-核心概念-1/">webpack学习03-核心概念(下)</a>
+            <a href="/2019/09/21/工具软件/markdown常用语法/">markdown常用语法</a>
           </li>
         
           <li>
-            <a href="/2019/09/10/webpack学习03-核心概念/">webpack学习03-核心概念</a>
+            <a href="/2019/09/21/工具软件/有道云笔记使用/">有道云笔记使用</a>
           </li>
         
           <li>
-            <a href="/2019/09/10/webpack学习02-文件结构解析/">webpack学习02-babel</a>
+            <a href="/2019/09/21/工具软件/mac使用/">mac使用</a>
           </li>
         
           <li>
-            <a href="/2019/09/10/webpack学习01-项目搭建/">webpack学习01-项目搭建</a>
+            <a href="/2019/09/20/工具软件/webstrom使用/">webstrom使用</a>
           </li>
         
       </ul>
