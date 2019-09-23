@@ -62,6 +62,119 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-studyData/webpack学习03-核心概念" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/10/studyData/webpack学习03-核心概念/" class="article-date">
+  <time datetime="2019-09-10T14:23:12.000Z" itemprop="datePublished">2019-09-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/10/studyData/webpack学习03-核心概念/">webpack学习03-核心概念</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="plugins插件-让打包更便捷"><a href="#plugins插件-让打包更便捷" class="headerlink" title="plugins插件 让打包更便捷"></a>plugins插件 让打包更便捷</h4><p>插件是 webpack 的支柱功能。webpack 自身也是构建于，你在 webpack 配置中用到的相同的插件系统之上！</p>
+<p>插件目的在于解决 loader 无法实现的其他事。</p>
+<p>未配置html文件入口，安装<code>npm install --save-dev html-webpack-plugin</code></p>
+<p>webpack.config.js中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;); //通过 npm 安装</span><br><span class="line">  plugins: [</span><br><span class="line">        new HtmlWebpackPlugin()</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+
+<p>HTMLWebpackplugin会在打包结束后，自动编译可自动在dist下生成index.html文件，并把打包生成的js文件自动引入html中。<br>但是生成的html并没有dom操作生成的root的div标签，因此可以配置html为模板文件：<br><code>new HtmlWebpackPlugin({template: &#39;./src/index.html&#39;})</code></p>
+<h4 id="plugins作用"><a href="#plugins作用" class="headerlink" title="plugins作用"></a>plugins作用</h4><p>可以当你项目运行到某一时刻时，自动帮你做一些事情，如HTMLWebpackplugin会整个打包过程结束后，帮我们生成一个HTML文件，然后把打包生成的js文件注入到这个HTML文件中，其他<br>插件会在刚打包、打包js的某些时刻，让plugin帮你做一些事情。</p>
+<p>希望重新打包时，希望dist先删除，然后再打包，<br><code>npm install clean-webpack-plugin -D</code><br>配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const CleanWebpackPlugin = require(&apos;clean-webpack-plugin&apos;); //定义</span><br><span class="line"> plugins: [</span><br><span class="line">        new HtmlWebpackPlugin(&#123;template: &apos;./src/index.html&apos;&#125;),// 打包之后运行</span><br><span class="line">        new CleanWebpackPlugin([&apos;dist&apos;])//打包之前，使用该插件删除dist目录下的所有内容</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+
+<p>运行错误：<code>CleanWebpackPlugin is not a constructor</code>，错误原因：<code>const {CleanWebpackPlugin} = require(&#39;clean-webpack-plugin&#39;);new CleanWebpackPlugin();</code>需要这样定义。</p>
+<h5 id="entry-与-output基本配置"><a href="#entry-与-output基本配置" class="headerlink" title="entry 与 output基本配置"></a>entry 与 output基本配置</h5><h6 id="entry-和-output打包多个文件时的配置："><a href="#entry-和-output打包多个文件时的配置：" class="headerlink" title="entry 和 output打包多个文件时的配置："></a>entry 和 output打包多个文件时的配置：</h6><p>默认output出口main.js<br>entry写一个字符串<code>entry:&#39;/src/index.js&#39;</code>等价为写一个对象：对象的键main对应打包生成的文件名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">entry:&#123;</span><br><span class="line">    main:&apos;/src/index.js&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果配置两个入口文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">entry:&#123;</span><br><span class="line">    main:&apos;./src/index.js&apos;,</span><br><span class="line">    sub:&apos;./src/index.js&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出一个出口文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, &apos;dist&apos;),//将绝对路径转为相对路径</span><br><span class="line">    filename: &apos;index.bundle.js&apos;//输出文件</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>将会输出如下错误：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6xq37fzofj30rs032ab3.jpg" style="width:100px"><br>打包错误，因为打包是多个文件，main.js和sub.js打包后都会起名叫index.bundle.js，这样的话名字就冲突了。<br>解决这个问题，把filename名称替换为占位符，output中的占位符可以支持 几个这样的配置内容，如hash 、name。如：<code>filename: &#39;[name].js&#39;</code><br>name为打包entry对应的key值。如此配置之后，在打包的时候，打包会被放在index.js文件里，main.js中输出，第二次打包会被打包到sub.js里，打包后结果：<br>dist目录下会打包出mian.js和sub.js：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6xqd3zksqj30qo09cgmm.jpg"><br>同时webpack会自动把打包生成的main.js和sub.js放在index.html中：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6xqfxvmv4j30zg02caav.jpg"></p>
+<h6 id="publicPath"><a href="#publicPath" class="headerlink" title="publicPath"></a>publicPath</h6><p>打包完的文件index.html文件给后端，作为后端入口文件，js文件上传到CDN域名下面，希望地址前多一个CDN地址域名，比如传递到<code>src=&quot;http://cdn.com/main.js&quot;&quot;</code>,希望打包完成后注入到html中的js多带<code>cdn.com</code>的域名，现在手动去改肯定不行，可以在webpack.config.js中改一个配置，在<br>output中配置<code>publicPath:&#39;http://cdn.com.cn&#39;</code>,修改后，重新运行打包，dist/index.html中在所有引入的js都会加入该地址。</p>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6xqq9uti3j31d20280tt.jpg">
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/10/studyData/webpack学习03-核心概念/" data-id="ck0vripy3001lna32y3kbllus" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-studyData/webpack学习02-文件结构解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/10/studyData/webpack学习02-文件结构解析/" class="article-date">
+  <time datetime="2019-09-10T14:22:55.000Z" itemprop="datePublished">2019-09-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/10/studyData/webpack学习02-文件结构解析/">webpack学习02-babel</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>自2015年ECMAScript6发布后，新的特性及语法可以更方便的使用在我们的开发上面，更在每年都推出新ES规范，方便简洁，可以更优雅的开发跟js有关的应用。<br>但是浏览器的支援跟不上js版本的更新，所以新版本的js在现有的浏览器上面支援度很低，目前市面上支援度最高的版本大概就是ES5了，为了要让我们可以使用新版本的js做开发又要浏览器支援，<br>我们就需要有相应的工具做转换，把新版本的js转成ES5.</p>
+<p>webpack作为打包工具的使用，本身并没有提供把新版版的js转换成ES5的功能，所以要靠转换工具babel。</p>
+<h5 id="什么是「babel」"><a href="#什么是「babel」" class="headerlink" title="什么是「babel」?"></a>什么是「babel」?</h5><p>babel是一个目前被广泛使用的编译工具，可以运行在许多自动化工具上，我们可以使用webpack+babel来把新版本的js编译成ES5。</p>
+<h5 id="babel安装"><a href="#babel安装" class="headerlink" title="babel安装"></a>babel安装</h5><p>安装babel（最新babel7）：<br><code>npm install babel-loader @babel/core @babel/preset-env --save-dev</code><br>安装完成后打开package.json文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&quot;devDependencies&quot;: &#123;</span><br><span class="line">   &quot;@babel/core&quot;: &quot;^7.6.0&quot;,</span><br><span class="line">   &quot;@babel/preset-env&quot;: &quot;^7.6.0&quot;,</span><br><span class="line">   &quot;babel-loader&quot;: &quot;^8.0.6&quot;,</span><br><span class="line">   &quot;webpack&quot;: &quot;^4.39.3&quot;,</span><br><span class="line">   &quot;webpack-cli&quot;: &quot;^3.3.8&quot;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>babel-loader:webpack要去读取任何文件都要靠loader这个工具去做判断，然后再去做转换，所以我们就需要webpack挂载这个babel-loader。<br>@babel/core: 文件需要调用babel的API进行编译。<br>@babel/preset-env：可以使用最新版本的JavaScript然后去编译，不用去理会哪些语法需要转换。</p>
+<h5 id="babel配置"><a href="#babel配置" class="headerlink" title="babel配置"></a>babel配置</h5><p>虽然已经完成了babel的下载，仍需要在webpack里面没有设置任何跟babel有关的设定：<br>在webpack.config.js里面加上module属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">        &#123;</span><br><span class="line">            test: /\.(js)$/,</span><br><span class="line">            exclude: /(node_modules)/,</span><br><span class="line">            use: &#123;</span><br><span class="line">                loader: &apos;babel-loader&apos;,</span><br><span class="line">                options: &#123;</span><br><span class="line">                  presets: [&apos;@babel/preset-env&apos;]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过设定babel-loader，然后babel上面调用了@babel/preset-env，让我们可以直接使用编译最新版本的js。ES6的语法如const、字符串模板、箭头函数等都会被编译为es5版本.</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>babel不只是转换新版本的js，也可以转换react的jsx、yscript等。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/10/studyData/webpack学习02-文件结构解析/" data-id="ck0vripxy001ana320hdbk3eo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-studyData/webpack学习01-项目搭建" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/09/10/studyData/webpack学习01-项目搭建/" class="article-date">
@@ -109,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/10/studyData/webpack学习01-项目搭建/" data-id="ck0shaw88000ob3329mvgee9r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/10/studyData/webpack学习01-项目搭建/" data-id="ck0vripxw0015na32ij9rrhc8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -164,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/02/weekly/webpack学习/" data-id="ck0shaw7w0007b332hlbyvihh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/02/weekly/webpack学习/" data-id="ck0vripxp000mna32isf3tzex" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -242,7 +355,7 @@ Connection: Upgrade</code>是Websocket的核心，告诉Apache、Nginx等服务�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/02/weekly/websocket机制/" data-id="ck0shaw7x0008b332ekt2i7mn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/02/weekly/websocket机制/" data-id="ck0vripxo000kna323ueub5g5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -324,7 +437,7 @@ layerX/Y除IE外与pageX/Y相同，IE11下与clientX/Y相同，非官方属性�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/18/studyData/其他/常见x，y属性/" data-id="ck0shaw8s001ob3324o3optyk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/18/studyData/其他/常见x，y属性/" data-id="ck0vripyb001yna32lgujk6m9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -373,7 +486,7 @@ layerX/Y除IE外与pageX/Y相同，IE11下与clientX/Y相同，非官方属性�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/12/知识点总结/" data-id="ck0shaw7b0002b332lgwq9tql" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/12/知识点总结/" data-id="ck0vripwi0001na328npwfa1x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -491,7 +604,7 @@ layerX/Y除IE外与pageX/Y相同，IE11下与clientX/Y相同，非官方属性�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/12/studyData/其他/分享至社交圈/" data-id="ck0shaw8q001kb332zjdkj5ym" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/12/studyData/其他/分享至社交圈/" data-id="ck0vripy8001rna321b0trq7p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -541,7 +654,7 @@ layerX/Y除IE外与pageX/Y相同，IE11下与clientX/Y相同，非官方属性�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/11/studyData/其他/HTML5调起APP应用程序/" data-id="ck0shaw8r001mb332lumq582s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/11/studyData/其他/HTML5调起APP应用程序/" data-id="ck0vripy9001una3284hbj7vg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -579,106 +692,7 @@ layerX/Y除IE外与pageX/Y相同，IE11下与clientX/Y相同，非官方属性�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/11/studyData/其他/阻止按钮多次点击/" data-id="ck0shaw8v001rb332zgbcrfjs" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-weekly/学习周报2019-08-09" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/08/weekly/学习周报2019-08-09/" class="article-date">
-  <time datetime="2019-08-08T13:26:22.000Z" itemprop="datePublished">2019-08-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/08/weekly/学习周报2019-08-09/">学习周报2019-08-09</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-保存图片至本地"><a href="#1-保存图片至本地" class="headerlink" title="1.保存图片至本地"></a>1.保存图片至本地</h3><p>  下载文件是一个非常常见的需求，前端保存页面为图片，最常见的方案都是利用html2canvas来生成图片，同时利用HTML5的新属性download来点击保存到本地。</p>
-<h3 id="2-PC浏览器下载图片"><a href="#2-PC浏览器下载图片" class="headerlink" title="2.PC浏览器下载图片"></a>2.PC浏览器下载图片</h3><p>网上一些实现方法由于跨域会导致a标签在部分浏览器中会直接打开新标签页，因此最终实现兼容性较好的下载方式为用 js 去获取图片，获得其 base64，放回 img 的 src 中再进行绘制。</p>
-<p><strong>分为四步：</strong></p>
-<ol>
-<li>用 JavaScript 创建一个隐藏的a标签</li>
-<li>设置它的 href 属性</li>
-<li>设置它的 download 属性</li>
-<li>用 JavaScript 来触发这个它的 click 事件</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">downloadImage(selector, name) &#123;</span><br><span class="line">    // selector 为要img 标签类或id名，name用来指定下载图片的名称</span><br><span class="line">    const image = new Image();</span><br><span class="line">    // 解决跨域 Canvas 污染问题</span><br><span class="line">    image.setAttribute(&apos;crossOrigin&apos;, &apos;anonymous&apos;);</span><br><span class="line">    image.onload = () =&gt; &#123;</span><br><span class="line">      const canvas = document.createElement(&apos;canvas&apos;);</span><br><span class="line">      canvas.width = image.width;</span><br><span class="line">      canvas.height = image.height;</span><br><span class="line"></span><br><span class="line">      const context = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">      context.drawImage(image, 0, 0, image.width, image.height);</span><br><span class="line">      const url = canvas.toDataURL(&apos;image/png&apos;);</span><br><span class="line">      // 生成一个a元素</span><br><span class="line">      const a = document.createElement(&apos;a&apos;);</span><br><span class="line">      // 创建一个单击事件</span><br><span class="line">      const event = new MouseEvent(&apos;click&apos;);</span><br><span class="line"></span><br><span class="line">      // 将a的download属性设置为我们想要下载的图片名称，若name不存在则使用‘下载图片名称’作为默认名称</span><br><span class="line">      a.download = name || &apos;下载图片名称&apos;;</span><br><span class="line">      // 将生成的URL设置为a.href属性</span><br><span class="line">      a.href = url;</span><br><span class="line"></span><br><span class="line">      // 触发a的单击事件</span><br><span class="line">      a.dispatchEvent(event);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    image.src = document.querySelector(selector).src;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>跨域问题需要在给 img 元素设置 crossOrigin:anonymous;属性，图片路径服务端必须设置允许跨域。<br>为了更快的响应，很多 CDN 会缓存图片的返回值，而缓存的值是不带 CORS 头的。因为没有 CORS 头，所以 js 请求会被拦截。<br> 因此本地文件及图片管理系统中的图片可以下载，网络在线图片及iPic上的图片链接均存在跨域问题无法下载。<br> （除img标签图片下载之外还有canvas图片下载等方法。）</p>
-<h3 id="3-通过HTML5实现APP保存图片至相册"><a href="#3-通过HTML5实现APP保存图片至相册" class="headerlink" title="3.通过HTML5实现APP保存图片至相册"></a>3.通过HTML5实现APP保存图片至相册</h3><p>通过HTML5实现APP保存图片，需要调用手机系统中相册/保存图片到相册，经过查阅发现，现有APP保存图片HTML相关方法是通过HTML5 plus即中国HTML5产业联盟的扩展规范来进行实现。<br>通过属性plus.gallery获取相册管理对象。<br>具体开发实现参考：<a href="https://www.php.cn/html5-tutorial-356600.html" target="_blank" rel="noopener">HTML5 Plus实现APP图片相关操作 </a></p>
-<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h3><p>PC浏器实现下载图片该方法是基于从 DOM 读取的元素及属性来一点点的绘制 canvas，因此，它只能正确地呈现它理解的元素和属性，这意味着有许多 CSS 属性不起作用。图片大小、图片路径跨域问题、图片格式等都可能导致下载不成功。通过原生HTML5以及JS实现保存图片至APP本地相册并未找到方法实现。关于保存图片，涉及之前没了解过的知识点较多，关于相关学习本次只是简单了解，具体掌握还需继续深入学习。</p>
-<h3 id="学习参考："><a href="#学习参考：" class="headerlink" title="学习参考："></a>学习参考：</h3><ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a" target="_blank" rel="noopener">MDN a标签说明</a></li>
-<li><a href="https://www.jianshu.com/p/17d7e5ddf10a" target="_blank" rel="noopener">canvas.toDataURL方法</a></li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/CORS_enabled_image" target="_blank" rel="noopener">“被污染”的 canvas</a></li>
-<li><a href="https://www.html5plus.org/doc/zh_cn/gallery.html" target="_blank" rel="noopener">HTML5Gallery</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/08/weekly/学习周报2019-08-09/" data-id="ck0shaw80000eb3323f20ogrx" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-studyData/html5/WEEX" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/05/studyData/html5/WEEX/" class="article-date">
-  <time datetime="2019-08-05T14:10:43.000Z" itemprop="datePublished">2019-08-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/05/studyData/html5/WEEX/">WEEX</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-WEEX概念"><a href="#1-WEEX概念" class="headerlink" title="1.WEEX概念"></a>1.WEEX概念</h3><hr>
-<p>SBridge 简单来讲，主要是 给 JavaScript 提供调用 Native 功能的接口，让混合开发中的『前端部分』可以方便地使用地址位置、摄像头甚至支付等 Native 功能。<br>既然是『简单来讲』，那么 JSBridge 的用途肯定不只『调用 Native 功能』这么简单宽泛。实际上，JSBridge 就像其名称中的『Bridge』的意义一样，是 Native 和非 Native 之间的桥梁，它的核心是 构建 Native 和非 Native 间消息通信的通道，而且是 双向通信的通道。</p>
-<h3 id="2-开发过程中常用WEEX来做什么？"><a href="#2-开发过程中常用WEEX来做什么？" class="headerlink" title="2.开发过程中常用WEEX来做什么？"></a>2.开发过程中常用WEEX来做什么？</h3><hr>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/05/studyData/html5/WEEX/" data-id="ck0shaw8q001ib332eqt05lsy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/11/studyData/其他/阻止按钮多次点击/" data-id="ck0vripyc0021na321nrpbqzh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -694,7 +708,7 @@ layerX/Y除IE外与pageX/Y相同，IE11下与clientX/Y相同，非官方属性�
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -740,6 +754,14 @@ layerX/Y除IE外与pageX/Y相同，IE11下与clientX/Y相同，非官方属性�
       <ul>
         
           <li>
+            <a href="/2019/09/22/promise学习03-Promise-all/">promise学习03-Promise.all</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/22/promise学习02-then/">promise学习02-then</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/21/工具软件/chrome常用操作/">chrome常用操作</a>
           </li>
         
@@ -749,14 +771,6 @@ layerX/Y除IE外与pageX/Y相同，IE11下与clientX/Y相同，非官方属性�
         
           <li>
             <a href="/2019/09/21/工具软件/有道云笔记使用/">有道云笔记使用</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/21/工具软件/mac使用/">mac使用</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/20/工具软件/webstrom使用/">webstrom使用</a>
           </li>
         
       </ul>

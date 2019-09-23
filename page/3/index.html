@@ -62,6 +62,105 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-weekly/学习周报2019-08-09" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/08/weekly/学习周报2019-08-09/" class="article-date">
+  <time datetime="2019-08-08T13:26:22.000Z" itemprop="datePublished">2019-08-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/08/weekly/学习周报2019-08-09/">学习周报2019-08-09</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-保存图片至本地"><a href="#1-保存图片至本地" class="headerlink" title="1.保存图片至本地"></a>1.保存图片至本地</h3><p>  下载文件是一个非常常见的需求，前端保存页面为图片，最常见的方案都是利用html2canvas来生成图片，同时利用HTML5的新属性download来点击保存到本地。</p>
+<h3 id="2-PC浏览器下载图片"><a href="#2-PC浏览器下载图片" class="headerlink" title="2.PC浏览器下载图片"></a>2.PC浏览器下载图片</h3><p>网上一些实现方法由于跨域会导致a标签在部分浏览器中会直接打开新标签页，因此最终实现兼容性较好的下载方式为用 js 去获取图片，获得其 base64，放回 img 的 src 中再进行绘制。</p>
+<p><strong>分为四步：</strong></p>
+<ol>
+<li>用 JavaScript 创建一个隐藏的a标签</li>
+<li>设置它的 href 属性</li>
+<li>设置它的 download 属性</li>
+<li>用 JavaScript 来触发这个它的 click 事件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">downloadImage(selector, name) &#123;</span><br><span class="line">    // selector 为要img 标签类或id名，name用来指定下载图片的名称</span><br><span class="line">    const image = new Image();</span><br><span class="line">    // 解决跨域 Canvas 污染问题</span><br><span class="line">    image.setAttribute(&apos;crossOrigin&apos;, &apos;anonymous&apos;);</span><br><span class="line">    image.onload = () =&gt; &#123;</span><br><span class="line">      const canvas = document.createElement(&apos;canvas&apos;);</span><br><span class="line">      canvas.width = image.width;</span><br><span class="line">      canvas.height = image.height;</span><br><span class="line"></span><br><span class="line">      const context = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">      context.drawImage(image, 0, 0, image.width, image.height);</span><br><span class="line">      const url = canvas.toDataURL(&apos;image/png&apos;);</span><br><span class="line">      // 生成一个a元素</span><br><span class="line">      const a = document.createElement(&apos;a&apos;);</span><br><span class="line">      // 创建一个单击事件</span><br><span class="line">      const event = new MouseEvent(&apos;click&apos;);</span><br><span class="line"></span><br><span class="line">      // 将a的download属性设置为我们想要下载的图片名称，若name不存在则使用‘下载图片名称’作为默认名称</span><br><span class="line">      a.download = name || &apos;下载图片名称&apos;;</span><br><span class="line">      // 将生成的URL设置为a.href属性</span><br><span class="line">      a.href = url;</span><br><span class="line"></span><br><span class="line">      // 触发a的单击事件</span><br><span class="line">      a.dispatchEvent(event);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    image.src = document.querySelector(selector).src;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>跨域问题需要在给 img 元素设置 crossOrigin:anonymous;属性，图片路径服务端必须设置允许跨域。<br>为了更快的响应，很多 CDN 会缓存图片的返回值，而缓存的值是不带 CORS 头的。因为没有 CORS 头，所以 js 请求会被拦截。<br> 因此本地文件及图片管理系统中的图片可以下载，网络在线图片及iPic上的图片链接均存在跨域问题无法下载。<br> （除img标签图片下载之外还有canvas图片下载等方法。）</p>
+<h3 id="3-通过HTML5实现APP保存图片至相册"><a href="#3-通过HTML5实现APP保存图片至相册" class="headerlink" title="3.通过HTML5实现APP保存图片至相册"></a>3.通过HTML5实现APP保存图片至相册</h3><p>通过HTML5实现APP保存图片，需要调用手机系统中相册/保存图片到相册，经过查阅发现，现有APP保存图片HTML相关方法是通过HTML5 plus即中国HTML5产业联盟的扩展规范来进行实现。<br>通过属性plus.gallery获取相册管理对象。<br>具体开发实现参考：<a href="https://www.php.cn/html5-tutorial-356600.html" target="_blank" rel="noopener">HTML5 Plus实现APP图片相关操作 </a></p>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h3><p>PC浏器实现下载图片该方法是基于从 DOM 读取的元素及属性来一点点的绘制 canvas，因此，它只能正确地呈现它理解的元素和属性，这意味着有许多 CSS 属性不起作用。图片大小、图片路径跨域问题、图片格式等都可能导致下载不成功。通过原生HTML5以及JS实现保存图片至APP本地相册并未找到方法实现。关于保存图片，涉及之前没了解过的知识点较多，关于相关学习本次只是简单了解，具体掌握还需继续深入学习。</p>
+<h3 id="学习参考："><a href="#学习参考：" class="headerlink" title="学习参考："></a>学习参考：</h3><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a" target="_blank" rel="noopener">MDN a标签说明</a></li>
+<li><a href="https://www.jianshu.com/p/17d7e5ddf10a" target="_blank" rel="noopener">canvas.toDataURL方法</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/CORS_enabled_image" target="_blank" rel="noopener">“被污染”的 canvas</a></li>
+<li><a href="https://www.html5plus.org/doc/zh_cn/gallery.html" target="_blank" rel="noopener">HTML5Gallery</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/08/weekly/学习周报2019-08-09/" data-id="ck0vripxu0010na329uv8ayns" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-studyData/html5/WEEX" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/05/studyData/html5/WEEX/" class="article-date">
+  <time datetime="2019-08-05T14:10:43.000Z" itemprop="datePublished">2019-08-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/05/studyData/html5/WEEX/">WEEX</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-WEEX概念"><a href="#1-WEEX概念" class="headerlink" title="1.WEEX概念"></a>1.WEEX概念</h3><hr>
+<p>SBridge 简单来讲，主要是 给 JavaScript 提供调用 Native 功能的接口，让混合开发中的『前端部分』可以方便地使用地址位置、摄像头甚至支付等 Native 功能。<br>既然是『简单来讲』，那么 JSBridge 的用途肯定不只『调用 Native 功能』这么简单宽泛。实际上，JSBridge 就像其名称中的『Bridge』的意义一样，是 Native 和非 Native 之间的桥梁，它的核心是 构建 Native 和非 Native 间消息通信的通道，而且是 双向通信的通道。</p>
+<h3 id="2-开发过程中常用WEEX来做什么？"><a href="#2-开发过程中常用WEEX来做什么？" class="headerlink" title="2.开发过程中常用WEEX来做什么？"></a>2.开发过程中常用WEEX来做什么？</h3><hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/05/studyData/html5/WEEX/" data-id="ck0vripya001wna32x2d7rptx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-studyData/html5/jsBridge" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/05/studyData/html5/jsBridge/" class="article-date">
@@ -89,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/05/studyData/html5/jsBridge/" data-id="ck0shaw8p001hb332kznfbydu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/05/studyData/html5/jsBridge/" data-id="ck0vripy8001sna329p6rrys6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -155,7 +254,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/05/studyData/HTML相关知识学习/" data-id="ck0shaw86000kb332gfjjinjo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/05/studyData/HTML相关知识学习/" data-id="ck0vripxu000yna32mutb2rn7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -214,7 +313,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-08-02/" data-id="ck0shaw82000gb3324w4b95oj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-08-02/" data-id="ck0vripxs000tna32v8jhva2h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -270,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/sourceShare/学习资料/" data-id="ck0shaw8e000yb332657f47eb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/sourceShare/学习资料/" data-id="ck0vripxv0013na32ojb63nuj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习资源/">学习资源</a></li></ul>
@@ -323,7 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-05/" data-id="ck0shaw7z000ab332h4xszds3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-05/" data-id="ck0vripxm000hna32nbtsaon2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -377,7 +476,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-26/" data-id="ck0shaw84000ib332d0dvqvf2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-26/" data-id="ck0vripy4001nna32rn8yzm2s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -447,7 +546,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-19/" data-id="ck0shaw87000mb332u0fi6duu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-19/" data-id="ck0vripxr000qna32bi1nhevl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -500,7 +599,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-12/" data-id="ck0shaw7z000cb332wxugum7v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/04/weekly/学习周报2019-07-12/" data-id="ck0vripxt000vna32fpkp96fc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -512,120 +611,11 @@
 
 
   
-    <article id="post-sourceShare/技术快报" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/04/sourceShare/技术快报/" class="article-date">
-  <time datetime="2019-08-04T02:53:23.000Z" itemprop="datePublished">2019-08-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/04/sourceShare/技术快报/">技术快报</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="前端技术快报第57期"><a href="#前端技术快报第57期" class="headerlink" title="前端技术快报第57期"></a>前端技术快报第57期</h1><h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><ul>
-<li><a href="https://juejin.im/post/5d2d41a7e51d454f723025ad" target="_blank" rel="noopener">React小技巧汇总</a></li>
-<li><a href="https://mp.weixin.qq.com/s/VpPFXt_stWXHYWSAt8eOcg" target="_blank" rel="noopener">2019 React Redux 完全指南</a></li>
-</ul>
-<hr>
-<p> React开发基础学习掌握</p>
-<h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><ul>
-<li><a href="https://www.html.cn/archives/8510" target="_blank" rel="noopener">Grid布局指南</a></li>
-<li><a href="https://www.runoob.com/w3cnote/flex-grammar.html" target="_blank" rel="noopener">Flex布局语法教程</a></li>
-<li><a href="https://css-irl.info/to-grid-or-to-flex/" target="_blank" rel="noopener">To Grid or to Flex?</a></li>
-</ul>
-<hr>
-<p>关于gird和flex布局学习及使用选择</p>
-<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><p>-<a href="https://www.html.cn/archives/9517" target="_blank" rel="noopener"> JavaScript 开销及原因</a></p>
-<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><ul>
-<li><a href="https://juejin.im/post/5c71392de51d455f1c310be3" target="_blank" rel="noopener">nodeppt</a></li>
-</ul>
-<hr>
-<p>代码控制的酷炫PPT</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
-<li><a href="https://mp.weixin.qq.com/s/zi1Af8UXiWq_pXc-yDt50g" target="_blank" rel="noopener">需求分析与开发时间评估</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/04/sourceShare/技术快报/" data-id="ck0shaw8k001ab3327kdck8h1" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术快报/">技术快报</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/30/hello-world/" class="article-date">
-  <time datetime="2019-07-29T17:00:42.387Z" itemprop="datePublished">2019-07-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/30/hello-world/">Hello World!</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/30/hello-world/" data-id="ck0shaw730000b332bj8c0jk5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -671,6 +661,14 @@
       <ul>
         
           <li>
+            <a href="/2019/09/22/promise学习03-Promise-all/">promise学习03-Promise.all</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/22/promise学习02-then/">promise学习02-then</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/21/工具软件/chrome常用操作/">chrome常用操作</a>
           </li>
         
@@ -680,14 +678,6 @@
         
           <li>
             <a href="/2019/09/21/工具软件/有道云笔记使用/">有道云笔记使用</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/21/工具软件/mac使用/">mac使用</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/20/工具软件/webstrom使用/">webstrom使用</a>
           </li>
         
       </ul>
