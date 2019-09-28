@@ -62,6 +62,75 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-promise学习04-Promise-resolve" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/28/promise学习04-Promise-resolve/" class="article-date">
+  <time datetime="2019-09-28T12:20:17.000Z" itemprop="datePublished">2019-09-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/28/promise学习04-Promise-resolve/">promise学习04-Promise.resolve</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="Promise-resolve"><a href="#Promise-resolve" class="headerlink" title="Promise.resolve()"></a>Promise.resolve()</h5><p>返回一个fulfilled的Promise实例，或原始Promise实例。</p>
+<ol>
+<li>参数为空，返回一个状态为fulfilled的Promise实例</li>
+<li>参数是一个跟Promise无关的值，同上，不过fulfilled响应函数会得到这个参数</li>
+<li>参数为Promise实例，则返回该实例，不做任何修改</li>
+<li>参数为thenable，立刻执行它的.then()</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;start&apos;); // eslint-disable-line</span><br><span class="line"></span><br><span class="line">       Promise.resolve().then((value)=&gt;&#123;</span><br><span class="line">           console.log(&apos;Step 1&apos;,value); // eslint-disable-line</span><br><span class="line">           return Promise.resolve(&apos;Hello&apos;);</span><br><span class="line">       &#125;).then(value=&gt;&#123;</span><br><span class="line">           console.log(value,&apos;world&apos;); // eslint-disable-line</span><br><span class="line">           return Promise.resolve(new Promise(resolve =&gt; &#123;</span><br><span class="line">               setTimeout(()=&gt;&#123;</span><br><span class="line">                   resolve(&apos;Good&apos;);</span><br><span class="line">               &#125;,2000);</span><br><span class="line">           &#125;));</span><br><span class="line">       &#125;)</span><br><span class="line">           .then(value=&gt;&#123;</span><br><span class="line">               console.log(value,&apos;evening&apos;); // eslint-disable-line</span><br><span class="line">               return Promise.resolve(&#123;</span><br><span class="line">                   then()&#123;</span><br><span class="line">                       console.log(&apos;,everyone&apos;); // eslint-disable-line</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;)</span><br><span class="line">           &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>结果：<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7fijttiwuj316006s0uj.jpg" alt></p>
+<p>原因分析：一开始未给value值，所以输出undefined，再下一步resolve对象时，并不会改变Promise的状态，</p>
+<h5 id="Promise-reject"><a href="#Promise-reject" class="headerlink" title="Promise.reject()"></a>Promise.reject()</h5><p>返回一个rejected的Promise实例。<br>Promise.reject()不认thenable，其他与resolve一致。</p>
+<h5 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a>Promise.race()</h5><p>类似Promise.all()，区别在于它有任意一个完成就算完成。<br>将两个Promise实例放在数组中传给Promise.race，运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;start&apos;); // eslint-disable-line</span><br><span class="line"></span><br><span class="line">       let p1 = new Promise(resolve =&gt; &#123;</span><br><span class="line">           setTimeout(()=&gt;&#123;</span><br><span class="line">               resolve(&apos;I\&apos;m P1&apos;);</span><br><span class="line">           &#125;,3000);</span><br><span class="line">       &#125;);</span><br><span class="line">       let p2 = new Promise(resolve =&gt; &#123;</span><br><span class="line">           setTimeout(()=&gt;&#123;</span><br><span class="line">               resolve(&apos;I\&apos;m P2&apos;);</span><br><span class="line">           &#125;,1000)</span><br><span class="line">       &#125;);</span><br><span class="line">       Promise.race([p1,p2])</span><br><span class="line">           .then(value =&gt; &#123;</span><br><span class="line">               console.log(value); // eslint-disable-line</span><br><span class="line">           &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7fixsnqyoj30zc04cdg7.jpg" alt></p>
+<p>常见用法：</p>
+<ol>
+<li>把异步操作和定时器放在一起</li>
+<li>如果定时器先触发，就认为超时，告知用户。比如从远程的服务器加载数据，就可以设置定时器，在规定时间后加载的数据还没有返回，就告知用户。</li>
+</ol>
+<h5 id="现实中的Promise"><a href="#现实中的Promise" class="headerlink" title="现实中的Promise"></a>现实中的Promise</h5><ol>
+<li>把回调包装成Promise<br>把回调包装成Promise最为常见，它有两个显而易见的好处：<br>（1）可读性更好<br>（2）返回的结果可以加入任何Promise队列</li>
+<li>把任何异步操作包装成Promise<br>假设需求：<br>（1）用户点击按钮，弹出确认窗体<br>（2）用户确认和取消有不同的处理<br>浏览器兼容性如下：<br>除了IE支持性较差外，别的大部分浏览器都支持原生Promise。</li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7fjcrzqiij31xs0lgjwq.jpg" alt></p>
+<h5 id="ES2017新增运算符：async-await"><a href="#ES2017新增运算符：async-await" class="headerlink" title="ES2017新增运算符：async/await"></a>ES2017新增运算符：async/await</h5><p>异步函数是在Promise上的进一步改进，赋予了JavaScript以顺序手法编写异步脚本的能力。<br>既保留异步运算的无阻塞特性，还能继续使用同步写法，还能正常使用return/try/catch.</p>
+<p>async/await仍在Promise基础上实现的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function resolveSecond(x)&#123;</span><br><span class="line">      return new Promise(resolve =&gt; &#123;</span><br><span class="line">          setTimeout(()=&gt;&#123;</span><br><span class="line">              resolve(x);</span><br><span class="line">          &#125;,2000);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  async function f1()&#123;</span><br><span class="line">      var x = await resolveSecond(10);</span><br><span class="line">      console.log(&apos;x&apos;,x); // eslint-disable-line</span><br><span class="line">  &#125;</span><br><span class="line">  f1();</span><br></pre></td></tr></table></figure>
+
+<p>两秒后输出：x 10</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/28/promise学习04-Promise-resolve/" data-id="ck13l10i80002cz32uftp5wbg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-promise学习03-Promise-all" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/09/22/promise学习03-Promise-all/" class="article-date">
@@ -116,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/22/promise学习03-Promise-all/" data-id="ck0vripwd0000na3269jaead3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/22/promise学习03-Promise-all/" data-id="ck13l10ie0006cz32jatdt231" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -201,7 +270,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/22/promise学习02-then/" data-id="ck0vripwn0003na32hg1f7epc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/22/promise学习02-then/" data-id="ck13l10i50001cz32lg4wjgv0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -307,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/工具软件/chrome常用操作/" data-id="ck0vripxg000cna3277fk8dg3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/工具软件/chrome常用操作/" data-id="ck13l10jl0019cz32dbfi1nby" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
@@ -345,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/工具软件/markdown常用语法/" data-id="ck0vripxh000dna32zqcj1y1t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/工具软件/markdown常用语法/" data-id="ck13l10jn001ecz32kyccwmd8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
@@ -388,7 +457,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/工具软件/有道云笔记使用/" data-id="ck0vripxk000gna322pa96f95" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/工具软件/有道云笔记使用/" data-id="ck13l10jo001gcz32cuxl2ynm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
@@ -480,7 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/工具软件/mac使用/" data-id="ck0vripxi000fna32098gz0lh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/工具软件/mac使用/" data-id="ck13l10jk0017cz32p6yv9n8w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
@@ -565,7 +634,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/20/工具软件/webstrom使用/" data-id="ck0vripxq000pna32wrw00n82" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/20/工具软件/webstrom使用/" data-id="ck13l10jp001jcz32jir2xq8r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
@@ -674,7 +743,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/20/promis学习/" data-id="ck0vripwo0004na32hdduaatv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/20/promis学习/" data-id="ck13l10id0005cz327oyoalib" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -776,97 +845,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/15/studyData/webpack学习04-react中webpack配置/" data-id="ck0vripxx0018na32ubz2hmdl" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-studyData/webpack学习03-核心概念-1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/13/studyData/webpack学习03-核心概念-1/" class="article-date">
-  <time datetime="2019-09-13T03:49:11.000Z" itemprop="datePublished">2019-09-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/13/studyData/webpack学习03-核心概念-1/">webpack学习03-核心概念(下)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="sourceMap的配置"><a href="#sourceMap的配置" class="headerlink" title="sourceMap的配置"></a>sourceMap的配置</h4><h6 id="sourceMap是shong么？"><a href="#sourceMap是shong么？" class="headerlink" title="sourceMap是shong么？"></a>sourceMap是shong么？</h6><p>当我们代码写错后，打包运行，在console控制台会有错误提示，但提示的是错误在打包之后的文件位置，而开发阶段，最重要的是错误定位到原文件，</p>
-<p>sourceMap是一个映射关系，知道dist/main.js文件出错位置在原文件index.js文件中的位置。</p>
-<h6 id="sourceMap使用"><a href="#sourceMap使用" class="headerlink" title="sourceMap使用"></a>sourceMap使用</h6><p>在webpack.config.js中配置devtool属性为<code>devtool: &#39;source-map&#39;</code>,而这个是会影响性能<br>具体查看<a href="https://webpack.js.org/configuration/devtool/#devtool" target="_blank" rel="noopener">官网</a>,使用devtool其实就是在使用sourcemap，配置之后，官网表格会显示打包的过程build、rebuild是会变慢的，因为打包过程中要构建这种映射关系.<br>打包运行后，dist目录下会生成main.js.map文件，其实就是打包后的文件与原文件的映射关系文件。</p>
-<p>官网中：cheap、eval、inline、module等都可以自由组合，产生不同的打包效果：<br><code>devtool: &#39;inline-source-map&#39;</code>与<code>devtool: &#39;source-map&#39;</code>区别，第一种无map文件，map文件会以dataURL的方式直接写在dist/main.js中。main.js.map文件会被变成base64对的字符串放在main.js的底部。<br><code>devtool: &#39;cheap-inline-source-map&#39;</code>与上述的区别，上述会告诉哪一行哪一列即哪个字符发生错误，这是比较耗费性能的，且我们实际只需要知道在哪一行就行，cheap会使打包性能得到一定的提升。<br>且cheap只对业务代码做映射，对loader等第三方引入的模块文件不做映射，而<code>module</code>会管loader、第三方模块中的错误。<br><code>eval</code>是打包速度最快的一种方式，通过eval的执行方式，来生成sourcemap的对应关系，但是针对复杂的代码，该方式的提示可能不够全面。</p>
-<blockquote>
-<p>最佳实践</p>
-</blockquote>
-<p>开发环境mode：development：<code>devtool:&#39;cheap-moudle-eval-source-map&#39;</code><br>线上环境mode：production：<code>devtool:&#39;cheap-module-source-map&#39;</code></p>
-<p>sourceMap的原理是什么？</p>
-<p>webpack-dev-server不生成dist目录，会放在电脑的内存中，会有效的提升打包的速度，让开发更快，webpackdev-server隐藏的一个目录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;start&quot;: &quot;webpack --mode development --watch&quot;,  </span><br><span class="line">&quot;build&quot;: &quot;webpack --mode production&quot;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>scripts:”webpack-dev-server”命令运行后，打包不会生成dist目录，会帮助我们启动一个localhost服务器。<ol>
-<li>webpack-dev-server简介：<br>是一个小型node.js express服务器<br>新建一个开发服务器，可以serve我们pack以后的代码，并且当代码更新的时候自动刷新浏览器<br>启动webpack-dev-server后，你在目标文件夹中是看不到编译后的文件的，实时编译后的文件都保存到了内存当中。</li>
-<li>两种自动刷新方式：<ol>
-<li>iframe mode<br>在网页中嵌入了一个 iframe ，将我们自己的应用注入到这个 iframe 当中去，因此每次你修改的文件后，都是这个 iframe 进行了 reload<br>命令行：webpack-dev-server，无需–inline<br>浏览器访问：<a href="http://localhost:8080/webpack-dev-server/index.html" target="_blank" rel="noopener">http://localhost:8080/webpack-dev-server/index.html</a><br>inline mode</li>
-<li>命令行：webpack-dev-server –inline<br>浏览器访问：<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a></li>
-</ol>
-</li>
-<li>安装webpack-dev-server<br>npm install webpack-dev-server –save-dev<br>可在项目根目录下安装（不加-g，在项目根目录出现node_modules文件夹，内含webpack-dev-server及其依赖包），也可全局安装（加-g 必须sudo）</li>
-</ol>
-</li>
-</ol>
-<p>c. 在webpack.config.js中添加配置<br>当在一个代码里引入别的模块时，如果希望只更新代码发生变化的模块就要用HMR技术，在webpack.config.js中配置<br><code>hot:true;hotOnly:true;</code>以及在plugins中配置相关信息。</p>
-<h6 id="error集锦"><a href="#error集锦" class="headerlink" title="error集锦"></a>error集锦</h6><ol>
-<li><p>` scripts”: {</p>
-<pre><code>&quot;start&quot;: &quot;webpack-dev-server&quot;</code></pre><p>}<code>配置后执行</code>npm run start`:</p>
-<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6xt186fuqj31ls0gqn1p.jpg">
-
-<p>错误原因：本项目中未安装webpack-dev-server<br>解决办法：执行<code>npm install webpack-dev-server --save-dev</code><br> 安装失败：</p>
- <img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6xt31rw1nj31lo0dc785.jpg">
- 因为package.json中有一个符号写错了，错误提示很详细，修改错误后，安装成功。</li>
-<li><p>执行又错误：</p>
-<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6xt60rkpzj31i70u0tfl.jpg">
-
-<p>因为在webpack.config.js中需要相关属性信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    historyApiFallback: true,</span><br><span class="line">    host: &apos;127.0.0.1&apos;,</span><br><span class="line">    inline: true,//注意：不写hot: true，否则浏览器无法自动更新；也不要写colors:true，progress:true等，webpack2.x已不支持这些</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<pre><code>ps:访问地址http://127.0.0.1:8081  
-默认是8080，此时我访问8080是nginx，占用了端口号 </code></pre><hr>
-<p>写这样一个例子，引入css文件，界面动态渲染dom元素，每次我们修改css中的样式，界面都会重新刷新，之前添加的dom元素也都不存在了，为了使界面dom元素保留，只刷新样式文件，就要用到HMR了。</p>
-<h4 id="HMR-Hot-Module-Replacement热模块更新"><a href="#HMR-Hot-Module-Replacement热模块更新" class="headerlink" title="HMR Hot Module Replacement热模块更新"></a>HMR Hot Module Replacement热模块更新</h4><p>通过HMR简化流程。</p>
-<h6 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    hot:true, // 让webpack devServer开启HMR功能</span><br><span class="line">    hotOnly:true, // 即便是HMR功能没有生效，也不让浏览器自动刷新</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
-
-<p>引入插件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const webpack=require(&apos;webpack&apos;);</span><br><span class="line">plugins: [</span><br><span class="line">        new webpack.HotModuleReplacementPlugin(),// HMR开启</span><br><span class="line">    ],</span><br></pre></td></tr></table></figure>
-
-<p>如果不使用HMR，有两个js文件时，只修改一个，会重新请求数据，整个页面都会刷新，之前操作的一些数据也不会被保存下来。<br>css-loader中底层实现了HMR代码的编写，react等都不需要写HMR代码,内置实现了HMR。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/13/studyData/webpack学习03-核心概念-1/" data-id="ck0vripxz001dna32a06b25t3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/15/studyData/webpack学习04-react中webpack配置/" data-id="ck13l10jf000wcz326w0lob7d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -928,6 +907,10 @@
       <ul>
         
           <li>
+            <a href="/2019/09/28/promise学习04-Promise-resolve/">promise学习04-Promise.resolve</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/22/promise学习03-Promise-all/">promise学习03-Promise.all</a>
           </li>
         
@@ -941,10 +924,6 @@
         
           <li>
             <a href="/2019/09/21/工具软件/markdown常用语法/">markdown常用语法</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/21/工具软件/有道云笔记使用/">有道云笔记使用</a>
           </li>
         
       </ul>
