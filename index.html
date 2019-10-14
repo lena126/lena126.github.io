@@ -62,6 +62,196 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-WordPress主题开发" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/14/WordPress主题开发/" class="article-date">
+  <time datetime="2019-10-14T03:46:45.000Z" itemprop="datePublished">2019-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/14/WordPress主题开发/">WordPress主题开发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="开发："><a href="#开发：" class="headerlink" title="开发："></a>开发：</h4><p>在目录下，themes文件夹中，放入主题开发即可。<br>nfs://192.168.64.2/opt/lampp/htdocs/wordpress/wp-content/themes</p>
+<ul>
+<li><a href="https://blog.csdn.net/langzi7758521/article/details/53396781" target="_blank" rel="noopener">主题安装开发</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/14/WordPress主题开发/" data-id="ck1pwx29200007d32oo3978v4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-WordPress安装指南" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/12/WordPress安装指南/" class="article-date">
+  <time datetime="2019-10-12T08:23:16.000Z" itemprop="datePublished">2019-10-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/12/WordPress安装指南/">WordPress安装指南</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="WordPress简介"><a href="#WordPress简介" class="headerlink" title="WordPress简介"></a>WordPress简介</h4><p>WordPress是使用PHP语言开发的博客平台，用户可以在支持PHP和MySQL数据库的服务器上架设属于自己的网站。也可以把 WordPress当作一个内容管理系统（CMS）来使用。</p>
+<p>WordPress是一款个人博客系统，并逐步演化成一款内容管理系统软件，它是使用PHP语言和MySQL数据库开发的。用户可以在支持 PHP 和 MySQL数据库的服务器上使用自己的博客。</p>
+<h4 id="1-XAMPP安装-参考教程"><a href="#1-XAMPP安装-参考教程" class="headerlink" title="1.XAMPP安装 参考教程"></a>1.XAMPP安装 <a href="https://www.betterhostreview.com/install-wordpress-mac-xampp.html" target="_blank" rel="noopener">参考教程</a></h4><ol>
+<li><p><a href="https://www.apachefriends.org/download.php?xampp-macosx-1.7.3.dmg" target="_blank" rel="noopener">XAMPP官网</a>，一般安装最新版本，下载7.3.10版本，安装完成之后</p>
+</li>
+<li><p>打开XAMPP管理界面，</p>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7xkf175mvj30sq0q0wgu.jpg" style="width:300px">
+其中general-start,services启动Apache，MySQL，network。
+[本地WordPress需要PHP和MySQL。现在我们需要为Mac的WordPress和XAMPP建立一个数据库。XAMPP为我们提供了phpMyAdmin来管理数据库。我们可以用它为我们在Mac上的本地WordPress安装创建MySQL数据库。在此之前，我们需要在Network选项卡中启用localhost端口转发。即需要enable]</li>
+<li><p>此时访问<code>http://localhost:8080/</code>以及<code>http://localhost:8080/phpmyadmin/</code>说明XAMPP安装成功。<br>(在数据库管理界面中，创建一个数据库，即后续wp-config.php配置中需要的WordPress的数据库)</p>
+<h4 id="2-WordPress安装"><a href="#2-WordPress安装" class="headerlink" title="2. WordPress安装"></a>2. WordPress安装</h4></li>
+<li><p><a href="https://cn.wordpress.org/download/" target="_blank" rel="noopener">下载文档</a></p>
+</li>
+<li><p>XAMPP管理界面<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7xkeitsb9j30sg0q2tae.jpg" style="width:200px"><br>切换到Mac上的XAMPP堆栈管理器的volume选项卡。单击Mount按钮来挂载/opt/lampp目录。然后单击Explore按钮在Finder中打开XAMPP文件管理器。</p>
+</li>
+<li><p>将WordPress解压到htdocs文件夹下，访问<code>http://localhost:8080/wordpress/</code>，出现如下界面代表所有操作成功：</p>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7xjuobmt5j30yl0fw76e.jpg" style="width:300px">
+
+</li>
+</ol>
+<h4 id="wp-config-php配置"><a href="#wp-config-php配置" class="headerlink" title="wp-config.php配置"></a>wp-config.php配置</h4><p> 1.<code>http://localhost:8080/wordpress/</code> 打开之后按照提示信息配置wp-config.php相应的数据库名、用户名、密码等信息（注意创建WordPress数据库），再次刷新，出现下面页面：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7xk37k531j30yt0lz76w.jpg" style="width:300px"><br>输入相关信息，提示成功，点击登录,daungdaung，就是下面成功界面了：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7xk8ln2voj315z0pm0x7.jpg" style="width:300px"></p>
+<h5 id="1-http-localhost-8080-wordpress-打开之后按照提示信息配置wp-config-php，再次刷新，出现下面页面："><a href="#1-http-localhost-8080-wordpress-打开之后按照提示信息配置wp-config-php，再次刷新，出现下面页面：" class="headerlink" title="1.http://localhost:8080/wordpress/ 打开之后按照提示信息配置wp-config.php，再次刷新，出现下面页面："></a>1.<code>http://localhost:8080/wordpress/</code> 打开之后按照提示信息配置wp-config.php，再次刷新，出现下面页面：</h5><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7xk37k531j30yt0lz76w.jpg" style="width:300px">
+输入相关信息，提示成功，点击登录,daungdaung，就是下面成功界面了：
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7xk8ln2voj315z0pm0x7.jpg" style="width:300px">
+此时我们返回到phpMyAdmin数据库管理页面，可以看到我们创建的数据库wordpress已经有好多个表了。
+
+<h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><ul>
+<li><a href="http://www.wazhuti.com/1497.html" target="_blank" rel="noopener">为什么要建立开发环境</a></li>
+<li><a href="https://www.zhihu.com/question/22176762" target="_blank" rel="noopener">安装教程</a></li>
+<li><a href="https://stackoverflow.com/questions/48319054/no-referrer-when-downgrade-nginx-502" target="_blank" rel="noopener">解决方案</a></li>
+<li><a href="https://blog.csdn.net/qq_36595013/article/details/80542583" target="_blank" rel="noopener">参考网站</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/12/WordPress安装指南/" data-id="ck1pwx29f00087d32w27jbxtk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ESlint问题总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/10/ESlint问题总结/" class="article-date">
+  <time datetime="2019-10-10T15:24:29.000Z" itemprop="datePublished">2019-10-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/10/ESlint问题总结/">ESlint问题总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>Expected to return a value at the end of arrow function. (consistent-return)</li>
+</ol>
+<p>代码块：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7t4uubi52j314a0kmn17.jpg" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;.language-box&apos;).click(function () &#123;</span><br><span class="line">  if (lang === &apos;zh_CN&apos;) &#123;</span><br><span class="line">    $.cookie(&apos;locale&apos;, &apos;en_US&apos;, &#123; path: &apos;/&apos; &#125;);</span><br><span class="line">    $(this).text(&apos;English&apos;);</span><br><span class="line">    window.location.reload();</span><br><span class="line">  &#125; else if (lang === &apos;en_US&apos;) &#123;</span><br><span class="line">    $.cookie(&apos;locale&apos;, &apos;zh_CN&apos;, &#123; path: &apos;/&apos; &#125;);</span><br><span class="line">    $(this).text(&apos;简体中文&apos;);</span><br><span class="line">    window.location.reload();</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    $.cookie(&apos;locale&apos;, &apos;zh_CN&apos;, &#123; path: &apos;/&apos; &#125;);</span><br><span class="line">    window.location.reload();</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>解决方案：</p>
+<p>在function函数最后结束时，需要添加一个return返回值，true或false</p>
+<ol start="3">
+<li>/* eslint-disable */ 来对当前文件禁用ESlint检查</li>
+<li>eslintrc.js 的配置使用<br>eslint 配置项<br>root 限定配置文件的使用范围<br>parser 指定eslint的解析器<br>parserOptions 设置解析器选项<br>extends 指定eslint规范<br>plugins 引用第三方的插件<br>env 指定代码运行的宿主环境<br>rules 启用额外的规则或覆盖默认的规则<br>globals 声明在代码中的自定义全局变量<br>extends使用公司内部rules</li>
+<li><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7t7ajqzxaj30c608e0t8.jpg" alt><br>不仅有ESlint检查，还有JSHint语法检查。<br><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7t7bofzwaj30m006swfd.jpg" alt><br>像这种全局检查错误，就是JShint语法检查错误提示<br><a href="https://jshint.com/docs/options/" target="_blank" rel="noopener">JShint官网</a><br>echarts,ajax,等挂在window上的全局变量，检查提示错误解决办法：<br>在.jshintrc配置文件中添加属性：解除对特定于项目的全局变量禁用警告。<br>将相应属性设置为true可以对该变量进行读写操作。将其设置为false将触发JSHint认为该变量是只读的。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&quot;globals&quot;: &#123;</span><br><span class="line">    &quot;jQuery&quot;: true,</span><br><span class="line">    &quot;define&quot;: true,</span><br><span class="line">    &quot;$&quot;: true,</span><br><span class="line">    &quot;ok&quot;: true,</span><br><span class="line">    &quot;echarts&quot;: true</span><br><span class="line">    &quot;ajax&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修复完之后，又出现ESlint提示变量undefined错误，因此需要进一步在.eslintrc.js文件中配置属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&quot;globals&quot;: &#123;</span><br><span class="line">  &quot;jQuery&quot;: true,</span><br><span class="line">  &quot;define&quot;: true,</span><br><span class="line">  &quot;$&quot;: true,</span><br><span class="line">  &quot;ok&quot;: true,</span><br><span class="line">  &quot;echarts&quot;: true,</span><br><span class="line">  &quot;ajax&quot;: true,</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>以上操作就在全局范围内使用该变量而不会报错。（true是为了防止再用window.ajax等再对该变量赋值）<br>如果改为false，就会出现如下情况:提示对￥进行了重定义，因此要设置为true。<br><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7t7sf88u2j30sq06wq3s.jpg" alt></p>
+<ol start="4">
+<li><a href="https://eslint.org/docs/rules/no-underscore-dangle" target="_blank" rel="noopener">Unexpected dangling ‘_’ in ‘{a}’</a> <br><br>当JSLint、JSHint或ESlint遇到以下划线字符开头或结尾的标识符时，将抛出该提示错误。<br><br>在JavaScript中使用悬空下划线来表示对象的“私有”成员实际上已经有很长的历史了(尽管JavaScript没有真正的私有成员，但这个约定是一个警告)。<br><br>注释修复<br><code>/* eslint no-underscore-dangle: [&quot;error&quot;, { &quot;allow&quot;: [&quot;_monitor&quot;] }] */</code></li>
+</ol>
+<p>5.expected an assignment or function call and instead saw an expression.(W030) <br><br>该提示出现在短路逻辑<code>&amp;&amp;</code> /<code>? :</code> / <code>||</code> 使用之后，JSHint不支持,可将其改为<code>if else</code>语句，也可增加<code>/* jshint -W030 */</code>该方法注释解决。</p>
+<ol start="6">
+<li>Move the invocation into the parens that contain the function <br><br>当JSLint和ESLint遇到立即调用的函数表达式，其中调用的括号出现在括起的括号之外时，将抛出“将调用移动到包含函数的parens中”错误。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function ($) &#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;)(jQuery);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>解决方法有两种：一是<br><code>/* eslint wrap-iife: [1, &quot;outside&quot;] */</code>注释解决。<br>二是改为如下写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function ($) &#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;(jQuery));</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li><p>Expected method shorthand 应该使用简写形式<br><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7td1zzkzsj310a09qjsx.jpg" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getRebackRecords(_data, succFn) &#123;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Assignment to property of function parmeter ‘data’ .(no-param-reassign)</p>
+</li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tdczuymsj31ew09g76z.jpg" alt></p>
+<p>给函数属性复制可能会产生混乱的结果<a href="https://eslint.org/docs/rules/no-param-reassign#disallow-reassignment-of-function-parameters-no-param-reassign" target="_blank" rel="noopener">参考官网</a><br><code>/* eslint no-param-reassign: &quot;error&quot; */</code>注释解决。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/10/ESlint问题总结/" data-id="ck1pwx29a00037d32r5yb45ow" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-promise学习04-Promise-resolve" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/09/28/promise学习04-Promise-resolve/" class="article-date">
@@ -119,7 +309,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/28/promise学习04-Promise-resolve/" data-id="ck1k2dhgf0004dz32so6agihp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/28/promise学习04-Promise-resolve/" data-id="ck1pwx29c00047d32xbkulr3r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -185,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/22/promise学习03-Promise-all/" data-id="ck1k2dhgb0002dz32knecqpdz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/22/promise学习03-Promise-all/" data-id="ck1pwx29s000e7d32clky9j0k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -270,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/22/promise学习02-then/" data-id="ck1k2dhg80001dz32x0xn8vp9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/22/promise学习02-then/" data-id="ck1pwx29d00057d3256vrkohq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -376,7 +566,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/工具软件/chrome常用操作/" data-id="ck1k2dhhe0010dz329co3ux35" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/工具软件/chrome常用操作/" data-id="ck1pwx2al000u7d32oa4kw1w1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
@@ -414,7 +604,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/工具软件/markdown常用语法/" data-id="ck1k2dhhb000rdz32h903n0b5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/工具软件/markdown常用语法/" data-id="ck1pwx2an00117d32hzxit1m5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
@@ -457,7 +647,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/工具软件/有道云笔记使用/" data-id="ck1k2dhhf0013dz32f7avlup4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/工具软件/有道云笔记使用/" data-id="ck1pwx2ao00137d326q8lj1aa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
@@ -549,306 +739,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/工具软件/mac使用/" data-id="ck1k2dhhd000wdz32qx6l671p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/工具软件/mac使用/" data-id="ck1pwx2ap00157d32xr3x1gwk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-工具软件/webstrom使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/20/工具软件/webstrom使用/" class="article-date">
-  <time datetime="2019-09-20T15:47:49.000Z" itemprop="datePublished">2019-09-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/20/工具软件/webstrom使用/">webstrom使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-git相关操作"><a href="#1-git相关操作" class="headerlink" title="1. git相关操作"></a>1. git相关操作</h3><p>webstrom中git相关操作，其中分为文件夹右键，文件右键；如图所示只是部分操作区别<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76f3zy94cj30ym0sywmm.jpg" style="width:600px;"><br>        1. 图1<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76f425crjj30tc0eeadr.jpg" style="width:600px;"><br>        2. 图1.1<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76f43wsamj30yk0jggqe.jpg" style="width:600px;"><br>        3. 图2<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76f45v0uxj31360aqad3.jpg" style="width:600px;"><br>        4. 图3</p>
-<ol>
-<li>首先图1中，为文件右键git相关操作，其中：</li>
-<li>compare with the same Repository Version<br>与当前版本（的文件）做比较，可以理解为与最新版本比较，也就是可以比较本地工作区和本地版本库的差异<br>是指当前文件，与commit后暂存区的区别，比较视图中右侧永远是最新的代码，之间的差别就是你本地修改后未commit的代码</li>
-<li>command+d 查看当前版本与历史版本的不同<br>当你想要保存当前的暂存区和工作区的状态的时候，你可以使用git stash命令<br>这个命令会保存当前的暂存区和工作区的状态，然后返回到HEAD（git reset —hard HEAD）。最新的stach可以在.git/refs/stash中看到。</li>
-</ol>
-<ul>
-<li>Revert…　　还原代码，要注意与reset的区分，这里仅仅是将本地工作区的代码还原为本地仓库中的最新版本的代码</li>
-<li>command+option+z   revert当前文件</li>
-<li>checkout　　检出至本地工作区，此时本地已经检出过</li>
-<li>checkout as new local branch　　检出至本地工作区，并创建新分支</li>
-<li>compare 　　两个分支进行比较，比如，我想拿当前的test分支与本地的master分支进行比较</li>
-<li>merge 　　进行合并操作，以比较版本合入当前版本中，merge的过程当中，可能会有冲突（要记住，多人修改同一处代码时，才可出现冲突），稍候介绍怎么处理冲突</li>
-<li>delete 　　删除当前分支</li>
-<li>git add：暂存区的目录树被更新，同时工作区修改（或新增）的文件内容被写入到对象库中的一个新的对象中，而该对象的ID 被记录在暂存区的文件索引中。</li>
-<li>git commit：暂存区的目录树写到版本库（对象库）中，对应的分支会做相应的更新。即HEAD指向的目录树就是提交时暂存区的目录树</li>
-<li>git pull，将下载（fetch）和合并（merge）放到一个命令里</li>
-</ul>
-<h3 id="2-实用技巧"><a href="#2-实用技巧" class="headerlink" title="2. 实用技巧"></a>2. 实用技巧</h3><ul>
-<li>webstrom中command+ -  对当前代码块进行展开/折叠  command+。 实现对当前代码块的折叠展开切换</li>
-<li>shift + ⬇ ⬆ down with selection</li>
-<li>option+x 删除光标所在word之前所有字符  control+x 删除当前行光标后内容</li>
-<li>// todo 代码中注释TODO，command+6 可以查看todolist</li>
-<li>fn option f12 打开terminal   command+。  打开终端设备</li>
-</ul>
-<h3 id="3-开发技巧"><a href="#3-开发技巧" class="headerlink" title="3. 开发技巧"></a>3. 开发技巧</h3><pre><code>1. 看代码是否编译成功，看gitlab中提交记录，pipelines编辑是否成功
-2. gitpull只是拉取当前分支的远程代码，与本地分支进行合并
-3. git fetch 将origin/master   merge into current才是将远程代码合到当前分支</code></pre><h3 id="4-webstrom快捷键"><a href="#4-webstrom快捷键" class="headerlink" title="4.webstrom快捷键"></a>4.webstrom快捷键</h3><ul>
-<li>command+ 调出设置窗口</li>
-<li>双击shift 搜索</li>
-<li>command+shift+f 搜索（更好用）</li>
-<li>command+l 跳到指定行</li>
-<li>command+shift+l 执行pull changes</li>
-<li>command+shift+k push commits</li>
-</ul>
-<h3 id="Live-Templates-代码补全配置"><a href="#Live-Templates-代码补全配置" class="headerlink" title="Live Templates 代码补全配置"></a>Live Templates 代码补全配置</h3><ol>
-<li>cmd+， 调出设置窗口</li>
-<li>路径Preferences | Editor | Live Templates<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76j8ih7luj31s80q0jv0.jpg" style="width:500px;">
-<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76jfpuxxzj31kq0cegoe.jpg" style="width:500px;">
-<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76jmkl0qaj313c0ngtcl.jpg" style="width:500px;">
-
-</li>
-</ol>
-<h3 id="KeyMap-快捷键"><a href="#KeyMap-快捷键" class="headerlink" title="KeyMap 快捷键"></a>KeyMap 快捷键</h3><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76jr3qkp6j31750u0qb7.jpg" style="width:600px;">
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/20/工具软件/webstrom使用/" data-id="ck1k2dhhd000ydz320j7eoeha" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-promis学习" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/20/promis学习/" class="article-date">
-  <time datetime="2019-09-20T14:04:39.000Z" itemprop="datePublished">2019-09-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/20/promis学习/">promis学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1-promise是什么"><a href="#1-promise是什么" class="headerlink" title="1.promise是什么"></a>1.promise是什么</h4><p>MDN给出的定义：Promise对象用于异步计算，一个Promise表示一个现在、将来或永不可能可用的值。<br>按用途来解释：</p>
-<ol>
-<li>用于异步计算</li>
-<li>可以将异步操作队列化，按照期望的顺序执行，返回符合预期的结果。</li>
-<li>可以在对象之间传递和操作Promise，帮助我们处理队列。</li>
-</ol>
-<h4 id="2-为什么会有promise"><a href="#2-为什么会有promise" class="headerlink" title="2.为什么会有promise"></a>2.为什么会有promise</h4><ol>
-<li>JavaScript为检查表单而生</li>
-<li>创造它的首要目标是操作DOM</li>
-<li>所以，JavaScript很多操作是异步的</li>
-</ol>
-<blockquote>
-<p>异步：将耗时很长的A交付的工作交给系统之后，就去继续做B交付的工作。等到系统完成前面的工作之后，再通过回调或者事件，继续做A剩下的工作。</p>
-</blockquote>
-<p>从观察者的角度来看，AB工作的完成顺序，和交付给他们的时间顺序无关，所以叫”异步”。</p>
-<p>异步操作的常见语法：<br>ajax请求、jQuery监听页面加载之后的回调$(function(){})</p>
-<p>浏览器中的JavaScript：</p>
-<ol>
-<li>异步操作以事件为主 onload、ready等</li>
-<li>回调主要出现在Ajax和File API<br>有了Node.js之后，对异步的依赖进一步加剧了：</li>
-<li>无阻塞高并发，是Nodejs的招聘，异步操作是其保障，大量操作依赖回调函数<br>稍有不慎，就会踏入”回调地狱”。</li>
-</ol>
-<p>异步回调有四个问题：</p>
-<ol>
-<li>嵌套层次很深，难以维护</li>
-<li>无法正常使用return和throw</li>
-<li>无法正常检索堆栈信息</li>
-<li>在多个回调之间难以建立联系</li>
-</ol>
-<h4 id="3-Promise详解"><a href="#3-Promise详解" class="headerlink" title="3.Promise详解"></a>3.Promise详解</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 初始化一个promise实例</span><br><span class="line">new Promise</span><br><span class="line">(</span><br><span class="line">    /*执行器executor*/</span><br><span class="line">    function(resolve,reject)&#123;</span><br><span class="line">        // 一段耗时很长的异步操作</span><br><span class="line">        </span><br><span class="line">        resolve(); // 数据处理完成</span><br><span class="line">        reject(); // 数据处理出错</span><br><span class="line">    &#125;</span><br><span class="line">    .then(function A()&#123;</span><br><span class="line">        // 成功，下一步</span><br><span class="line">    &#125;,function B()&#123;</span><br><span class="line">        // 失败，做相应处理</span><br><span class="line">    &#125;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>Promise是一个代理对象，它和原先要进行的操作并无关系<ol start="2">
-<li>它通过引入一个回调，避免更多的回调</li>
-<li>Promise有3个状态：<ol>
-<li>Pending实例化时，【待定】状态</li>
-<li>执行完毕，调用resolve时，fullfilled【实现】状态</li>
-<li>rejected【被否决】操作失败<br>Promise状态发生改变，就会触发.then()里的响应函数处理后续步骤。<br>Promise状态一经改变，不会再变。</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76dhyjm1hj30yw0cggn4.jpg">
-
-<ol>
-<li>Promise实例一经创建，执行器立即执行；</li>
-<li>new 一个Promise传入执行器，创建实例后执行器开始执行，执行器是一个异步操作，接下来，通常会有后续的操作，调用第一个then，第二个then，最终生成一个队列，每一个then都会返回一个新的Promise实例。</li>
-<li>当executor执行完毕之后，开始判断状态，把状态改变为成功或失败，接着调用then的对应的处理函数，一个then处理完了之后，循环到下一个then，反复的循环，直到队列当中所有的待处理的函数都执行完</li>
-</ol>
-<ul>
-<li>Promise实现一个定时执行的小程序</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;here we go&apos;);</span><br><span class="line"></span><br><span class="line">       new Promise( resolve =&gt; &#123;</span><br><span class="line">           setTimeout(()=&gt;&#123;</span><br><span class="line">               resolve(&apos;hello&apos;);</span><br><span class="line">            &#125;, 2000)</span><br><span class="line">           &#125;)</span><br><span class="line">           .then( value =&gt; &#123;</span><br><span class="line">               console.log(value); // eslint-disable-line</span><br><span class="line">               return new Promise(resolve =&gt; &#123;</span><br><span class="line">                   setTimeout(() =&gt; &#123;</span><br><span class="line">                       resolve(&apos;world12&apos;)</span><br><span class="line">                   &#125;,2000);</span><br><span class="line">               &#125;);</span><br><span class="line">           &#125;)</span><br><span class="line">           .then(value =&gt; &#123;</span><br><span class="line">               console.log(value + &apos;world&apos;);</span><br><span class="line">           &#125;)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>假如一个Promise已经完成了，再.then()会怎样？<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;start&apos;); // eslint-disable-line</span><br><span class="line"> let promise = new Promise(resolve =&gt; &#123;</span><br><span class="line">     setTimeout(()=&gt;&#123;</span><br><span class="line">         console.log(&apos;the promise fulfilled&apos;); // eslint-disable-line</span><br><span class="line">         resolve(&apos;hello,world&apos;);</span><br><span class="line">     &#125;, 1000);</span><br><span class="line"> &#125;);</span><br><span class="line"> setTimeout(()=&gt;&#123;</span><br><span class="line">     Promise.then( value=&gt; &#123;</span><br><span class="line">         console.log(value); // eslint-disable-line</span><br><span class="line">     &#125;);</span><br><span class="line"> &#125;,3000);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>我们在任何一个地方生成一个Promise队列之后，可以将它作为一个变量传递到其他地方，如果我们的操作是一个很明显的队列的先进先出的一个状态，我们就可以在它的后面去追续任意多的then，<br>不管前面的Promise是否完成，队列都会按照它对应的顺序去执行，如果没有完成，他就会顺序的完成，如果已完成，后面追加的then也会得到前面Promise返回的值。<br>这就是Promise身为队列，最重要的特性所在。</p>
-<ul>
-<li>假如在.then()的函数里面不返回新的Promise，会怎样？</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;here we go&apos;);</span><br><span class="line"></span><br><span class="line">      new Promise( resolve =&gt; &#123;</span><br><span class="line">          setTimeout(()=&gt;&#123;</span><br><span class="line">              resolve(&apos;hello&apos;);</span><br><span class="line">           &#125;, 2000)</span><br><span class="line">          &#125;)</span><br><span class="line">          .then( value =&gt; &#123;  // (2)</span><br><span class="line">              console.log(value); // eslint-disable-line</span><br><span class="line">              console.log(&apos;every one&apos;); // eslint-disable-line</span><br><span class="line">              (function()&#123; // (1)</span><br><span class="line">                  return new Promise(resolve =&gt; &#123; // (3)</span><br><span class="line">                      setTimeout(() =&gt; &#123;</span><br><span class="line">                          console.log(&apos;Miss lina&apos;); // eslint-disable-line</span><br><span class="line">                          resolve(&apos;world12&apos;)</span><br><span class="line">                      &#125;,2000);</span><br><span class="line">                  &#125;);</span><br><span class="line">              &#125;());</span><br><span class="line">              return false;</span><br><span class="line">          &#125;)</span><br><span class="line">          .then(value =&gt; &#123;</span><br><span class="line">              console.log(value + &apos;world&apos;);</span><br><span class="line">          &#125;)</span><br><span class="line"></span><br><span class="line">       // 输出结果</span><br><span class="line">       // here we go</span><br><span class="line">       // hello</span><br><span class="line">       // every one</span><br><span class="line">       // falseworld</span><br><span class="line">       // Miss lina</span><br></pre></td></tr></table></figure>
-
-<p>Because：</p>
-<p>中没有返回一个新的值，返回的Promise实例是在（3）中返回的，而不是在（2）的响应函数中返回的，<br>因此没有等待里面的return而直接return false，继续下一个then。<br>与此同时，（3）Promise中的timeout仍在等待执行，因此2s之后，输出了”Miss lina””<br>:在Promise中如果不直接返回一个Promise实例，它就会默认地去执行下一个环节，即使返回false也不会影响下一步。<br>如果注释：// return false;会返回 <code>undefined world</code>，没有明确返回值时就相当于return null。</p>
-<ul>
-<li>线程整个进程的进度，是在所有的都完成之后才会进行的，（3）中的Promise虽然没有进入到队列当中，没有终止2秒钟才能继续执行，但整个进程，是等他完成之后才宣告完成。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/20/promis学习/" data-id="ck1k2dhgg0005dz32odnfcpv9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-studyData/webpack学习04-react中webpack配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/15/studyData/webpack学习04-react中webpack配置/" class="article-date">
-  <time datetime="2019-09-15T02:48:44.000Z" itemprop="datePublished">2019-09-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/15/studyData/webpack学习04-react中webpack配置/">webpack学习04-create-reate-app</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="脚手架工具creact-react-app-中webpack配置"><a href="#脚手架工具creact-react-app-中webpack配置" class="headerlink" title="脚手架工具creact-react-app 中webpack配置"></a>脚手架工具creact-react-app 中webpack配置</h3><p>脚手架工具，其实是node的一个程序，会帮我们初始化一个项目，包含项目的工程目录以及这个项目打包的webpack配置。</p>
-<p>通过脚手架生成的工程会默认的webpack的配置都已经配置好了，但是把webpack相关的配置文件隐藏起来了，执行<code>npm run build/start</code>等命令时会调用这些隐藏的配置文件，来进行项目的打包，生成可以运行的代码。</p>
-<p>脚手架提供了eject命令，可以将隐藏的webpack配置项展现出来，执行<code>npm run eject</code> 之后，项目目录会多出config及scripts文件夹：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6zekelnxtj30j008kwew.jpg"></p>
-<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6zelj3f50j30g604kaa3.jpg">
-
-<p style="font-size:10px;">jest文件夹可以先删掉，涉及自动化测试相关知识。scripts中test.js涉及自动化测试命令，也可以先删掉。package.json中test、eject命令可以先删掉。</p>
-
-<h5 id="npm-run-start"><a href="#npm-run-start" class="headerlink" title="npm run start"></a>npm run start</h5><p style="font-size:10px;">项目安装依赖失败的话，删除yarn.lock、node_modules文件，再执行npm install</p>
-
-
-<p><code>npm run start</code>命令会启动一个服务器，webpack-dev-server，让在开发过程中可以实时调试，做热模块更新。</p>
-<p><code>npm run build</code>命令帮我们生成线上要运行的生产环境代码。</p>
-<p>执行命令时<br><code>&quot;start&quot;: &quot;node scripts/start.js&quot;,
-    &quot;build&quot;: &quot;node scripts/build.js&quot;,</code><br>通过node执行scripts下面的start.js/build.js文件。</p>
-<h6 id="build-js文件"><a href="#build-js文件" class="headerlink" title="build.js文件"></a>build.js文件</h6><h6 id="env-js文件内容"><a href="#env-js文件内容" class="headerlink" title="env.js文件内容"></a>env.js文件内容</h6><ol>
-<li>L8 /config/env 文件：<code>delete require.cache[require.resolve(&#39;./paths&#39;)];</code>清paths中的缓存，使他能拿到paths中的最新内容</li>
-<li>L10判断当前打包环境</li>
-<li>L11打包中遇到异常，要抛出这个异常，而不是忽略他继续执行。</li>
-<li>L17webpack打包的时候，可以配置很多的环境变量，在脚手架工具里，可以把环境变量配置在根目录下创建.env的文件，在该文件中去定义一些全局变量。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const NODE_ENV = process.env.NODE_ENV;</span><br><span class="line">if (!NODE_ENV) &#123;</span><br><span class="line">  throw new Error(</span><br><span class="line">    &apos;The NODE_ENV environment variable is required but was not specified.&apos;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>会去.env文件中读取这些全局变量，然后定义到打包的过程之中。</p>
-<ol start="5">
-<li>L52 获取当前文件的路径，把他定义到NODE_PATH下面，即定义一个全局变量NODE_PATH里面，存放当前项目所在的路径</li>
-<li>L63提供一个方法，结合外部传进来的一个路径，对全局变量做一些整理，最终把他返回出去。</li>
-</ol>
-<h6 id="webpack-config-js文件内容"><a href="#webpack-config-js文件内容" class="headerlink" title="webpack.config.js文件内容"></a>webpack.config.js文件内容</h6><ol>
-<li>核心的webpack的配置内容</li>
-<li>L136 return<ol>
-<li>mode根据isEnvProduction判断当前环境，webpackEnv</li>
-<li>bail一旦在打包过程中遇到错误就及时停止，不再往下打包了，直接报错，（开发环境继续打包，线上环境停止打包）</li>
-<li>devtool  shouldUseSourceMap根据在全局变量中是否配置了GENERATE_SOURCEMAP</li>
-<li>entry入口 path</li>
-<li>output输出，线上环境方法哦appBuild文件夹下 pathinfo 把入口引入的其他模块的信息，通过注释的形式有所输出</li>
-<li>filename chunkFilename如果是线上环境，就用chunkhash 开发环境直接使用static/bundle.js</li>
-<li>devtoolModuleFilenameTemplate 通过sourcemap找到里面的依赖文件所在的disk（硬盘上）真正的路径位置，来定位到sourcemap中相应代码文件的行数，来帮助我们进行调错，解决sourcemap定位不准的问题（一些大型项目，应该配置此项）</li>
-<li>optimization做优化或一些代码的压缩都放在该配置项里，取决于当前的环境；minimizer里配置了TerserPlugin插件，即压缩js的一个插件，里面做了一些配置，线上环境才会执行，开发环境无效</li>
-<li>splitChunks默认webpack中的 把node_modules中的东西单独打包，runtimeChunk把webpack runtime的代码单独打包生成文件</li>
-<li>resolve<br>1.modules 如果配置了modules是个数组，当你引入一个模块的时候，会到node_moduls中去找，还会到其他的modules去找。根据你的配置生成modules配置的数组，当引入一个模块的时候，会到数组里对应的文件夹里去找<ol start="2">
-<li>extension 根据文件后缀alias别名</li>
-<li>plugins 当引入一个其他模块的时候，resolve生效，定义的plugins生效</li>
-</ol>
-</li>
-<li>resolveLoader只用引入一些loader时才会执行</li>
-<li>module  strictExportPresence引入的模块必须明确地导出自己的内容</li>
-<li>{ parser: { requireEnsure: false } },不支持require.ensure，必须使用import进行异步代码的加载</li>
-<li>enforce: ‘pre’,在loader前用eslint对代码做检测</li>
-<li>oneOf 当我们打包文件的时候，会到下面逐个的去找loader，直到找到一个为止（图片，如果是个图片文件，通过url-loader对图片打包，如果小于10kb时放到base64里，如果大于10kb直接把文件拷贝过去）</li>
-</ol>
-</li>
-</ol>
-<h6 id="build-js文件内容"><a href="#build-js文件内容" class="headerlink" title="build.js文件内容"></a>build.js文件内容</h6><ol>
-<li>L15引入dev文件，执行该文件，对一些打包过程中要用到的全局变量进行赋值</li>
-<li>L18 <ol>
-<li>path 核心模块</li>
-<li>chalk让命令行的提示更加美观的工具</li>
-<li>L22 webpack.config文件 return的就是build拿到的文件</li>
-</ol>
-</li>
-<li>L47 configFactory 得到打包所需要的webpack配置内容，</li>
-</ol>
-<p>path.js打包的一些路径信息<br>env.js帮助初始化运行环境的文件<br>webpackDevServer.config</p>
-<p>start.js文件：开发环境，遇到问题及时报错</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/15/studyData/webpack学习04-react中webpack配置/" data-id="ck1k2dhhc000tdz32wmlmdrpn" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
 
     </footer>
   </div>
@@ -894,7 +788,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
     </div>
   </div>
 
@@ -907,23 +801,23 @@
       <ul>
         
           <li>
+            <a href="/2019/10/14/WordPress主题开发/">WordPress主题开发</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/12/WordPress安装指南/">WordPress安装指南</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/10/ESlint问题总结/">ESlint问题总结</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/28/promise学习04-Promise-resolve/">promise学习04-Promise.resolve</a>
           </li>
         
           <li>
             <a href="/2019/09/22/promise学习03-Promise-all/">promise学习03-Promise.all</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/22/promise学习02-then/">promise学习02-then</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/21/工具软件/chrome常用操作/">chrome常用操作</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/21/工具软件/markdown常用语法/">markdown常用语法</a>
           </li>
         
       </ul>

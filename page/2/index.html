@@ -62,6 +62,302 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-工具软件/webstrom使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/20/工具软件/webstrom使用/" class="article-date">
+  <time datetime="2019-09-20T15:47:49.000Z" itemprop="datePublished">2019-09-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/20/工具软件/webstrom使用/">webstrom使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-git相关操作"><a href="#1-git相关操作" class="headerlink" title="1. git相关操作"></a>1. git相关操作</h3><p>webstrom中git相关操作，其中分为文件夹右键，文件右键；如图所示只是部分操作区别<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76f3zy94cj30ym0sywmm.jpg" style="width:600px;"><br>        1. 图1<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76f425crjj30tc0eeadr.jpg" style="width:600px;"><br>        2. 图1.1<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76f43wsamj30yk0jggqe.jpg" style="width:600px;"><br>        3. 图2<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76f45v0uxj31360aqad3.jpg" style="width:600px;"><br>        4. 图3</p>
+<ol>
+<li>首先图1中，为文件右键git相关操作，其中：</li>
+<li>compare with the same Repository Version<br>与当前版本（的文件）做比较，可以理解为与最新版本比较，也就是可以比较本地工作区和本地版本库的差异<br>是指当前文件，与commit后暂存区的区别，比较视图中右侧永远是最新的代码，之间的差别就是你本地修改后未commit的代码</li>
+<li>command+d 查看当前版本与历史版本的不同<br>当你想要保存当前的暂存区和工作区的状态的时候，你可以使用git stash命令<br>这个命令会保存当前的暂存区和工作区的状态，然后返回到HEAD（git reset —hard HEAD）。最新的stach可以在.git/refs/stash中看到。</li>
+</ol>
+<ul>
+<li>Revert…　　还原代码，要注意与reset的区分，这里仅仅是将本地工作区的代码还原为本地仓库中的最新版本的代码</li>
+<li>command+option+z   revert当前文件</li>
+<li>checkout　　检出至本地工作区，此时本地已经检出过</li>
+<li>checkout as new local branch　　检出至本地工作区，并创建新分支</li>
+<li>compare 　　两个分支进行比较，比如，我想拿当前的test分支与本地的master分支进行比较</li>
+<li>merge 　　进行合并操作，以比较版本合入当前版本中，merge的过程当中，可能会有冲突（要记住，多人修改同一处代码时，才可出现冲突），稍候介绍怎么处理冲突</li>
+<li>delete 　　删除当前分支</li>
+<li>git add：暂存区的目录树被更新，同时工作区修改（或新增）的文件内容被写入到对象库中的一个新的对象中，而该对象的ID 被记录在暂存区的文件索引中。</li>
+<li>git commit：暂存区的目录树写到版本库（对象库）中，对应的分支会做相应的更新。即HEAD指向的目录树就是提交时暂存区的目录树</li>
+<li>git pull，将下载（fetch）和合并（merge）放到一个命令里</li>
+</ul>
+<h3 id="2-实用技巧"><a href="#2-实用技巧" class="headerlink" title="2. 实用技巧"></a>2. 实用技巧</h3><ul>
+<li>webstrom中command+ -  对当前代码块进行展开/折叠  command+。 实现对当前代码块的折叠展开切换</li>
+<li>shift + ⬇ ⬆ down with selection</li>
+<li>option+x 删除光标所在word之前所有字符  control+x 删除当前行光标后内容</li>
+<li>// todo 代码中注释TODO，command+6 可以查看todolist</li>
+<li>fn option f12 打开terminal   command+。  打开终端设备</li>
+</ul>
+<h3 id="3-开发技巧"><a href="#3-开发技巧" class="headerlink" title="3. 开发技巧"></a>3. 开发技巧</h3><pre><code>1. 看代码是否编译成功，看gitlab中提交记录，pipelines编辑是否成功
+2. gitpull只是拉取当前分支的远程代码，与本地分支进行合并
+3. git fetch 将origin/master   merge into current才是将远程代码合到当前分支</code></pre><h3 id="4-webstrom快捷键"><a href="#4-webstrom快捷键" class="headerlink" title="4.webstrom快捷键"></a>4.webstrom快捷键</h3><ul>
+<li>command+ 调出设置窗口</li>
+<li>双击shift 搜索</li>
+<li>command+shift+f 搜索（更好用）</li>
+<li>command+l 跳到指定行</li>
+<li>command+shift+l 执行pull changes</li>
+<li>command+shift+k push commits</li>
+</ul>
+<h3 id="Live-Templates-代码补全配置"><a href="#Live-Templates-代码补全配置" class="headerlink" title="Live Templates 代码补全配置"></a>Live Templates 代码补全配置</h3><ol>
+<li>cmd+， 调出设置窗口</li>
+<li>路径Preferences | Editor | Live Templates<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76j8ih7luj31s80q0jv0.jpg" style="width:500px;">
+<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76jfpuxxzj31kq0cegoe.jpg" style="width:500px;">
+<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76jmkl0qaj313c0ngtcl.jpg" style="width:500px;">
+
+</li>
+</ol>
+<h3 id="KeyMap-快捷键"><a href="#KeyMap-快捷键" class="headerlink" title="KeyMap 快捷键"></a>KeyMap 快捷键</h3><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76jr3qkp6j31750u0qb7.jpg" style="width:600px;">
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/20/工具软件/webstrom使用/" data-id="ck1pwx2ap00177d32h57ixsnu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-promis学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/20/promis学习/" class="article-date">
+  <time datetime="2019-09-20T14:04:39.000Z" itemprop="datePublished">2019-09-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/20/promis学习/">promis学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-promise是什么"><a href="#1-promise是什么" class="headerlink" title="1.promise是什么"></a>1.promise是什么</h4><p>MDN给出的定义：Promise对象用于异步计算，一个Promise表示一个现在、将来或永不可能可用的值。<br>按用途来解释：</p>
+<ol>
+<li>用于异步计算</li>
+<li>可以将异步操作队列化，按照期望的顺序执行，返回符合预期的结果。</li>
+<li>可以在对象之间传递和操作Promise，帮助我们处理队列。</li>
+</ol>
+<h4 id="2-为什么会有promise"><a href="#2-为什么会有promise" class="headerlink" title="2.为什么会有promise"></a>2.为什么会有promise</h4><ol>
+<li>JavaScript为检查表单而生</li>
+<li>创造它的首要目标是操作DOM</li>
+<li>所以，JavaScript很多操作是异步的</li>
+</ol>
+<blockquote>
+<p>异步：将耗时很长的A交付的工作交给系统之后，就去继续做B交付的工作。等到系统完成前面的工作之后，再通过回调或者事件，继续做A剩下的工作。</p>
+</blockquote>
+<p>从观察者的角度来看，AB工作的完成顺序，和交付给他们的时间顺序无关，所以叫”异步”。</p>
+<p>异步操作的常见语法：<br>ajax请求、jQuery监听页面加载之后的回调$(function(){})</p>
+<p>浏览器中的JavaScript：</p>
+<ol>
+<li>异步操作以事件为主 onload、ready等</li>
+<li>回调主要出现在Ajax和File API<br>有了Node.js之后，对异步的依赖进一步加剧了：</li>
+<li>无阻塞高并发，是Nodejs的招聘，异步操作是其保障，大量操作依赖回调函数<br>稍有不慎，就会踏入”回调地狱”。</li>
+</ol>
+<p>异步回调有四个问题：</p>
+<ol>
+<li>嵌套层次很深，难以维护</li>
+<li>无法正常使用return和throw</li>
+<li>无法正常检索堆栈信息</li>
+<li>在多个回调之间难以建立联系</li>
+</ol>
+<h4 id="3-Promise详解"><a href="#3-Promise详解" class="headerlink" title="3.Promise详解"></a>3.Promise详解</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 初始化一个promise实例</span><br><span class="line">new Promise</span><br><span class="line">(</span><br><span class="line">    /*执行器executor*/</span><br><span class="line">    function(resolve,reject)&#123;</span><br><span class="line">        // 一段耗时很长的异步操作</span><br><span class="line">        </span><br><span class="line">        resolve(); // 数据处理完成</span><br><span class="line">        reject(); // 数据处理出错</span><br><span class="line">    &#125;</span><br><span class="line">    .then(function A()&#123;</span><br><span class="line">        // 成功，下一步</span><br><span class="line">    &#125;,function B()&#123;</span><br><span class="line">        // 失败，做相应处理</span><br><span class="line">    &#125;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Promise是一个代理对象，它和原先要进行的操作并无关系<ol start="2">
+<li>它通过引入一个回调，避免更多的回调</li>
+<li>Promise有3个状态：<ol>
+<li>Pending实例化时，【待定】状态</li>
+<li>执行完毕，调用resolve时，fullfilled【实现】状态</li>
+<li>rejected【被否决】操作失败<br>Promise状态发生改变，就会触发.then()里的响应函数处理后续步骤。<br>Promise状态一经改变，不会再变。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g76dhyjm1hj30yw0cggn4.jpg">
+
+<ol>
+<li>Promise实例一经创建，执行器立即执行；</li>
+<li>new 一个Promise传入执行器，创建实例后执行器开始执行，执行器是一个异步操作，接下来，通常会有后续的操作，调用第一个then，第二个then，最终生成一个队列，每一个then都会返回一个新的Promise实例。</li>
+<li>当executor执行完毕之后，开始判断状态，把状态改变为成功或失败，接着调用then的对应的处理函数，一个then处理完了之后，循环到下一个then，反复的循环，直到队列当中所有的待处理的函数都执行完</li>
+</ol>
+<ul>
+<li>Promise实现一个定时执行的小程序</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;here we go&apos;);</span><br><span class="line"></span><br><span class="line">       new Promise( resolve =&gt; &#123;</span><br><span class="line">           setTimeout(()=&gt;&#123;</span><br><span class="line">               resolve(&apos;hello&apos;);</span><br><span class="line">            &#125;, 2000)</span><br><span class="line">           &#125;)</span><br><span class="line">           .then( value =&gt; &#123;</span><br><span class="line">               console.log(value); // eslint-disable-line</span><br><span class="line">               return new Promise(resolve =&gt; &#123;</span><br><span class="line">                   setTimeout(() =&gt; &#123;</span><br><span class="line">                       resolve(&apos;world12&apos;)</span><br><span class="line">                   &#125;,2000);</span><br><span class="line">               &#125;);</span><br><span class="line">           &#125;)</span><br><span class="line">           .then(value =&gt; &#123;</span><br><span class="line">               console.log(value + &apos;world&apos;);</span><br><span class="line">           &#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>假如一个Promise已经完成了，再.then()会怎样？<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;start&apos;); // eslint-disable-line</span><br><span class="line"> let promise = new Promise(resolve =&gt; &#123;</span><br><span class="line">     setTimeout(()=&gt;&#123;</span><br><span class="line">         console.log(&apos;the promise fulfilled&apos;); // eslint-disable-line</span><br><span class="line">         resolve(&apos;hello,world&apos;);</span><br><span class="line">     &#125;, 1000);</span><br><span class="line"> &#125;);</span><br><span class="line"> setTimeout(()=&gt;&#123;</span><br><span class="line">     Promise.then( value=&gt; &#123;</span><br><span class="line">         console.log(value); // eslint-disable-line</span><br><span class="line">     &#125;);</span><br><span class="line"> &#125;,3000);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>我们在任何一个地方生成一个Promise队列之后，可以将它作为一个变量传递到其他地方，如果我们的操作是一个很明显的队列的先进先出的一个状态，我们就可以在它的后面去追续任意多的then，<br>不管前面的Promise是否完成，队列都会按照它对应的顺序去执行，如果没有完成，他就会顺序的完成，如果已完成，后面追加的then也会得到前面Promise返回的值。<br>这就是Promise身为队列，最重要的特性所在。</p>
+<ul>
+<li>假如在.then()的函数里面不返回新的Promise，会怎样？</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;here we go&apos;);</span><br><span class="line"></span><br><span class="line">      new Promise( resolve =&gt; &#123;</span><br><span class="line">          setTimeout(()=&gt;&#123;</span><br><span class="line">              resolve(&apos;hello&apos;);</span><br><span class="line">           &#125;, 2000)</span><br><span class="line">          &#125;)</span><br><span class="line">          .then( value =&gt; &#123;  // (2)</span><br><span class="line">              console.log(value); // eslint-disable-line</span><br><span class="line">              console.log(&apos;every one&apos;); // eslint-disable-line</span><br><span class="line">              (function()&#123; // (1)</span><br><span class="line">                  return new Promise(resolve =&gt; &#123; // (3)</span><br><span class="line">                      setTimeout(() =&gt; &#123;</span><br><span class="line">                          console.log(&apos;Miss lina&apos;); // eslint-disable-line</span><br><span class="line">                          resolve(&apos;world12&apos;)</span><br><span class="line">                      &#125;,2000);</span><br><span class="line">                  &#125;);</span><br><span class="line">              &#125;());</span><br><span class="line">              return false;</span><br><span class="line">          &#125;)</span><br><span class="line">          .then(value =&gt; &#123;</span><br><span class="line">              console.log(value + &apos;world&apos;);</span><br><span class="line">          &#125;)</span><br><span class="line"></span><br><span class="line">       // 输出结果</span><br><span class="line">       // here we go</span><br><span class="line">       // hello</span><br><span class="line">       // every one</span><br><span class="line">       // falseworld</span><br><span class="line">       // Miss lina</span><br></pre></td></tr></table></figure>
+
+<p>Because：</p>
+<p>中没有返回一个新的值，返回的Promise实例是在（3）中返回的，而不是在（2）的响应函数中返回的，<br>因此没有等待里面的return而直接return false，继续下一个then。<br>与此同时，（3）Promise中的timeout仍在等待执行，因此2s之后，输出了”Miss lina””<br>:在Promise中如果不直接返回一个Promise实例，它就会默认地去执行下一个环节，即使返回false也不会影响下一步。<br>如果注释：// return false;会返回 <code>undefined world</code>，没有明确返回值时就相当于return null。</p>
+<ul>
+<li>线程整个进程的进度，是在所有的都完成之后才会进行的，（3）中的Promise虽然没有进入到队列当中，没有终止2秒钟才能继续执行，但整个进程，是等他完成之后才宣告完成。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/20/promis学习/" data-id="ck1pwx29r000d7d327tiev2f0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-studyData/webpack学习04-react中webpack配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/15/studyData/webpack学习04-react中webpack配置/" class="article-date">
+  <time datetime="2019-09-15T02:48:44.000Z" itemprop="datePublished">2019-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/15/studyData/webpack学习04-react中webpack配置/">webpack学习04-create-reate-app</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="脚手架工具creact-react-app-中webpack配置"><a href="#脚手架工具creact-react-app-中webpack配置" class="headerlink" title="脚手架工具creact-react-app 中webpack配置"></a>脚手架工具creact-react-app 中webpack配置</h3><p>脚手架工具，其实是node的一个程序，会帮我们初始化一个项目，包含项目的工程目录以及这个项目打包的webpack配置。</p>
+<p>通过脚手架生成的工程会默认的webpack的配置都已经配置好了，但是把webpack相关的配置文件隐藏起来了，执行<code>npm run build/start</code>等命令时会调用这些隐藏的配置文件，来进行项目的打包，生成可以运行的代码。</p>
+<p>脚手架提供了eject命令，可以将隐藏的webpack配置项展现出来，执行<code>npm run eject</code> 之后，项目目录会多出config及scripts文件夹：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6zekelnxtj30j008kwew.jpg"></p>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6zelj3f50j30g604kaa3.jpg">
+
+<p style="font-size:10px;">jest文件夹可以先删掉，涉及自动化测试相关知识。scripts中test.js涉及自动化测试命令，也可以先删掉。package.json中test、eject命令可以先删掉。</p>
+
+<h5 id="npm-run-start"><a href="#npm-run-start" class="headerlink" title="npm run start"></a>npm run start</h5><p style="font-size:10px;">项目安装依赖失败的话，删除yarn.lock、node_modules文件，再执行npm install</p>
+
+
+<p><code>npm run start</code>命令会启动一个服务器，webpack-dev-server，让在开发过程中可以实时调试，做热模块更新。</p>
+<p><code>npm run build</code>命令帮我们生成线上要运行的生产环境代码。</p>
+<p>执行命令时<br><code>&quot;start&quot;: &quot;node scripts/start.js&quot;,
+    &quot;build&quot;: &quot;node scripts/build.js&quot;,</code><br>通过node执行scripts下面的start.js/build.js文件。</p>
+<h6 id="build-js文件"><a href="#build-js文件" class="headerlink" title="build.js文件"></a>build.js文件</h6><h6 id="env-js文件内容"><a href="#env-js文件内容" class="headerlink" title="env.js文件内容"></a>env.js文件内容</h6><ol>
+<li>L8 /config/env 文件：<code>delete require.cache[require.resolve(&#39;./paths&#39;)];</code>清paths中的缓存，使他能拿到paths中的最新内容</li>
+<li>L10判断当前打包环境</li>
+<li>L11打包中遇到异常，要抛出这个异常，而不是忽略他继续执行。</li>
+<li>L17webpack打包的时候，可以配置很多的环境变量，在脚手架工具里，可以把环境变量配置在根目录下创建.env的文件，在该文件中去定义一些全局变量。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const NODE_ENV = process.env.NODE_ENV;</span><br><span class="line">if (!NODE_ENV) &#123;</span><br><span class="line">  throw new Error(</span><br><span class="line">    &apos;The NODE_ENV environment variable is required but was not specified.&apos;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>会去.env文件中读取这些全局变量，然后定义到打包的过程之中。</p>
+<ol start="5">
+<li>L52 获取当前文件的路径，把他定义到NODE_PATH下面，即定义一个全局变量NODE_PATH里面，存放当前项目所在的路径</li>
+<li>L63提供一个方法，结合外部传进来的一个路径，对全局变量做一些整理，最终把他返回出去。</li>
+</ol>
+<h6 id="webpack-config-js文件内容"><a href="#webpack-config-js文件内容" class="headerlink" title="webpack.config.js文件内容"></a>webpack.config.js文件内容</h6><ol>
+<li>核心的webpack的配置内容</li>
+<li>L136 return<ol>
+<li>mode根据isEnvProduction判断当前环境，webpackEnv</li>
+<li>bail一旦在打包过程中遇到错误就及时停止，不再往下打包了，直接报错，（开发环境继续打包，线上环境停止打包）</li>
+<li>devtool  shouldUseSourceMap根据在全局变量中是否配置了GENERATE_SOURCEMAP</li>
+<li>entry入口 path</li>
+<li>output输出，线上环境方法哦appBuild文件夹下 pathinfo 把入口引入的其他模块的信息，通过注释的形式有所输出</li>
+<li>filename chunkFilename如果是线上环境，就用chunkhash 开发环境直接使用static/bundle.js</li>
+<li>devtoolModuleFilenameTemplate 通过sourcemap找到里面的依赖文件所在的disk（硬盘上）真正的路径位置，来定位到sourcemap中相应代码文件的行数，来帮助我们进行调错，解决sourcemap定位不准的问题（一些大型项目，应该配置此项）</li>
+<li>optimization做优化或一些代码的压缩都放在该配置项里，取决于当前的环境；minimizer里配置了TerserPlugin插件，即压缩js的一个插件，里面做了一些配置，线上环境才会执行，开发环境无效</li>
+<li>splitChunks默认webpack中的 把node_modules中的东西单独打包，runtimeChunk把webpack runtime的代码单独打包生成文件</li>
+<li>resolve<br>1.modules 如果配置了modules是个数组，当你引入一个模块的时候，会到node_moduls中去找，还会到其他的modules去找。根据你的配置生成modules配置的数组，当引入一个模块的时候，会到数组里对应的文件夹里去找<ol start="2">
+<li>extension 根据文件后缀alias别名</li>
+<li>plugins 当引入一个其他模块的时候，resolve生效，定义的plugins生效</li>
+</ol>
+</li>
+<li>resolveLoader只用引入一些loader时才会执行</li>
+<li>module  strictExportPresence引入的模块必须明确地导出自己的内容</li>
+<li>{ parser: { requireEnsure: false } },不支持require.ensure，必须使用import进行异步代码的加载</li>
+<li>enforce: ‘pre’,在loader前用eslint对代码做检测</li>
+<li>oneOf 当我们打包文件的时候，会到下面逐个的去找loader，直到找到一个为止（图片，如果是个图片文件，通过url-loader对图片打包，如果小于10kb时放到base64里，如果大于10kb直接把文件拷贝过去）</li>
+</ol>
+</li>
+</ol>
+<h6 id="build-js文件内容"><a href="#build-js文件内容" class="headerlink" title="build.js文件内容"></a>build.js文件内容</h6><ol>
+<li>L15引入dev文件，执行该文件，对一些打包过程中要用到的全局变量进行赋值</li>
+<li>L18 <ol>
+<li>path 核心模块</li>
+<li>chalk让命令行的提示更加美观的工具</li>
+<li>L22 webpack.config文件 return的就是build拿到的文件</li>
+</ol>
+</li>
+<li>L47 configFactory 得到打包所需要的webpack配置内容，</li>
+</ol>
+<p>path.js打包的一些路径信息<br>env.js帮助初始化运行环境的文件<br>webpackDevServer.config</p>
+<p>start.js文件：开发环境，遇到问题及时报错</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/15/studyData/webpack学习04-react中webpack配置/" data-id="ck1pwx2ak000s7d32ruy8l7qu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-studyData/webpack学习03-核心概念-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/09/13/studyData/webpack学习03-核心概念-1/" class="article-date">
@@ -140,7 +436,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/13/studyData/webpack学习03-核心概念-1/" data-id="ck1k2dhh9000ndz32ijv56ecv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/13/studyData/webpack学习03-核心概念-1/" data-id="ck1pwx2am000w7d321uis3wkr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -203,7 +499,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/10/studyData/webpack学习03-核心概念/" data-id="ck1k2dhha000pdz32xn63gkpq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/10/studyData/webpack学习03-核心概念/" data-id="ck1pwx2am000z7d32ht45q39r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -253,7 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/10/studyData/webpack学习02-文件结构解析/" data-id="ck1k2dhh8000kdz32ehscj27b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/10/studyData/webpack学习02-文件结构解析/" data-id="ck1pwx2ai000p7d3216vsyykt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -312,7 +608,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/10/studyData/webpack学习01-项目搭建/" data-id="ck1k2dhh6000jdz32jbfsz0kc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/10/studyData/webpack学习01-项目搭建/" data-id="ck1pwx2ai000o7d32998sp71c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -367,7 +663,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/02/weekly/webpack学习/" data-id="ck1k2dhhi001adz32j5olphtt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/02/weekly/webpack学习/" data-id="ck1pwx2aq00197d32en6a3tf1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -445,7 +741,7 @@ Connection: Upgrade</code>是Websocket的核心，告诉Apache、Nginx等服务�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/02/weekly/websocket机制/" data-id="ck1k2dhhh0017dz32ibpbfbkq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/02/weekly/websocket机制/" data-id="ck1pwx2as001e7d322qo9hkel" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -527,224 +823,7 @@ layerX/Y除IE外与pageX/Y相同，IE11下与clientX/Y相同，非官方属性�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/18/studyData/其他/常见x，y属性/" data-id="ck1k2dhhw0020dz32lgh2sih2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/12/知识点总结/" class="article-date">
-  <time datetime="2019-08-12T12:02:41.000Z" itemprop="datePublished">2019-08-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/12/知识点总结/">知识点总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>onClick={this.shareType(‘save’)} 不能携带参数吗？触发无反应 不会触发，因为相当于直接调取函数运行的结果，会直接执行，点击不再反应</li>
-<li>transform:translateX(-50%) translateY(-50%);  写在一起和分开写效果不同，why？分开写是相同属性被覆盖，只有最后写的那个属性会生效</li>
-<li>webstorm 注册码 ：微信搜索公众号：jetbrains007，进入公众号就可以获得最新激活码</li>
-<li>卸载mac版本的GlobalProtect：<br><code>sudo /Applications/GlobalProtect.app/Contents/Resources/uninstall_gp.sh</code></li>
-<li>React defaultProps, propTypes用法:<br>//defaultProps   如果父组件调用子组件的时候不给子组件传值，可以在子组件中使用defaultProps定义的默认值<br>//同时propTypes定义父组件给子组件传值的类型,需引入import PropTypes from ‘prop-types’;</li>
-<li><a href="https://zhuanlan.zhihu.com/p/24926838" target="_blank" rel="noopener">PureComponent的作用</a></li>
-</ol>
-<p>这个类的用法很简单，如果你有些组件是纯组件，那么把继承类从 Component 换成 PureComponent 即可。当组件更新时，如果组件的 props 和 state 都没发生改变，render 方法就不会触发，省去 Virtual DOM 的生成和比对过程，达到提升性能的目的。<br>xt</p>
-<p>7.<a href="https://juejin.im/post/5d53a8895188257fad671cbc" target="_blank" rel="noopener">typeScript写法</a><br>8.<a href="https://juejin.im/entry/57a42bd07db2a2005a9419aa" target="_blank" rel="noopener">react中函数式及类声明组件</a><br>9.<a href="https://blog.csdn.net/weixin_37620905/article/details/82961944" target="_blank" rel="noopener">ES6中的解构、扩展运算符(…)、rest参数(…)的使用</a><br>10.<a href>resolve是shong么:require.resolve,promise.resolve</a><br>11.[分享至twitter]</p>
-<p>12.dangerouslySetInnerHTML使用时，内部不能嵌套子元素<br>13.Charles安装配置教程：<br>（1）遇到mac的网络请求不能抓包，首先确认charles的proxy选项设置，Proxy -&gt; macOS Proxy，勾选上macOS Proxy，再试一试能否抓取mac的网络请求包。<br>此时如果不能上网，是因为证书没被信任，打开Charles，help，SSL proxying，install Charles root certificate，接着出现下面界面，搜索到Charles相关证书，永久信任。<br><br><br><img src="http://ww2.sinaimg.cn/large/006y8mN6ly1g69ljgrd9vj31i40iwwkj.jpg" width="300px"><br><br><br>（2）手机端修改连接高级，8888端口号及电脑IP配置。<br><br>(3)<a href="https://blog.csdn.net/juse__we/article/details/81330170" target="_blank" rel="noopener">使用Charles进行HTTPS抓包</a><br><br>(4)<a href="https://blog.csdn.net/weixin_41725711/article/details/81302208" target="_blank" rel="noopener">手机安装证书</a><br><br>(5)<a href="https://download.csdn.net/download/u012709932/10488852" target="_blank" rel="noopener">4.1.2Mac证书</a><br></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/12/知识点总结/" data-id="ck1k2dhgh0006dz324xdznap7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-studyData/其他/分享至社交圈" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/12/studyData/其他/分享至社交圈/" class="article-date">
-  <time datetime="2019-08-12T08:01:34.000Z" itemprop="datePublished">2019-08-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/12/studyData/其他/分享至社交圈/">分享至社交圈</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h3><p>常见的有分享至微博、朋友圈、twitter等，学习总结了微博、twitter的图文链接的分享方法。</p>
-<h3 id="2-分享到微博"><a href="#2-分享到微博" class="headerlink" title="2.分享到微博"></a>2.分享到微博</h3><p>实现微博分享只需要携带分享内容跳到指定链接，微博分享链接为<code>http://v.t.sina.com.cn/share/share.php?</code>，后面可拼相关参数配置分享信息：</p>
-<p><code>title</code>:分享时所示的文字内容，为空则自动抓取分享页面的title值 <br><br><code>url</code>:要分享的链接<br><br><code>pic</code>:自定义图片地址(可选，允许为空，多个地址用||分隔)<br><br><code>appkey</code>:用于发布微博的来源显示，为空则分享的内容来源会显示来自互联网。(可选，需要注册新浪开发appkey)<br></p>
-<p>可通过a标签或window.location.href、window.open跳转至分享页面：</p>
-<p>示例代码实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">shareWeibo = () =&gt; &#123;</span><br><span class="line">   const wbTitle = &apos;Let\&apos; Build Bitcoin Together!&apos;;</span><br><span class="line">   const wbUrl = &apos;https://www.baidu.com&apos;; // 要分享的链接地址</span><br><span class="line">   const imgUrl = `$&#123;this.props.shareImage&#125;`;// 要分享的图片地址</span><br><span class="line">   window.open(</span><br><span class="line">     `http://service.weibo.com/share/share.php?appkey=&amp;title=$&#123;wbTitle&#125;&amp;url=$&#123;wbUrl&#125;&amp;pic=$&#123;imgUrl&#125;`,</span><br><span class="line">     &apos;_blank&apos;</span><br><span class="line">   );</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
-
-<p>更详细的分享操作可以参考<a href="https://open.weibo.com/wiki/ShareCode" target="_blank" rel="noopener">微博API</a></p>
-<h3 id="3-分享至twitter"><a href="#3-分享至twitter" class="headerlink" title="3.分享至twitter"></a>3.分享至twitter</h3><h5 id="twitter有两种分享图文方式"><a href="#twitter有两种分享图文方式" class="headerlink" title="twitter有两种分享图文方式"></a>twitter有两种分享图文方式</h5><details>
-  <summary><span id="list5"> 1. tweet button</span></summary>
- <br>
-
-<p>简单的tw分享并不需要调用sdk，只需要跳转到一个特定页面，<br>twitter并不像其他的API文档支持&amp;image或picture/photo等参数来分享图片，找到正确的分享图片方法比较坎坷。</p>
-<h5 id="分享图文到twitter"><a href="#分享图文到twitter" class="headerlink" title="分享图文到twitter:"></a>分享图文到twitter:</h5><p>分享链接为<code>https://twitter.com/intent/tweet?</code>，有以下参数：</p>
-<p><code>url</code>:要分享的链接 <br><br><code>via</code>:关联账户  <br><br><code>hashtags</code>:标签集 #  <br><br><code>text</code>:描述内容  <br></p>
-<h6 id="实现步骤："><a href="#实现步骤：" class="headerlink" title="实现步骤："></a>实现步骤：</h6><ol>
-<li>创建一个 URL，从 <code>https://twitter.com/intent/tweet?text*</code> 开始，并在此 URL末尾的推文中添加任何要显示的文本，包括一个空格和指向复制的图像的链接；</li>
-<li>按 Enter,浏览器中应显示一个Twitter框，其中包含你指定的文本以及链接（请确保已登录）；</li>
-</ol>
-<img src="http://ww4.sinaimg.cn/large/006tNc79gy1g60hpjspt8j30ka067jrn.jpg" width="300px">
-
-<p>右下角Tweet即为Tweet button推文按钮，支持预填充共享文本、井号标签和 tw 帐户引用，关联相关的tw账户，以驱动关注者。<br></p>
-<ol start="3">
-<li>URL显示会替换一些空字符及特殊字符，因此在地址栏中的展示会稍有变化；</li>
-<li>通过a标签或window.open等方法打开新的窗口，进入分享界面。</li>
-</ol>
-<h6 id="示例代码实现："><a href="#示例代码实现：" class="headerlink" title="示例代码实现："></a>示例代码实现：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">shareTwitter = () =&gt; &#123;</span><br><span class="line">   const twTitle = &apos;Let\&apos;s Build BitCoin together! pic.twitter.com/JQsxPo8j8G&apos;; // 标题及图片地址</span><br><span class="line">  const twUrl = &apos;https://okcoin.co&apos;;//要分享的链接</span><br><span class="line">  window.open(</span><br><span class="line">    `https://twitter.com/intent/tweet?text=$&#123;twTitle&#125;&amp;url=$&#123;twUrl&#125;`,</span><br><span class="line">    &apos;_blank&apos;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>其中text中可写要分享的标题文字或图片，但是<strong>图片网址</strong>必须是tw自己生成的，地址格式为<code>pic.twitter.com/JQsxPo8j8G</code>，也就是某人在tw上已经推了这个图片。<br>tweet button推文成功后twitter会自动将其中的pic解析显示，标题部分仍会正确显示在标题位置。<br>最终分享图文及链接实现效果如下：</p>
-<img src="http://ww1.sinaimg.cn/large/006tNc79gy1g60j6qaohnj30x00lsju4.jpg" width="300px">
-
-<p><br><br></p>
-<h6 id="图片地址获取："><a href="#图片地址获取：" class="headerlink" title="图片地址获取："></a>图片地址获取：</h6><p>在已发送的推文中，点击右上角，弹出如图所示下拉菜单，<br>选择<code>Embed Tweet</code>，跳转至当前推文链接代码，找到其中类似于<code>pic.twitter.com/JQsxPo8j8G</code>的地址，即为图片地址。</p>
-<img src="http://ww3.sinaimg.cn/large/006tNc79gy1g60hgjcpj0j30xa0mk776.jpg" id="pic" width="300px">
-</details>
-
- <br>
-
-<details>
-  <summary><span id="list5"> 2. tweet card</span>
-</summary>
-
-
-<h5 id="实现方式1-Embedded-Tweets："><a href="#实现方式1-Embedded-Tweets：" class="headerlink" title="实现方式1 Embedded Tweets："></a>实现方式1 Embedded Tweets：</h5><p> 嵌入的推文将您从 tw 中挑选的内容引入你的网站文章，<br> 代码块为<a href="#pic">Embedded Tweets</a>中copy的代码块：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;und&quot; dir=&quot;ltr&quot;&gt;</span><br><span class="line">    &lt;a href=&quot;https://t.co/JQsxPo8j8G&quot;&gt;pic.twitter.com/JQsxPo8j8G&lt;/a&gt;</span><br><span class="line">        &lt;/p&gt;&amp;mdash; 丽娜 (@kWfizEnkOn36pZw)</span><br><span class="line">    &lt;a href=&quot;https://twitter.com/kWfizEnkOn36pZw/status/1161873113505648640?ref_src=twsrc%5Etfw&quot;&gt;August 15, 2019&lt;/a&gt;</span><br><span class="line">&lt;/blockquote&gt;</span><br></pre></td></tr></table></figure>
-
-<h6 id="界面如下："><a href="#界面如下：" class="headerlink" title="界面如下："></a>界面如下：</h6><img src="http://ww4.sinaimg.cn/large/006tNc79gy1g60iq78ftbj30fd0eqgmy.jpg" width="300px">
-
-<p>通过点击，可以跳转到twitter中并且定位到所发推文。</p>
-<h5 id="实现方式2-开放式图形元标签："><a href="#实现方式2-开放式图形元标签：" class="headerlink" title="实现方式2 开放式图形元标签："></a>实现方式2 开放式图形元标签：</h5><blockquote>
-<p>借助 Twitter 卡片，您可以将丰富的照片、视频和媒体体验附加到推文，<br>帮助推动网站流量。只需向网页添加几行标记，推文链接到您的内容的<br>用户就会在推文中添加一张对其关注者可见的”卡片”。</p>
-</blockquote>
-<p>其实就是在你的网站加一段代码，实现更丰富的twitter内容分享。</p>
-<h6 id="分为4个步骤"><a href="#分为4个步骤" class="headerlink" title="分为4个步骤"></a>分为4个步骤</h6><ol>
-<li><p>选择要实现的卡类型；</p>
-</li>
-<li><p>将正确的元标记添加到页面；</p>
-</li>
-<li><p>通过要测试的验证器工具运行URL;</p>
-</li>
-<li><p>将推文显示该URL，并在详细信息视图中看到该卡显示在您的推文下方。</p>
-<p>要开始实现卡片标记，请向页面的 HEAD 部分添加<code>&lt;meta name=&quot;twitter:card&quot; content=&quot;summary&quot; /&gt;</code> HTML 标记，为内容指定卡片类型;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;twitter:card&quot; content=&quot;summary&quot; /&gt;</span><br><span class="line">&lt;meta name=&quot;twitter:site&quot; content=&quot;@nytimesbits&quot; /&gt;</span><br><span class="line">&lt;meta name=&quot;twitter:creator&quot; content=&quot;@nickbilton&quot; /&gt;</span><br><span class="line">&lt;meta property=&quot;og:url&quot; content=&quot;http://bits.blogs.nytimes.com/2011/12/08/a-twitter-for-my-sister/&quot; /&gt;</span><br><span class="line">&lt;meta property=&quot;og:title&quot; content=&quot;A Twitter for My Sister&quot; /&gt;</span><br><span class="line">&lt;meta property=&quot;og:description&quot; content=&quot;..&quot; /&gt;</span><br><span class="line">&lt;meta property=&quot;og:image&quot; content=&quot;..&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<p> 最后社交平台会解析出来你的要分享的信息，并加上平台自己的样式。<br> </p></details><p></p>
-<h3 id="4-分享至其他平台"><a href="#4-分享至其他平台" class="headerlink" title="4.分享至其他平台"></a>4.分享至其他平台</h3><p>目前PC不支持分享朋友圈；一个较全的分享工具，分享至QQ空间、百度贴吧、豆瓣、腾讯微博等<a href="http://www.bshare.cn/share" target="_blank" rel="noopener">查看效果</a>，<br>其中的分享链接可以参考，本次学习分享方法仅是PC浏览器中实现方法，不适用于移动端分享。<br>常用分享多为第一种twitter button方式，第二种了解就好。</p>
-<h6 id="学习参考："><a href="#学习参考：" class="headerlink" title="学习参考："></a>学习参考：</h6><ul>
-<li><a href="https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview" target="_blank" rel="noopener">twitter button</a></li>
-<li><a href="https://onlinejournalismblog.com/2015/02/10/how-to-learn-about-apis-while-making-tweetable-quotes/" target="_blank" rel="noopener">API</a></li>
-<li><a href="https://onlinejournalismblog.com/2015/02/11/how-to-make-a-tweetable-image-in-your-blog-post/" target="_blank" rel="noopener">embed images in ‘tweet this’ links</a></li>
-<li><a href="https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/overview" target="_blank" rel="noopener">嵌入式推文Embedded Tweets</a></li>
-<li><a href="https://www.ybierling.com/is/blog-web-twittermetatagshtml" target="_blank" rel="noopener">Twitter meta tags</a></li>
-<li><a href="https://blog.csdn.net/cj1029/article/details/44466187" target="_blank" rel="noopener">社交媒体分享探索</a></li>
-<li><a href="https://open.weibo.com/wiki/ShareCode" target="_blank" rel="noopener">微博开发平台</a></li>
-<li><a href="https://neilpatel.com/blog/open-graph-meta-tags/" target="_blank" rel="noopener">You need to know</a></li>
-<li><a href="https://wiki.open.qq.com/wiki/website/add_share#1.1.09URL" target="_blank" rel="noopener">腾讯开放平台</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/12/studyData/其他/分享至社交圈/" data-id="ck1k2dhhv001ydz32432vm0gq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-studyData/其他/HTML5调起APP应用程序" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/11/studyData/其他/HTML5调起APP应用程序/" class="article-date">
-  <time datetime="2019-08-11T08:05:14.000Z" itemprop="datePublished">2019-08-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/11/studyData/其他/HTML5调起APP应用程序/">HTML5调起APP应用程序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>在项目中，通过HTML5实现APP应用程序开发时，需要完成以下需求：<strong>判断当前用户是否下载APP，已下载：跳转至APP内，未下载：去下载</strong>。目前客户端同学不支持对用户手机内是否有该APP做出判断，因此采用以下思路：<strong>提供两个button按钮，【已下载，去首页】【未下载，去下载】</strong>，这样让用户手动判断是否下载，避免用户已下载重复下载以及跳转登录页判断执行的矛盾。</p>
-<h3 id="2-优化"><a href="#2-优化" class="headerlink" title="2.优化"></a>2.优化</h3><p>目前思路能够满足功能需求，但是对于一些用户未下载，点击已下载这种情况的恶意点击操作，以及部分手机浏览器对于window.location.href跳转支持的兼容性，仍需做出跳转失败判断及提示。</p>
-<h3 id="3-解决思路"><a href="#3-解决思路" class="headerlink" title="3.解决思路"></a>3.解决思路</h3><ol>
-<li>设置一个延迟执行提示，然后判断当前页面是否被hidden</li>
-<li>被hidden证明跳转成功，清楚定时器</li>
-<li>几秒之后仍旧没有被hidden证明跳转失败，做出提示信息</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">window.location.href = &apos;**&apos;; // Android跳转当前活动页</span><br><span class="line">// 跳转失败提示信息</span><br><span class="line">const timer = setTimeout(() =&gt; &#123;</span><br><span class="line">  const message = Message.warn(&#123;</span><br><span class="line">    content: `请打开APP参与投票`,</span><br><span class="line">    showIcon: false,</span><br><span class="line">  &#125;);</span><br><span class="line">  setTimeout(() =&gt; &#123;</span><br><span class="line">    message.destroy();</span><br><span class="line">  &#125;, 1000);</span><br><span class="line">&#125;, 3000);</span><br><span class="line">document.addEventListener(&apos;visibilitychange&apos;, () =&gt; &#123;</span><br><span class="line">  if (document.visibilityState !== &apos;hidden&apos;) &#123;</span><br><span class="line">    //  切换tab回当前页面刷新数据</span><br><span class="line">    clearTimeout(timer); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">this.handleClose(); //关闭当前弹窗</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h3><p>关于判断从手机浏览器跳转至指定APP是否成功，需要移动端相关支持，浏览器无法明确地判断本地是否已经安装 app.以及Android、iOS不同情况，以及手机端华为、三星、UC、谷歌等浏览器较多，兼容性情况不好判断，且实现起来较复杂，这是目前想到的比较完善的操作提醒。当然，只是简单的调研实现，肯定有更优秀的方法需要去学习发现。</p>
-<h3 id="相关参考"><a href="#相关参考" class="headerlink" title="相关参考"></a>相关参考</h3><p><a href="https://blog.csdn.net/linshijun33/article/details/71429669" target="_blank" rel="noopener">iOS/Android 微信及浏览器中唤起本地APP
-</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/11/studyData/其他/HTML5调起APP应用程序/" data-id="ck1k2dhhu001vdz324vv008ml" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/18/studyData/其他/常见x，y属性/" data-id="ck1pwx2b500217d32j365qdm6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -793,7 +872,7 @@ layerX/Y除IE外与pageX/Y相同，IE11下与clientX/Y相同，非官方属性�
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
     </div>
   </div>
 
@@ -806,23 +885,23 @@ layerX/Y除IE外与pageX/Y相同，IE11下与clientX/Y相同，非官方属性�
       <ul>
         
           <li>
+            <a href="/2019/10/14/WordPress主题开发/">WordPress主题开发</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/12/WordPress安装指南/">WordPress安装指南</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/10/ESlint问题总结/">ESlint问题总结</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/28/promise学习04-Promise-resolve/">promise学习04-Promise.resolve</a>
           </li>
         
           <li>
             <a href="/2019/09/22/promise学习03-Promise-all/">promise学习03-Promise.all</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/22/promise学习02-then/">promise学习02-then</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/21/工具软件/chrome常用操作/">chrome常用操作</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/21/工具软件/markdown常用语法/">markdown常用语法</a>
           </li>
         
       </ul>
