@@ -99,17 +99,16 @@
 <li>copy 拷贝当前选中内容到剪贴板</li>
 <li>paste 在光标位置粘贴剪贴板的内容，如果有被选中的内容，会被替换</li>
 </ol>
-<h6 id="功能实现–从输入框复制"><a href="#功能实现–从输入框复制" class="headerlink" title="功能实现–从输入框复制"></a>功能实现–从输入框复制</h6><p>现在页面上有一个 <input> 标签，我们想要复制其中的内容，我们可以这样做：</p>
+<h6 id="功能实现–从输入框复制"><a href="#功能实现–从输入框复制" class="headerlink" title="功能实现–从输入框复制"></a>功能实现–从输入框复制</h6><p>页面上有一个input标签，复制其中的内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=&quot;demoInput&quot; value=&quot;hello world&quot;&gt;</span><br><span class="line">&lt;button id=&quot;btn&quot;&gt;点我复制&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">const btn = document.querySelector(&apos;#btn&apos;);</span><br><span class="line">btn.addEventListener(&apos;click&apos;, () =&gt; &#123;</span><br><span class="line">    const input = document.querySelector(&apos;#demoInput&apos;);</span><br><span class="line">    input.select();</span><br><span class="line">    if (document.execCommand(&apos;copy&apos;)) &#123;</span><br><span class="line">        document.execCommand(&apos;copy&apos;);</span><br><span class="line">        console.log(&apos;复制成功&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<h6 id="功能实现–其它地方复制"><a href="#功能实现–其它地方复制" class="headerlink" title="功能实现–其它地方复制"></a>功能实现–其它地方复制</h6><p>有的时候页面上并没有 <input> 标签，我们可能需要从一个 <div> 中复制内容，或者直接复制变量。</div></p>
-<p>还记得在 execCommand() 方法的定义中提到，它只能操作可编辑区域，也就是意味着除了 <input>、<textarea> 这样的输入域以外，是无法使用这个方法的。</textarea></p>
+<h6 id="功能实现–其它地方复制"><a href="#功能实现–其它地方复制" class="headerlink" title="功能实现–其它地方复制"></a>功能实现–其它地方复制</h6><p>页面上并没有input标签，可能需要从一个div中复制内容，或者直接复制变量。<br>在 execCommand() 方法的定义中提到，它只能操作可编辑区域，也就是意味着除了input、textarea这样的输入域以外，是无法使用这个方法的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;button id=&quot;btn&quot;&gt;点我复制&lt;/button&gt;</span><br><span class="line">const btn = document.querySelector(&apos;#btn&apos;);</span><br><span class="line">btn.addEventListener(&apos;click&apos;,() =&gt; &#123;</span><br><span class="line">    const input = document.createElement(&apos;input&apos;);</span><br><span class="line">    document.body.appendChild(input);</span><br><span class="line">    input.setAttribute(&apos;value&apos;, &apos;听说你想复制我&apos;);</span><br><span class="line">    input.select();</span><br><span class="line">    if (document.execCommand(&apos;copy&apos;)) &#123;</span><br><span class="line">        document.execCommand(&apos;copy&apos;);</span><br><span class="line">        console.log(&apos;复制成功&apos;);</span><br><span class="line">    &#125;</span><br><span class="line"> document.body.removeChild(input);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <h6 id="2-clipboard-js"><a href="#2-clipboard-js" class="headerlink" title="2. clipboard.js"></a>2. <a href="https://clipboardjs.com/" target="_blank" rel="noopener">clipboard.js</a></h6><p>我们java-web工程中复制功能就是借助于clipboard.js插件实现的，使用方法如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--   HTML --&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; id=&quot;copyValue&quot; /&gt;</span><br><span class="line">&lt;button type=&quot;button&quot; data-clipboard-target=&apos;#copyValue&apos; id=&quot;bar&quot;&gt;复制1&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--   JavaScript --&gt;</span><br><span class="line">    const clipboard = new Clipboard(&apos;button&apos;);</span><br><span class="line">    clipboard.on(&apos;success&apos;,function(e)&#123;</span><br><span class="line">        e.clearSelection(); //清除输入框</span><br><span class="line">        $(&apos;#bar&apos;).focus();</span><br><span class="line">        $(&apos;#bar&apos;).select();</span><br><span class="line">        $(&apos;#bar&apos;).text(&apos;已复制&apos;);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;);</span><br><span class="line">    clipboard.on(&apos;error&apos;,function(e)&#123;</span><br><span class="line">        e.clearSelection();</span><br><span class="line">        alert(&apos;复制失败&apos;);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
 
-<p>注意到，在 <button> 标签中添加了一个<code>data-clipboard-target</code> 属性，它的值是需要复制的 <code>&lt;input&gt;</code> 的 <code>id</code>，即从整个标签中复制内容。有的时候我们需要在复制后做一些事情，这时候就需要回调函数的支持。<br>复制成功、失败后执行的回调函数通过on方法监听成功、失败事件，进行相应处理。<br>其实Clipboard插件也是封装了selection和execCommand方法实现的拷贝功能。</button></p>
+<p>注意到，在 <code>&lt;button&gt;</code>标签中添加了一个<code>data-clipboard-target</code> 属性，它的值是需要复制的 <code>&lt;input&gt;</code> 的 <code>id</code>，即从整个标签中复制内容。有的时候我们需要在复制后做一些事情，这时候就需要回调函数的支持。<br>复制成功、失败后执行的回调函数通过on方法监听成功、失败事件，进行相应处理。<br>其实Clipboard插件也是封装了selection和execCommand方法实现的拷贝功能。</p>
 <h5 id="3-优缺点比较"><a href="#3-优缺点比较" class="headerlink" title="3.优缺点比较"></a>3.优缺点比较</h5><p>Clipboard.js 近几年使用较多，体积相对小，兼容性可以接受，使用还比较方便。<br>execCommand 新兴势力，safari等主流正在努力兼容。</p>
 <p>Clipboard.js 较小，4KB<br>execCommand是document方法，不用插件直接搞</p>
 <h5 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h5><p>clipboard.js就是封装了一下，本质就是document.execCommand(this.action)。<br>在项目开发中，java-web已经提供Clipboard.js插件的引用，使用，较为简单清爽；在一些别的活动页面开发时，为了一两个页面中的拷贝功能实现也不需要插件的引用，直接使用document.execCommand方法。</p>
@@ -117,7 +116,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/20/copy功能实现/" data-id="ck1yiisir0001rk32c4075jht" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/20/copy功能实现/" data-id="ck1yipl4x0004wr32iefw00nb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -175,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/WordPress主题开发/" data-id="ck1yiisii0000rk32xmlcm81g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/WordPress主题开发/" data-id="ck1yipl4q0001wr3209576f4a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -245,7 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/12/WordPress安装指南/" data-id="ck1yiisju0004rk325vjdcd1t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/12/WordPress安装指南/" data-id="ck1yipl4w0003wr326q54rs7q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -323,7 +322,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/10/ESlint问题总结/" data-id="ck1yiisjw0005rk32k5r2wr2t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/10/ESlint问题总结/" data-id="ck1yipl3q0000wr325t8iyopa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -392,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/28/promise学习04-Promise-resolve/" data-id="ck1yiisjz0008rk32tgngxgyw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/28/promise学习04-Promise-resolve/" data-id="ck1yipl5a000cwr323alk7f3y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -458,7 +457,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/22/promise学习03-Promise-all/" data-id="ck1yiisk1000ark32a7skj1ze" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/22/promise学习03-Promise-all/" data-id="ck1yipl550009wr32nwebvns3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -543,7 +542,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/22/promise学习02-then/" data-id="ck1yiisk4000crk324qiapz5w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/22/promise学习02-then/" data-id="ck1yipl5c000ewr32wy6spasv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -649,7 +648,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/工具软件/chrome常用操作/" data-id="ck1yiispz001krk323wynwbrt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/工具软件/chrome常用操作/" data-id="ck1yipl8u001iwr32dz74n73c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
@@ -687,7 +686,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/工具软件/markdown常用语法/" data-id="ck1yiispx001irk323n2g25x8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/工具软件/markdown常用语法/" data-id="ck1yipl91001owr32rbu0x1zs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
@@ -730,7 +729,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/工具软件/有道云笔记使用/" data-id="ck1yiisq0001lrk32hshr8fn4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/工具软件/有道云笔记使用/" data-id="ck1yipl90001nwr32l8iitx2c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具使用/">工具使用</a></li></ul>
