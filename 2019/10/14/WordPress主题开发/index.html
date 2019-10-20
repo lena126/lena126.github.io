@@ -7,18 +7,20 @@
   
   <title>WordPress主题开发 | 学习博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="开发：在目录下，themes文件夹中，放入主题开发即可。nfs://192.168.64.2/opt/lampp/htdocs/wordpress/wp-content/themes  主题安装开发">
+  <meta name="description" content="开发：在目录下，themes文件夹中，放入主题开发即可。nfs://192.168.64.2/opt/lampp/htdocs/wordpress/wp-content/themes 数据导入 安装导入数据wordpress插件 从原站点导出数据，    将该xml文件通过插件导入进本地站点即可成功导入所选择的文章数据信息。 错误集锦 安装导入数据插件时，安装失败，无法创建目录。最后添加该代码：">
 <meta name="keywords" content="学习记录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WordPress主题开发">
 <meta property="og:url" content="http://yoursite.com/2019/10/14/WordPress主题开发/index.html">
 <meta property="og:site_name" content="学习博客">
-<meta property="og:description" content="开发：在目录下，themes文件夹中，放入主题开发即可。nfs://192.168.64.2/opt/lampp/htdocs/wordpress/wp-content/themes  主题安装开发">
+<meta property="og:description" content="开发：在目录下，themes文件夹中，放入主题开发即可。nfs://192.168.64.2/opt/lampp/htdocs/wordpress/wp-content/themes 数据导入 安装导入数据wordpress插件 从原站点导出数据，    将该xml文件通过插件导入进本地站点即可成功导入所选择的文章数据信息。 错误集锦 安装导入数据插件时，安装失败，无法创建目录。最后添加该代码：">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-14T04:18:53.080Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6gy1g806spfuezj30i80ct0ts.jpg">
+<meta property="og:updated_time" content="2019-10-16T09:55:02.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WordPress主题开发">
-<meta name="twitter:description" content="开发：在目录下，themes文件夹中，放入主题开发即可。nfs://192.168.64.2/opt/lampp/htdocs/wordpress/wp-content/themes  主题安装开发">
+<meta name="twitter:description" content="开发：在目录下，themes文件夹中，放入主题开发即可。nfs://192.168.64.2/opt/lampp/htdocs/wordpress/wp-content/themes 数据导入 安装导入数据wordpress插件 从原站点导出数据，    将该xml文件通过插件导入进本地站点即可成功导入所选择的文章数据信息。 错误集锦 安装导入数据插件时，安装失败，无法创建目录。最后添加该代码：">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6gy1g806spfuezj30i80ct0ts.jpg">
   
     <link rel="alternate" href="/atom.xml" title="学习博客" type="application/atom+xml">
   
@@ -88,6 +90,22 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="开发："><a href="#开发：" class="headerlink" title="开发："></a>开发：</h4><p>在目录下，themes文件夹中，放入主题开发即可。<br>nfs://192.168.64.2/opt/lampp/htdocs/wordpress/wp-content/themes</p>
+<h4 id="数据导入"><a href="#数据导入" class="headerlink" title="数据导入"></a>数据导入</h4><ol>
+<li>安装导入数据wordpress插件</li>
+<li>从原站点导出数据，</li>
+</ol>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g806spfuezj30i80ct0ts.jpg" style="width:300px">
+
+<p>将该xml文件通过插件导入进本地站点即可成功导入所选择的文章数据信息。</p>
+<h6 id="错误集锦"><a href="#错误集锦" class="headerlink" title="错误集锦"></a>错误集锦</h6><ol>
+<li>安装导入数据插件时，安装失败，无法创建目录。<br>最后添加该代码：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">define(&quot;FS_METHOD&quot;, &quot;direct&quot;);</span><br><span class="line">define(&quot;FS_CHMOD_DIR&quot;, 0777);</span><br><span class="line">define(&quot;FS_CHMOD_FILE&quot;, 0777);</span><br></pre></td></tr></table></figure>
+
+<p><code>chmod -R 777 .bitnami/stackman/machines/xampp/volumes/root/htdocs/wordpress</code><br>修改权限。</p>
+<ol start="2">
+<li>此站正遇到技术问题，原因就是你上一步的操作，配置wp-config.php或其他相关操作影响了网站正常运行，修改错误，解决办法就是<br>恢复你的修改操作，或是将整个wordpress文件夹重新替换。</li>
+</ol>
 <ul>
 <li><a href="https://blog.csdn.net/langzi7758521/article/details/53396781" target="_blank" rel="noopener">主题安装开发</a></li>
 </ul>
@@ -95,7 +113,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/WordPress主题开发/" data-id="ck1pwx29200007d32oo3978v4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/WordPress主题开发/" data-id="ck1yiisii0000rk32xmlcm81g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -105,6 +123,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/10/20/copy功能实现/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          copy功能实现
+        
+      </div>
+    </a>
   
   
     <a href="/2019/10/12/WordPress安装指南/" id="article-nav-older" class="article-nav-link-wrap">
@@ -160,6 +187,10 @@
       <ul>
         
           <li>
+            <a href="/2019/10/20/copy功能实现/">copy功能实现</a>
+          </li>
+        
+          <li>
             <a href="/2019/10/14/WordPress主题开发/">WordPress主题开发</a>
           </li>
         
@@ -173,10 +204,6 @@
         
           <li>
             <a href="/2019/09/28/promise学习04-Promise-resolve/">promise学习04-Promise.resolve</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/22/promise学习03-Promise-all/">promise学习03-Promise.all</a>
           </li>
         
       </ul>
