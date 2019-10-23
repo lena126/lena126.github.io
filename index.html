@@ -91,7 +91,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/23/wordpress主题开06-分类/" data-id="ck23gikju000lpd32ght8cx6x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/23/wordpress主题开06-分类/" data-id="ck23gqlwp000ouz328ijyvzhq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -125,7 +125,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="1-PolyLang插件"><a href="#1-PolyLang插件" class="headerlink" title="1. PolyLang插件"></a>1. PolyLang插件</h4><p><a href="https://www.maixj.net/wz/polylang-wordpress-7003" target="_blank" rel="noopener">用PolyLang插件免费实现WordPress双语网站</a></p>
+        <h4 id="1-PolyLang插件"><a href="#1-PolyLang插件" class="headerlink" title="1. PolyLang插件"></a>1. PolyLang插件</h4><p>该插件主要实现，切换站点多语言环境：</p>
+<p><a href="https://www.maixj.net/wz/polylang-wordpress-7003" target="_blank" rel="noopener">用PolyLang插件免费实现WordPress双语网站</a></p>
 <ol>
 <li><p>WordPress后台配置多语言，如下，配置前端显示多语言文案显示：</p>
 <img style="width:300px" src="https://tva1.sinaimg.cn/large/006y8mN6ly1g87xrqm3wvj31c00nrn10.jpg">
@@ -135,22 +136,11 @@
 <li><p>I18n for WordPress Developers</p>
 </li>
 </ol>
-<p>2.Gettext的简介<br>WordPress使用的是gettext库和i18n工具。需要注意的是，如果你看看网上，你会看到_（）函数，它是指原生的PHP的gettext标准翻译功能，但对于WordPress ，你应该使用WordPress定义的函数来替代PHP的_（）函数.</p>
 <p>-<a href="https://leo108.com/pid-1232/" target="_blank" rel="noopener">i18n插件实现</a></p>
-<p>所谓的小工具（widget）就是一个在被调用时会输出字符到标准输出的 PHP 函数。把 PHP 函数变成小工具，则需要注册。调用 WordPress 小工具接口所注册的 PHP 回调函数（PHP 文档中称之为伪类型）即可注册您的函数。</p>
-<h6 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h6><ul>
-<li><a href="https://www.npc.ink/4782.html" target="_blank" rel="noopener">国际化-WordPress官方文档</a></li>
-</ul>
-<ul>
-<li><a href="http://codex.wordpress.org/Include_Tags" target="_blank" rel="noopener">引入标签</a></li>
-<li><a href="http://codex.wordpress.org/zh-cn:%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE" target="_blank" rel="noopener">模版标签</a>    </li>
-<li><a href="http://codex.wordpress.org/Template_Tags/" target="_blank" rel="noopener">英文参考网页</a><br><a href="http://codex.wordpress.org/zh-cn:%E5%87%BD%E6%95%B0%E5%8F%82%E8%80%83" target="_blank" rel="noopener">函数参考</a><br><a href="http://codex.wordpress.org/Function_Reference" target="_blank" rel="noopener">英文参考网页</a>    </li>
-</ul>
-<p><a href="http://codex.wordpress.org/zh-cn:%E4%B8%BB%E9%A2%98%E7%89%B9%E6%80%A7" target="_blank" rel="noopener">主题功能</a><br><a href="http://codex.wordpress.org/Theme_Features" target="_blank" rel="noopener">英文参考网页</a><br><a href="http://codex.wordpress.org/zh-cn:%E6%9D%A1%E4%BB%B6%E6%A0%87%E7%AD%BE" target="_blank" rel="noopener">条件标签</a><br><a href="http://codex.wordpress.org/Conditional_Tags" target="_blank" rel="noopener">英文参考网页</a><br><a href="http://codex.wordpress.org/zh-cn:Class_Reference/WP_Query" target="_blank" rel="noopener">WP_Query</a><br><a href="http://codex.wordpress.org/Class_Reference/WP_Query" target="_blank" rel="noopener">英文参考网页</a></p>
-<h4 id="1-语言包开发"><a href="#1-语言包开发" class="headerlink" title="1.语言包开发"></a>1.语言包开发</h4><ol>
+<h5 id="2-本地多语言配置"><a href="#2-本地多语言配置" class="headerlink" title="2. 本地多语言配置"></a>2. 本地多语言配置</h5><h6 id="语言包开发："><a href="#语言包开发：" class="headerlink" title="语言包开发："></a>语言包开发：</h6><ol>
 <li><p>在当前主题文件夹下 新建languages文件夹，</p>
 </li>
-<li><p>下载poedit软件，用软件新建语言包</p>
+<li><p>下载<a href="https://poedit.net/" target="_blank" rel="noopener">poedit</a>软件，用软件新建语言包</p>
 </li>
 <li><p>安装完poedit软件之后，</p>
 <ol>
@@ -169,18 +159,23 @@
 </ul>
 </li>
 </ol>
-<p>functions.php中添加代码如下：</p>
+<h6 id="代码使用："><a href="#代码使用：" class="headerlink" title="代码使用："></a>代码使用：</h6><p>functions.php中添加代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add_action( &apos;after_setup_theme&apos;, &apos;my_setup_theme&apos; );</span><br><span class="line">function my_setup_theme()&#123;</span><br><span class="line">    load_theme_textdomain( &apos;academy&apos;, get_template_directory() . &apos;/languages&apos; );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>代码中使用如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;? echo __(&apos;Search for:&apos;,&apos;academy&apos;); ?&gt;</span><br><span class="line">&lt;p&gt;&lt;? _e(&apos;category&apos;,&apos;academy&apos;); ?&gt;</span><br></pre></td></tr></table></figure>
 
 <p>就会将对应的文案显示在界面上，同时根据多语言切换，当前环境会自动切换中英文显示。</p>
+<h6 id="tips："><a href="#tips：" class="headerlink" title="tips："></a>tips：</h6><p>Gettext的简介：<br><br>WordPress使用的是gettext库和i18n工具。需要注意的是，如果你看看网上，你会看到_（）函数，它是指原生的PHP的gettext标准翻译功能，但对于WordPress ，你应该使用WordPress定义的函数来替代PHP的_（）函数.</p>
+<p>所谓的小工具（widget）就是一个在被调用时会输出字符到标准输出的 PHP 函数。把 PHP 函数变成小工具，则需要注册。调用 WordPress 小工具接口所注册的 PHP 回调函数（PHP 文档中称之为伪类型）即可注册您的函数。</p>
+<h6 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h6><ul>
+<li><a href="https://www.npc.ink/4782.html" target="_blank" rel="noopener">国际化-WordPress官方文档</a></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/23/wordpress主题开05-多语言/" data-id="ck23gikjy000rpd32cj3h7hj6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/23/wordpress主题开05-多语言/" data-id="ck23gqlwm000muz32qyy8a40r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -227,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/23/wordpress主题开04-导航栏/" data-id="ck23gikjw000ppd32zgpcfu5e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/23/wordpress主题开04-导航栏/" data-id="ck23gqlwl000kuz320x61l1s8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -285,7 +280,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/23/wordpress主题开03-缩略图/" data-id="ck23gikjo000fpd329pprtrzj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/23/wordpress主题开03-缩略图/" data-id="ck23gqlwh000iuz3280ck8f1e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -353,7 +348,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/22/wordpress主题开02/" data-id="ck23gikjn000dpd32go9b3znv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/22/wordpress主题开02/" data-id="ck23gqlwe000guz32bkqius4k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -419,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/20/copy功能实现/" data-id="ck23gikjf0003pd3297k8d1es" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/20/copy功能实现/" data-id="ck23gqlw6000auz322slw0v2g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习周报/">学习周报</a></li></ul>
@@ -472,12 +467,16 @@
 </ol>
 <ul>
 <li><a href="https://blog.csdn.net/langzi7758521/article/details/53396781" target="_blank" rel="noopener">主题安装开发</a></li>
+<li><a href="http://codex.wordpress.org/Include_Tags" target="_blank" rel="noopener">引入标签</a></li>
+<li><a href="http://codex.wordpress.org/zh-cn:%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE" target="_blank" rel="noopener">模版标签</a>    </li>
+<li><a href="http://codex.wordpress.org/Template_Tags/" target="_blank" rel="noopener">英文参考网页</a><br><a href="http://codex.wordpress.org/zh-cn:%E5%87%BD%E6%95%B0%E5%8F%82%E8%80%83" target="_blank" rel="noopener">函数参考</a><br><a href="http://codex.wordpress.org/Function_Reference" target="_blank" rel="noopener">英文参考网页</a>    </li>
 </ul>
+<p><a href="http://codex.wordpress.org/zh-cn:%E4%B8%BB%E9%A2%98%E7%89%B9%E6%80%A7" target="_blank" rel="noopener">主题功能</a><br><a href="http://codex.wordpress.org/Theme_Features" target="_blank" rel="noopener">英文参考网页</a><br><a href="http://codex.wordpress.org/zh-cn:%E6%9D%A1%E4%BB%B6%E6%A0%87%E7%AD%BE" target="_blank" rel="noopener">条件标签</a><br><a href="http://codex.wordpress.org/Conditional_Tags" target="_blank" rel="noopener">英文参考网页</a><br><a href="http://codex.wordpress.org/zh-cn:Class_Reference/WP_Query" target="_blank" rel="noopener">WP_Query</a><br><a href="http://codex.wordpress.org/Class_Reference/WP_Query" target="_blank" rel="noopener">英文参考网页</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/WordPress主题开发/" data-id="ck23gikj80000pd32atiunlom" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/WordPress主题开发/" data-id="ck23gqlvd0000uz32moh5lm53" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -548,7 +547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/12/WordPress安装指南/" data-id="ck23gikjc0001pd320wc34dmr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/12/WordPress安装指南/" data-id="ck23gqlvj0001uz324jcpr3tv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -626,7 +625,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/10/ESlint问题总结/" data-id="ck23gikji0005pd32qxfcnpcd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/10/ESlint问题总结/" data-id="ck23gqlw10006uz325oyfadm5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
@@ -695,7 +694,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/28/promise学习04-Promise-resolve/" data-id="ck23gikjp000hpd32or1x75ro" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/28/promise学习04-Promise-resolve/" data-id="ck23gqlw8000cuz32me236yak" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
